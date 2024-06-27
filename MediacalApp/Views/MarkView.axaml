@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:MediacalApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:MarkViewModel" Background="LightGray"
+             x:Class="MediacalApp.Views.MarkView">
+    <StackPanel Orientation="Vertical">
+
+        <Border CornerRadius="5" Background="White">
+            <Grid ColumnDefinitions="4*, *">
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock FontSize="15" 
+                        Text="{CompiledBinding CurrentValue}"
+                               Foreground="{CompiledBinding ColorText}" />
+                    <TextBlock Text="{CompiledBinding Unit.Name}"
+                               Margin="5, 0, 0, 0"
+                               FontWeight="Bold"/>
+
+                    <ItemsControl ItemsSource="{CompiledBinding Units}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{CompiledBinding Name}"
+                                           Margin="0,0,5,0"
+                                           TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+
+                </StackPanel>
+
+                <TextBlock Grid.Column="1" FontSize="12"
+                           Foreground="Gray"
+                           Text="{CompiledBinding CurrentDatetime}"/>
+            </Grid>
+        </Border>
+        
+        <TextBlock Text="Референсные значения" 
+                   Margin="0, 20,0,0" 
+                   FontSize="20" FontWeight="Bold"/>
+
+        <Border>
+            <!--график-->
+        </Border>
+
+        <TextBlock>
+
+        </TextBlock>
+
+        <Border>
+            <!--график-->
+        </Border>
+    </StackPanel>
+</UserControl>

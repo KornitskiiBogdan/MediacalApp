@@ -1,0 +1,126 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:MediacalApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             x:Class="MediacalApp.Views.AnalysisView">
+
+    <!--<lvc:CartesianChart x:DataType="viewModels:AnalysisViewModel" 
+                        d:DesignWidth="600" d:DesignHeight="450"
+                        Series="{Binding Chart.Series}"
+                        Title="{Binding Chart.Title}"
+                        XAxes="{Binding Chart.XAxes}"/>-->
+    <UserControl.Resources>
+		<ResourceDictionary>
+			<ControlTheme x:Key="GroupButton" TargetType="Button">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </ControlTheme>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel >
+
+		<Grid Margin="0,20,0,0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
+			<Button Grid.Column="0" HorizontalAlignment="Left"/>
+            <TextBlock Grid.Column="1" Text="Aнализы" HorizontalAlignment="Center"/>
+            <Button Grid.Column="2" HorizontalAlignment="Right"/>
+        </Grid>
+
+        <Grid Margin="0, 20, 0, 0" HorizontalAlignment="Stretch" >
+            <TextBox Name="SearchTextBox" 
+                     FontSize ="12"
+                     Watermark="Поиск"/>
+            <PathIcon Background="Red" 
+                    Height="16" Width="16" HorizontalAlignment="Right" Focusable="False"/>
+        </Grid>
+
+		<Grid Margin="0, 20, 0, 0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
+			<Button  Grid.Column="0"
+                     Content="Общий список"/>
+            
+            <Button Grid.Column="1"
+                    Content="По категории"/>
+            
+            <Button Grid.Column="2" Command="{Binding }"
+                    Content="По дате добавления"/>
+			<Grid.Styles>
+				<Style Selector="Button">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="Transparent"/>
+					<Setter Property="BorderThickness" Value="1"/>
+					<Setter Property="BorderBrush" Value="Black"></Setter>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="LightGray"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+					</Style>
+				</Style>
+            </Grid.Styles>
+        </Grid>
+
+        <TransitioningContentControl
+            IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNotNull}}"
+            Content="{Binding CurrentMark}"/>
+
+		<ListBox x:DataType="viewModels:AnalysisViewModel" SelectedItem="{Binding CurrentMark}"
+                 IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}" Background="White"
+             ItemsSource ="{CompiledBinding Analysis}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid ColumnDefinitions="5*, *">
+						<TextBlock Grid.Column="0" Text="{CompiledBinding Name}"/>
+						<TextBlock Grid.Column="0"
+								   FontSize="11"
+								   Foreground="Gray"
+								   VerticalAlignment="Bottom"
+								   Text="{CompiledBinding CurrentDatetime}"/>
+
+						<StackPanel Grid.Column="1" Orientation="Vertical" >
+							<Border Background="Transparent" BorderThickness="0">
+								<Border
+									Name="br"
+									Width="30"
+									Height="30"
+									BorderThickness="0"
+                           >
+									<Canvas>
+										<Line Name="icon1"
+												Stroke="Gray"
+												StrokeDashArray="3, 2"
+												StartPoint="0, 7"
+												EndPoint="30, 7"/>
+
+										<Line Name="icon2"
+											  Stroke="Gray"
+											  StrokeDashArray="3, 2"
+											  StartPoint="0, 23"
+											  EndPoint="30, 23"/>
+
+										<Line Name="icon3"
+											  Stroke="{CompiledBinding ColorText}"
+											  StartPoint="15, 0"
+											  EndPoint="15, 30"/>
+										<Ellipse Width="4" Height="4"
+												 Canvas.Left="13" Canvas.Top="{CompiledBinding TopPosition}" Fill="{CompiledBinding ColorText}" />
+
+
+									</Canvas>
+								</Border>
+							</Border>
+							<TextBlock Margin ="0,5, 0,0"
+									   FontSize="11"
+									   HorizontalAlignment="Center">
+								<Run Text="{CompiledBinding CurrentValue}"></Run>
+								<Run Text="{CompiledBinding Unit.Name}"/>
+							</TextBlock>
+						</StackPanel>
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</StackPanel>
+	
+</UserControl>
