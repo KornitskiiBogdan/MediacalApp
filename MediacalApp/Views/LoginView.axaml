@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:MediacalApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:LoginViewModel"
+             x:Class="MediacalApp.Views.LoginView">
+	<DockPanel x:DataType="viewModels:LoginViewModel" Margin="10">
+
+		<TextBlock Text="Login"
+				   DockPanel.Dock="Top"
+				   Margin="0 10 0 20"
+				   FontSize="26" FontWeight="Medium"
+				   VerticalAlignment="Center"
+				   HorizontalAlignment="Center"/>
+
+		<StackPanel DockPanel.Dock="Bottom">
+          <TextBlock Text="{CompiledBinding ErrorMessage}"
+                     HorizontalAlignment="Center"
+                     Foreground="IndianRed" FontSize="18"/>
+          <Button Content="LOGIN" Background="#146059"
+                  VerticalContentAlignment="Center"
+                  Margin="0 10 0 0 "
+                  Height="50"
+                  FontSize="18"
+                  Command="{CompiledBinding LoginCommand}"
+                  HorizontalAlignment="Stretch" 
+                  HorizontalContentAlignment="Center"/>
+
+      </StackPanel>
+
+      <StackPanel Spacing="10">
+          <TextBox Padding="10" Margin="5"
+                   Watermark="Username"
+                   AcceptsReturn="False"
+                   FontSize="16"
+                   MaxLines="1"
+                   Text="{CompiledBinding Username}"
+                   Height="50" VerticalContentAlignment="Center"/>
+
+          <TextBox Padding="10" Margin="5"
+                   Watermark="Password"
+                   AcceptsReturn="False"
+                   FontSize="16"
+                   MaxLines="1"
+                   Text="{CompiledBinding Password}" PasswordChar="*"
+                   Height="50" VerticalContentAlignment="Center"/>
+
+          <ComboBox ItemsSource="{CompiledBinding AvailableUsers}"
+                    SelectedItem="{CompiledBinding SelectedUser}"
+                    Margin="5" Width="300"
+                    Height="40" VerticalContentAlignment="Center"
+                    PlaceholderText="Select a user"
+                    HorizontalAlignment="Center">
+              <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                      <TextBlock Text="{CompiledBinding FullName}"></TextBlock>
+                  </DataTemplate>
+              </ComboBox.ItemTemplate>
+          </ComboBox>
+      </StackPanel>
+
+  </DockPanel>
+</UserControl>

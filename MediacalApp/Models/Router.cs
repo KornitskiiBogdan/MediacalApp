@@ -1,4 +1,6 @@
-﻿using MediacalApp.Messaging;
+﻿using System;
+using MediacalApp.Messaging;
+using MediacalApp.Service.LoginService;
 using MediacalApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,7 +28,8 @@ namespace MediacalApp.Models
                 openedApp.Services.AddSingleton<AnalysisViewModel>(new AnalysisViewModel(openedApp.Project));
                 openedApp.Services.AddSingleton<DocumentsViewModel>(new DocumentsViewModel(openedApp.Project));
                 openedApp.Services.AddSingleton<ProfileViewModel>(new ProfileViewModel(openedApp.Project));
-
+                openedApp.Services.AddHttpClient<ILoginService, LoginService>(httpClient =>
+                    httpClient.BaseAddress = new Uri("https://dummyjson.com/"));
             });
         }
     }

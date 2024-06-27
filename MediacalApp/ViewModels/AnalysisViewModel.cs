@@ -1,8 +1,6 @@
 ﻿using System;
-using MediacalApp.ViewModels.Charts;
 using ReactiveUI;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using MediacalApp.Models;
 using MediacalApp.Attributes;
 
@@ -42,6 +40,19 @@ namespace MediacalApp.ViewModels
             set => this.RaiseAndSetIfChanged(ref _currentMark, value);
         }
 
-        //public ICommand SortByDate { get; set; } = new ReactiveCommand<TParam,TResult>()
+        public void SortByDate()
+        {
+
+        }
+
+        public void SortByCategory()
+        {
+
+        }
+
+        public void SortByOrder()
+        {
+
+        }
     }
 }

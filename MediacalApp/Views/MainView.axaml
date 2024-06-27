@@ -20,7 +20,7 @@
 		<TransitioningContentControl Grid.Row="0" Background="White" 
                           Content="{Binding CurrentPage}"/>
 
-        <ListBox Grid.Row="1" Background="White"
+        <ListBox Grid.Row="1" Background="White" IsVisible="{Binding CurrentPage, Converter={x:Static converters:CurrentPageToBoolConverter.BoolConverter}}"
                  ItemsSource="{Binding Items}"
                  SelectedItem="{Binding SelectedListItem}">
             <ListBox.ItemsPanel>
