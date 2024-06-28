@@ -31,10 +31,13 @@ public sealed class MainViewModel : ViewModelBase
         {
             CurrentPage = Project.Services.GetRequiredService<AnalysisViewModel>();
         });
-        //Пока так
+        
         _currentPage = Project.Services.GetRequiredService<AnalysisViewModel>();
+        //Пока так. Из-за циклических зависимостей, потому что одновременно добавляется и ILoginService и LoginViewModel.
+        //Мб это норм, потому что окно логин нужно только при входе
+        //Нужно подумать...
         //_currentPage = new LoginViewModel(Project, Project.Services.GetRequiredService<ILoginService>());
-        //_currentPage = Project.Services.GetRequiredService<LoginViewModel>();
+
     }
 
     public ViewModelBase CurrentPage
