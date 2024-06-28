@@ -17,7 +17,7 @@ namespace MediacalApp.ViewModels
         //private ChartViewModel _chart = new LineChartViewModel();
         private MarkViewModel? _currentMark;
         private readonly MedicalProject _project;
-        private readonly SourceList<MarkViewModel> _sourceListMark = new SourceList<MarkViewModel>();
+        private readonly SourceList<MarkViewModel> _sourceListMark = new ();
 
         public AnalysisViewModel(MedicalProject project)
         {
