@@ -8,9 +8,8 @@
              x:Class="MediacalApp.Views.MarkView">
     <StackPanel Orientation="Vertical">
 
-        <Grid Margin="0,20,0,0" ColumnDefinitions="*, *" HorizontalAlignment="Stretch">
+        <Grid Margin="0,20,0,0" ColumnDefinitions="*" HorizontalAlignment="Stretch">
 			<Button Grid.Column="0" Command="{CompiledBinding GoBackCommand}" HorizontalAlignment="Left"/>
-            <Button Grid.Column="1" Command="{CompiledBinding GoNextCommand}" HorizontalAlignment="Right"/>
         </Grid>
         <Border CornerRadius="5" Background="White">
             <Grid ColumnDefinitions="4*, *">

@@ -123,10 +123,5 @@ namespace MediacalApp.ViewModels
         {
             await _project.MessageBus.SendAsync(new GoBackView(GetType()));
         }
-
-        public async Task GoNextCommand()
-        {
-            await _project.MessageBus.SendAsync(new GoNextView(GetType()));
-        }
     }
 }

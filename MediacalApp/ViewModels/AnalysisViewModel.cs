@@ -53,25 +53,6 @@ namespace MediacalApp.ViewModels
             {
                 CurrentMark = null;
             });
-
-            _project.MessageBus.Register<GoNextView>(backView =>
-            {
-                if (CurrentMark == null)
-                {
-                    return;
-                }
-
-                var arrayItems = _sourceListMark.Items.ToArray();
-                var indexCurrentMark = arrayItems.IndexOf(CurrentMark);
-                if (indexCurrentMark == arrayItems.Length - 1)
-                {
-                    CurrentMark = arrayItems[0];
-                }
-                else
-                {
-                    CurrentMark = arrayItems[indexCurrentMark + 1];
-                }
-            });
         }
 
         public AnalysisModel Model => _model;
