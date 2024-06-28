@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediacalApp.Messaging;
+using MediacalApp.Messaging.Messages;
 using MediacalApp.Models;
 using MediacalApp.Service.LoginService;
 using ReactiveUI;

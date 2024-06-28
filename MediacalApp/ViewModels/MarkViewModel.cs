@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
+using System.Threading.Tasks;
 using Avalonia.Media;
+using MediacalApp.Messaging;
+using MediacalApp.Messaging.Messages;
 using MediacalApp.Models;
-using MediacalApp.ViewModels.Charts;
 using ReactiveUI;
 
 namespace MediacalApp.ViewModels
@@ -21,19 +22,19 @@ namespace MediacalApp.ViewModels
         private readonly List<float> _values;
         private SolidColorBrush? _colorText;
         private int _topPosition;
-        private float? _upperValue;
-        private float? _lowerValue;
+        private readonly MarkModel _model;
+        private readonly MedicalProject _project;
 
-        public MarkViewModel(string name, DateTime date, float value, string unit, 
-            float? upperValue, float? lowerValue)
+        public MarkViewModel(MarkModel model, MedicalProject project,
+            string name, DateTime date, float value, string unit)
         {
+            _model = model;
+            _project = project;
             _name = name;
             _currentDatetime = date;
             _currentValue = value.ToString(CultureInfo.CurrentCulture);
             _unit = new Unit(unit);
             _values = new List<float>{value};
-            _upperValue = upperValue;
-            _lowerValue = lowerValue;
             CalculateReferences();
         }
 
@@ -84,7 +85,7 @@ namespace MediacalApp.ViewModels
 
         public void CalculateReferences()
         {
-            if(_lowerValue == null ||  _upperValue == null)
+            if(_model.LowerValue == null || _model.UpperValue == null)
             {
                 return;
             }
@@ -92,7 +93,7 @@ namespace MediacalApp.ViewModels
             var value = _values.Last();
 
             
-            if (value > _lowerValue.Value && value < _upperValue.Value)
+            if (value > _model.LowerValue.Value && value < _model.UpperValue.Value)
             {
                 ColorText = new SolidColorBrush(Colors.Green);
             }
@@ -101,21 +102,31 @@ namespace MediacalApp.ViewModels
                 ColorText = new SolidColorBrush(Colors.Red);
             }
 
-            if (value >= _upperValue.Value)
+            if (value >= _model.UpperValue.Value)
             {
-                TopPosition = (int)((_upperValue.Value / value) * 7) - 2; 
+                TopPosition = (int)((_model.UpperValue.Value / value) * 7) - 2; 
                 return;
             }
 
-            if (value <= _lowerValue.Value)
+            if (value <= _model.LowerValue.Value)
             {
-                TopPosition = (int)((value / _lowerValue.Value) * 7) + 25;
+                TopPosition = (int)((value / _model.LowerValue.Value) * 7) + 25;
                 return;
             }
 
-            var koefA = (_upperValue.Value - _lowerValue.Value) / 16;
-            var koefB = _lowerValue.Value;
+            var koefA = (_model.UpperValue.Value - _model.LowerValue.Value) / 16;
+            var koefB = _model.LowerValue.Value;
             TopPosition = (int)((value - koefB) / koefA) + 5;
+        }
+
+        public async Task GoBackCommand()
+        {
+            await _project.MessageBus.SendAsync(new GoBackView(GetType()));
+        }
+
+        public async Task GoNextCommand()
+        {
+            await _project.MessageBus.SendAsync(new GoNextView(GetType()));
         }
     }
 }

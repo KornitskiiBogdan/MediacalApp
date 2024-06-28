@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using MediacalApp.Messaging;
+using MediacalApp.Messaging.Messages;
 using MediacalApp.Models;
 using MediacalApp.Service.LoginService;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,8 @@ public sealed class MainViewModel : ViewModelBase
             CurrentPage = Project.Services.GetRequiredService<AnalysisViewModel>();
         });
         //Пока так
-        _currentPage = new LoginViewModel(Project, Project.Services.GetRequiredService<ILoginService>());
+        _currentPage = Project.Services.GetRequiredService<AnalysisViewModel>();
+        //_currentPage = new LoginViewModel(Project, Project.Services.GetRequiredService<ILoginService>());
         //_currentPage = Project.Services.GetRequiredService<LoginViewModel>();
     }
 
