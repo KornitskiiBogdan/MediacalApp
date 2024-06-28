@@ -15,7 +15,7 @@ namespace MediacalApp.ViewModels
     {
         private Unit _unit;
         private string _name;
-        private string _currentDatetime;
+        private DateTime _currentDatetime;
         private string _currentValue;
 
         private readonly List<float> _values;
@@ -24,7 +24,7 @@ namespace MediacalApp.ViewModels
         private float? _upperValue;
         private float? _lowerValue;
 
-        public MarkViewModel(string name, string date, float value, string unit, 
+        public MarkViewModel(string name, DateTime date, float value, string unit, 
             float? upperValue, float? lowerValue)
         {
             _name = name;
@@ -43,7 +43,7 @@ namespace MediacalApp.ViewModels
             set => this.RaiseAndSetIfChanged(ref _name, value);
         }
 
-        public string CurrentDatetime
+        public DateTime CurrentDatetime
         {
             get => _currentDatetime;
             set => this.RaiseAndSetIfChanged(ref _currentDatetime, value);
@@ -61,7 +61,7 @@ namespace MediacalApp.ViewModels
             set => this.RaiseAndSetIfChanged(ref _unit, value);
         }
 
-        public ObservableCollection<Unit> Units { get; set; }
+        public ObservableCollection<Unit> Units { get; set; } = new ObservableCollection<Unit>(); 
 
         public SolidColorBrush? ColorText
         {
@@ -75,7 +75,7 @@ namespace MediacalApp.ViewModels
             set => this.RaiseAndSetIfChanged(ref _topPosition, value);
         }
 
-        public void AddNewValue(string date, float value)
+        public void AddNewValue(DateTime date, float value)
         {
             CurrentValue = value.ToString(CultureInfo.CurrentCulture);
             CurrentDatetime = date;

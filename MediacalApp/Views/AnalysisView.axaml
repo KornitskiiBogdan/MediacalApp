@@ -44,17 +44,17 @@
 			
             <Button  x:DataType="viewModels:AnalysisViewModel" 
                      Grid.Column="0"
-                     Command="{Binding SortByOrder}"
+                     Command="{Binding Model.SortByOrder}"
                      Content="Общий список"/>
             
             <Button x:DataType="viewModels:AnalysisViewModel" 
                     Grid.Column="1"
-                    Command="{Binding SortByCategory}"
+                    Command="{Binding Model.SortByCategory}"
                     Content="По категории"/>
             
             <Button  x:DataType="viewModels:AnalysisViewModel" 
                      Grid.Column="2" 
-                     Command="{Binding SortByDate}"
+                     Command="{Binding Model.SortByDate}"
                      Content="По дате добавления"/>
 			<Grid.Styles>
 				<Style Selector="Button">
