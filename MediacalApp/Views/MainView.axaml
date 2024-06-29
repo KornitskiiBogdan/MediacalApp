@@ -13,7 +13,7 @@
     
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="6.3*"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
@@ -32,9 +32,9 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type models:ListItemTemplate}">
                         <StackPanel Orientation="Vertical">
-                            <PathIcon Data="{Binding IconKey, Converter={x:Static converters:TypeConverters.IconConverter}}"
-                                      Width="24"  Height="24" />
-                            <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0 15 0 0" Text="{Binding Label}"></TextBlock>
+                            <Image Source="{Binding IconKey, Converter={x:Static converters:TypeConverters.IconConverter}}"
+                                      Width="64"  Height="64" />
+                            <TextBlock HorizontalAlignment="Center" FontSize="11" Margin="0 5 0 0" Text="{Binding Label}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

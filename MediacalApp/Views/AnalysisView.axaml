@@ -33,25 +33,27 @@
               Margin="0, 20, 0, 0" HorizontalAlignment="Stretch" >
             <TextBox Name="SearchTextBox" 
                      FontSize ="12"
+					 BorderBrush="#FF00D7D4"
 					 Text="{Binding SearchText}"
-                     Watermark="Поиск"/>
-            <PathIcon Background="Red" 
-                    Height="16" Width="16" HorizontalAlignment="Right" Focusable="False"/>
+                     Watermark="Поиск">
+            </TextBox>
+            <Image Height="32" Width="32" Source="avares://MediacalApp/Assets/SearchRegular.png" HorizontalAlignment="Right" Focusable="False"/>
         </Grid>
 
 		<Grid 
               IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0, 20, 0, 0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
-			
-            <Button  x:DataType="viewModels:AnalysisViewModel" 
-                     Grid.Column="0"
-                     Command="{Binding Model.SortByOrder}"
-                     Content="Общий список"/>
             
             <Button x:DataType="viewModels:AnalysisViewModel" 
                     Grid.Column="1"
+					
                     Command="{Binding Model.SortByCategory}"
                     Content="По категории"/>
+
+            <Button  x:DataType="viewModels:AnalysisViewModel"
+                     Grid.Column="0"
+                     Command="{Binding Model.SortByOrder}"
+                     Content="Общий список"/>
             
             <Button  x:DataType="viewModels:AnalysisViewModel" 
                      Grid.Column="2" 
@@ -63,11 +65,11 @@
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     <Setter Property="Background" Value="Transparent"/>
 					<Setter Property="BorderThickness" Value="1"/>
-					<Setter Property="BorderBrush" Value="Black"></Setter>
+					<Setter Property="BorderBrush" Value="#FF00D7D4"></Setter>
                     <Setter Property="FontSize" Value="12"/>
                     <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
                         <Setter Property="Background" Value="LightGray"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="#FF00D7D4"/>
 					</Style>
 				</Style>
             </Grid.Styles>

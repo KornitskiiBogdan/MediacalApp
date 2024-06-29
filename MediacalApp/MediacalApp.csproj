@@ -17,7 +17,11 @@
 
   
   <ItemGroup>
+    <None Remove="Assets\AddRegular.png" />
+    <None Remove="Assets\AnalysisRegular.png" />
+    <None Remove="Assets\DocumentsRegular.png" />
     <None Remove="Assets\ProfileRegular.png" />
+    <None Remove="Assets\SettingsRegular.png" />
   </ItemGroup>
 
   <ItemGroup>
