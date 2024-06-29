@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace Exceloperations
+namespace ExcelOperations
 {
     public record ExcelMedicalGroup(string Name, List<ExcelMedicalSubGroup> SubGroups);
 
@@ -19,7 +19,7 @@ namespace Exceloperations
 
     public class ExcelRead
     {
-        private readonly string _path = @"C:\Users\Bogdan\Downloads\referensy_1.xlsx";
+        public const string Path = @"C:\Users\Bogdan\Downloads\referensy_1.xlsx";
         public List<ExcelMedicalGroup> Read(string path)
         {
             List<ExcelMedicalGroup> medicalGroups = new List<ExcelMedicalGroup>();

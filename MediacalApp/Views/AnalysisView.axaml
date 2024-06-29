@@ -25,7 +25,7 @@
 		<Grid IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
 			<Button Grid.Column="0" HorizontalAlignment="Left"/>
-            <TextBlock Grid.Column="1" Text="Aнализы" HorizontalAlignment="Center"/>
+            <TextBlock FontSize="16" Grid.Column="1" Text="Aнализы" HorizontalAlignment="Center"/>
             <Button Grid.Column="2" HorizontalAlignment="Right"/>
         </Grid>
 
