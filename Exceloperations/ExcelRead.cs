@@ -19,7 +19,7 @@ namespace Exceloperations
 
     public class ExcelRead
     {
-
+        private readonly string _path = @"C:\Users\Bogdan\Downloads\referensy_1.xlsx";
         public List<ExcelMedicalGroup> Read(string path)
         {
             List<ExcelMedicalGroup> medicalGroups = new List<ExcelMedicalGroup>();
