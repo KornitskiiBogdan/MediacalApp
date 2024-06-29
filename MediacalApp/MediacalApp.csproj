@@ -35,7 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Authentication\Authentication.csproj" />
     <ProjectReference Include="..\SkiaGraphics\SkiaGraphics.csproj" />
+    <ProjectReference Include="..\Tools\Tools.csproj" />
   </ItemGroup>
 
   <ItemGroup>

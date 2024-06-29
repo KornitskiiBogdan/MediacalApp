@@ -1,4 +1,4 @@
-﻿namespace MediacalApp.Service.LoginService;
+﻿namespace Authentication;
 
 public record DummyUser(string Username, string Password, string FirstName, string LastName)
 {

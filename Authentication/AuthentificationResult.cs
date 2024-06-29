@@ -1,4 +1,4 @@
-﻿namespace MediacalApp.Service.LoginService;
+﻿namespace Authentication;
 
 public record AuthentificationResult(
     int Id,

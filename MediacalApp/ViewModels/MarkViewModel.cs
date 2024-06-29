@@ -5,8 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Media;
+using MediacalApp.Messages;
 using MediacalApp.Messaging;
-using MediacalApp.Messaging.Messages;
 using MediacalApp.Models;
 using ReactiveUI;
 

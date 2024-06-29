@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediacalApp.Messaging.Messages
+namespace MediacalApp.Messages
 {
     public record GoBackView(Type TypeView);
 }

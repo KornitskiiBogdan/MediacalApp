@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediacalApp.iOS", "Mediacal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediacalApp.Browser", "MediacalApp.Browser\MediacalApp.Browser.csproj", "{F64075AA-94BA-4122-9EE5-3A4BED9BEB44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaGraphics", "SkiaGraphics\SkiaGraphics.csproj", "{CC955FC7-B145-4E21-A722-A7239688577D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkiaGraphics", "SkiaGraphics\SkiaGraphics.csproj", "{CC955FC7-B145-4E21-A722-A7239688577D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{1FC2F729-7647-457D-A019-BAFAF9DC2F62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{CC955FC7-B145-4E21-A722-A7239688577D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC955FC7-B145-4E21-A722-A7239688577D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC955FC7-B145-4E21-A722-A7239688577D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC2F729-7647-457D-A019-BAFAF9DC2F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC2F729-7647-457D-A019-BAFAF9DC2F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC2F729-7647-457D-A019-BAFAF9DC2F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC2F729-7647-457D-A019-BAFAF9DC2F62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,3 +1,3 @@
-﻿namespace MediacalApp.Service.LoginService;
+﻿namespace Authentication;
 
 public record UsersResponse(DummyUser[] Users);

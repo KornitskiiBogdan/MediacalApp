@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using MediacalApp.Messages;
 using MediacalApp.Messaging;
-using MediacalApp.Messaging.Messages;
-using MediacalApp.Service.LoginService;
-using MediacalApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MediacalApp.Models;

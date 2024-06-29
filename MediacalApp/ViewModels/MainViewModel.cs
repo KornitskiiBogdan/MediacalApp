@@ -1,8 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using MediacalApp.Messages;
 using MediacalApp.Messaging;
-using MediacalApp.Messaging.Messages;
 using MediacalApp.Models;
-using MediacalApp.Service.LoginService;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 

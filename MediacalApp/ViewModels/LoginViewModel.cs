@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Authentication;
+using MediacalApp.Messages;
 using MediacalApp.Messaging;
-using MediacalApp.Messaging.Messages;
 using MediacalApp.Models;
-using MediacalApp.Service.LoginService;
 using ReactiveUI;
 
 namespace MediacalApp.ViewModels

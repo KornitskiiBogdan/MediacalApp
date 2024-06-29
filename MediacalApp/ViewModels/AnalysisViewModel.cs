@@ -8,8 +8,8 @@ using MediacalApp.Models;
 using MediacalApp.Attributes;
 using DynamicData;
 using MediacalApp.Messaging;
-using MediacalApp.Messaging.Messages;
 using MediacalApp.Tools;
+using MediacalApp.Messages;
 
 namespace MediacalApp.ViewModels
 {
