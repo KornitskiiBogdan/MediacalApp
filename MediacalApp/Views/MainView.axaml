@@ -13,31 +13,34 @@
     
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="9*"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
 		<TransitioningContentControl Grid.Row="0" Background="White" 
                           Content="{Binding CurrentPage}"/>
 
-        <ListBox Grid.Row="1" Background="White" IsVisible="{Binding CurrentPage, Converter={x:Static converters:CurrentPageToBoolConverter.BoolConverter}}"
-                 ItemsSource="{Binding Items}"
-                 SelectedItem="{Binding SelectedListItem}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-			</ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type models:ListItemTemplate}">
-                    <StackPanel Spacing="15" Orientation="Horizontal">
-                        <PathIcon Data="{Binding IconKey, Converter={x:Static converters:TypeConverters.IconConverter}}"
-                                  Width="14" />
-                        <TextBlock Text="{Binding Label}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Border Grid.Row="1" IsVisible="{Binding CurrentPage, Converter={x:Static converters:CurrentPageToBoolConverter.BoolConverter}}">
+            <ListBox  Background="White"
+                     ItemsSource="{Binding Items}"
+                     SelectedItem="{Binding SelectedListItem}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1" HorizontalAlignment="Stretch" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:ListItemTemplate}">
+                        <StackPanel Orientation="Vertical">
+                            <PathIcon Data="{Binding IconKey, Converter={x:Static converters:TypeConverters.IconConverter}}"
+                                      Width="24"  Height="24" />
+                            <TextBlock HorizontalAlignment="Center" FontSize="14" Margin="0 15 0 0" Text="{Binding Label}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        
     </Grid>
 	
 </UserControl>

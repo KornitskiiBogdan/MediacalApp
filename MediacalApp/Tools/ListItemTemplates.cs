@@ -14,10 +14,10 @@ namespace MediacalApp.Tools
         {
             return new()
             {
-                new ListItemTemplate(typeof(AnalysisViewModel), "AnalysisRegular", "Analysis"),
-                new ListItemTemplate(typeof(DocumentsViewModel), "DocumentsRegular", "Documents"),
-                new ListItemTemplate(typeof(ProfileViewModel), "ProfileRegular", "Profile"),
-                new ListItemTemplate(typeof(SettingsViewModel), "SettingsRegular", "Settings"),
+                new ListItemTemplate(typeof(AnalysisViewModel), "AnalysisRegular", "Анализы"),
+                new ListItemTemplate(typeof(DocumentsViewModel), "DocumentsRegular", "Документы"),
+                new ListItemTemplate(typeof(ProfileViewModel), "ProfileRegular", "Профиль"),
+                new ListItemTemplate(typeof(SettingsViewModel), "SettingsRegular", "Настройки"),
             };
         }
     }
