@@ -1,4 +1,4 @@
-﻿namespace MedicalDatabase;
+﻿namespace MedicalDatabase.Objects;
 
 public abstract class MedicalNamedElementBase : MedicalElementBase
 {

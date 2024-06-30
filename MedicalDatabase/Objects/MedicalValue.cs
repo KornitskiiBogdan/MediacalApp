@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalDatabase
+namespace MedicalDatabase.Objects
 {
     public class MedicalValue : MedicalElementBase
     {
@@ -12,7 +12,7 @@ namespace MedicalDatabase
         private string _date;
         private int _parentId;
 
-        public MedicalValue()
+        public MedicalValue() : base()
         {
             _date = string.Empty;
         }

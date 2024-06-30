@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalDatabase
+namespace MedicalDatabase.Objects
 {
     public class MedicalReference : MedicalNamedElementBase
     {
         private string? _value;
         private int _parentId;
 
-        public MedicalReference()
+        public MedicalReference() : base()
         {
         }
 
         public MedicalReference(int id, int parentId, string name, string? value) : base(id, name)
         {
             _value = value;
-           _parentId = parentId;
+            _parentId = parentId;
         }
 
         public string? Value

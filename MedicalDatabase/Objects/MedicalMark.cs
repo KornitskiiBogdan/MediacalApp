@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalDatabase
+namespace MedicalDatabase.Objects
 {
     public class MedicalMark : MedicalNamedElementBase
     {
@@ -12,7 +12,7 @@ namespace MedicalDatabase
         private string _nameSubGroup;
         private string _nameGroup;
 
-        public MedicalMark()
+        public MedicalMark() : base()
         {
             _unit = string.Empty;
             _nameSubGroup = string.Empty;
