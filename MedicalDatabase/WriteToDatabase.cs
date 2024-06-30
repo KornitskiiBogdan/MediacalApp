@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,8 @@ namespace MedicalDatabase
         private readonly SQLiteConnection _sqlConnection;
         public WriteToDatabase()
         {
-            _sqlConnection = new SQLiteConnection("Data Source=MedicalDatabase.db");
+            var path = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName + "\\MedicalDatabase\\MedicalDatabase.db";
+            _sqlConnection = new SQLiteConnection($"Data Source={path}");
             _sqlConnection.Open();
         }
 
