@@ -2,18 +2,18 @@
 
 public abstract class MedicalElementBase
 {
-    private int _id;
+    private Int64 _id;
 
     protected MedicalElementBase()
     {
     }
 
-    protected MedicalElementBase(int id)
+    protected MedicalElementBase(Int64 id)
     {
         _id = id;
     }
 
-    public int Id
+    public Int64 Id
     {
         get => _id;
         set => _id = value;

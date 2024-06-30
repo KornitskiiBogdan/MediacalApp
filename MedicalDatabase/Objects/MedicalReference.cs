@@ -9,13 +9,13 @@ namespace MedicalDatabase.Objects
     public class MedicalReference : MedicalNamedElementBase
     {
         private string? _value;
-        private int _parentId;
+        private Int64 _parentId;
 
         public MedicalReference() : base()
         {
         }
 
-        public MedicalReference(int id, int parentId, string name, string? value) : base(id, name)
+        public MedicalReference(Int64 id, Int64 parentId, string name, string? value) : base(id, name)
         {
             _value = value;
             _parentId = parentId;
@@ -27,7 +27,7 @@ namespace MedicalDatabase.Objects
             set => _value = value;
         }
 
-        public int ParentId
+        public Int64 ParentId
         {
             get => _parentId;
             set => _parentId = value;

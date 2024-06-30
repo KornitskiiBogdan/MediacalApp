@@ -19,7 +19,7 @@ namespace MedicalDatabase.Objects
             _nameGroup = string.Empty;
         }
 
-        public MedicalMark(int id, string name, string unit, string nameSubGroup, string nameGroup) : base(id, name)
+        public MedicalMark(Int64 id, string name, string unit, string nameSubGroup, string nameGroup) : base(id, name)
         {
             _unit = unit;
             _nameSubGroup = nameSubGroup;

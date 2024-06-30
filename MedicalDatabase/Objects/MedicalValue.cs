@@ -10,14 +10,14 @@ namespace MedicalDatabase.Objects
     {
         private double _value;
         private string _date;
-        private int _parentId;
+        private Int64 _parentId;
 
         public MedicalValue() : base()
         {
             _date = string.Empty;
         }
 
-        public MedicalValue(int id, int parentId, double value, string date) : base(id)
+        public MedicalValue(Int64 id, Int64 parentId, double value, string date) : base(id)
         {
             _parentId = parentId;
             _value = value;
@@ -36,7 +36,7 @@ namespace MedicalDatabase.Objects
             set => _date = value;
         }
 
-        public int ParentId
+        public Int64 ParentId
         {
             get => _parentId;
             set => _parentId = value;

@@ -9,7 +9,7 @@ public abstract class MedicalNamedElementBase : MedicalElementBase
         _name = string.Empty;
     }
 
-    protected MedicalNamedElementBase(int id, string name) : base(id)
+    protected MedicalNamedElementBase(Int64 id, string name) : base(id)
     {
         _name = name;
     }
