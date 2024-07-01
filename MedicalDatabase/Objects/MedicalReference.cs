@@ -43,6 +43,7 @@ namespace MedicalDatabase.Objects
 
         private void ParseReferenceToInt(string value)
         {
+            //TODO Вроде бы есть более простой вариант чем такой
             if (Regex.IsMatch(value, @"\s*<\s*\w*"))
             {
                 LowerValue = 0;
