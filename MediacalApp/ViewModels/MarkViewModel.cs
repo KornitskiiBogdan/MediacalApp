@@ -22,13 +22,13 @@ namespace MediacalApp.ViewModels
         private readonly List<float> _values;
         private SolidColorBrush? _colorText;
         private int _topPosition;
-        private readonly MarkModel _model;
+        private readonly ReferenceModel _referenceModel;
         private readonly MedicalProject _project;
 
-        public MarkViewModel(MarkModel model, MedicalProject project,
+        public MarkViewModel(ReferenceModel referenceModel, MedicalProject project,
             string name, DateTime date, float value, string unit)
         {
-            _model = model;
+            _referenceModel = referenceModel;
             _project = project;
             _name = name;
             _currentDatetime = date;
@@ -85,7 +85,7 @@ namespace MediacalApp.ViewModels
 
         public void CalculateReferences()
         {
-            if(_model.LowerValue == null || _model.UpperValue == null)
+            if(_referenceModel.LowerValue == null || _referenceModel.UpperValue == null)
             {
                 return;
             }
@@ -93,7 +93,7 @@ namespace MediacalApp.ViewModels
             var value = _values.Last();
 
             
-            if (value > _model.LowerValue.Value && value < _model.UpperValue.Value)
+            if (value > _referenceModel.LowerValue.Value && value < _referenceModel.UpperValue.Value)
             {
                 ColorText = new SolidColorBrush(Colors.Green);
             }
@@ -102,20 +102,20 @@ namespace MediacalApp.ViewModels
                 ColorText = new SolidColorBrush(Colors.Red);
             }
 
-            if (value >= _model.UpperValue.Value)
+            if (value >= _referenceModel.UpperValue.Value)
             {
-                TopPosition = (int)((_model.UpperValue.Value / value) * 7) - 2; 
+                TopPosition = (int)((_referenceModel.UpperValue.Value / value) * 7) - 2; 
                 return;
             }
 
-            if (value <= _model.LowerValue.Value)
+            if (value <= _referenceModel.LowerValue.Value)
             {
-                TopPosition = (int)((value / _model.LowerValue.Value) * 7) + 25;
+                TopPosition = (int)((value / _referenceModel.LowerValue.Value) * 7) + 25;
                 return;
             }
 
-            var koefA = (_model.UpperValue.Value - _model.LowerValue.Value) / 16;
-            var koefB = _model.LowerValue.Value;
+            var koefA = (_referenceModel.UpperValue.Value - _referenceModel.LowerValue.Value) / 16;
+            var koefB = _referenceModel.LowerValue.Value;
             TopPosition = (int)((value - koefB) / koefA) + 5;
         }
 
