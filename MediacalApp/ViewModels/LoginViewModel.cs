@@ -5,6 +5,7 @@ using Authentication;
 using MediacalApp.Messages;
 using MediacalApp.Messaging;
 using MediacalApp.Models;
+using MedicalDatabase;
 using ReactiveUI;
 
 namespace MediacalApp.ViewModels

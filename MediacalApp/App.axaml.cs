@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using MediacalApp.Models;
 using MediacalApp.ViewModels;
 using MediacalApp.Views;
+using MedicalDatabase;
 
 namespace MediacalApp;
 

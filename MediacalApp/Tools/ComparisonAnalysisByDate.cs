@@ -12,7 +12,20 @@ namespace MediacalApp.Tools
         {
             if (x != null)
             {
-                return y == null ? 1 : x.CurrentDatetime.CompareTo(y.CurrentDatetime);
+                if (y == null)
+                {
+                    return 1;
+                }
+                else
+                {
+                    if (x.CurrentDatetime == null)
+                    {
+                        return y.CurrentDatetime == null ? 0 : -1;
+                    }
+
+                    return y.CurrentDatetime == null ? 1 : x.CurrentDatetime.Value.CompareTo(y.CurrentDatetime.Value);
+                }
+
             }
 
             if (y == null)

@@ -8,26 +8,26 @@ namespace MedicalDatabase.Objects
 {
     public class MedicalMark : MedicalNamedElementBase
     {
-        private string _unit;
+        private Unit _unit;
         private string _nameSubGroup;
         private string _nameGroup;
 
         public MedicalMark() : base()
         {
-            _unit = string.Empty;
+            _unit = new Unit(string.Empty);
             _nameSubGroup = string.Empty;
             _nameGroup = string.Empty;
         }
 
         public MedicalMark(Int64 id, string name, string unit, string nameSubGroup, string nameGroup) : base(id, name)
         {
-            _unit = unit;
+            _unit = new Unit(unit);
             _nameSubGroup = nameSubGroup;
             _nameGroup = nameGroup;
         }
 
 
-        public string Unit
+        public Unit Unit
         {
             get => _unit;
             set => _unit = value;

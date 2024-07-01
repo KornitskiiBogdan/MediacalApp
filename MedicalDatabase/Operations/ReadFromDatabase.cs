@@ -41,10 +41,18 @@ namespace MedicalDatabase.Operations
             return result.ToArray();
         }
 
-        public MedicalReference[] ReadReferences()
+        public MedicalReference[] ReadAllReferences()
         {
-            string sqlExpression = $"SELECT * FROM MedicalReferences";
+            return ReadReferences($"SELECT * FROM MedicalReferences");
+        }
 
+        public MedicalReference[] ReadReferences(MedicalMark mark)
+        {
+            return ReadReferences($"SELECT * FROM MedicalReferences WHERE IdParent = {mark.Id}");
+        }
+
+        private MedicalReference[] ReadReferences(string sqlExpression)
+        {
             SQLiteCommand command = new SQLiteCommand(sqlExpression, SqlConnection);
 
             var result = new List<MedicalReference>();
@@ -66,10 +74,18 @@ namespace MedicalDatabase.Operations
             return result.ToArray();
         }
 
-        public MedicalValue[] ReadValues()
+        public MedicalValue[] ReadAllValues()
         {
-            string sqlExpression = $"SELECT * FROM MedicalValues";
+            return ReadValues($"SELECT * FROM MedicalValues");
+        }
 
+        public MedicalValue[] ReadValues(MedicalMark mark)
+        {
+            return ReadValues($"SELECT * FROM MedicalValues WHERE IdParent = {mark.Id}");
+        }
+
+        private MedicalValue[] ReadValues(string sqlExpression)
+        {
             SQLiteCommand command = new SQLiteCommand(sqlExpression, SqlConnection);
 
             var result = new List<MedicalValue>();
@@ -79,7 +95,7 @@ namespace MedicalDatabase.Operations
                 {
                     while (reader.Read())
                     {
-                        var date = (string)reader["Date"];
+                        var date = (long)reader["Date"];
                         var id = (Int64)reader["Id"];
                         var value = (int)reader["Value"];
                         var idParent = (Int64)reader["IdParent"];

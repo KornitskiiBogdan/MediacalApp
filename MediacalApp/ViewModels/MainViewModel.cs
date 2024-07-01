@@ -2,6 +2,7 @@
 using MediacalApp.Messages;
 using MediacalApp.Messaging;
 using MediacalApp.Models;
+using MedicalDatabase;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 

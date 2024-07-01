@@ -8,29 +8,35 @@ namespace MedicalDatabase.Objects
 {
     public class MedicalValue : MedicalElementBase
     {
-        private double _value;
-        private string _date;
+        private float _value;
+        private long _date;
         private Int64 _parentId;
 
         public MedicalValue() : base()
         {
-            _date = string.Empty;
         }
 
-        public MedicalValue(Int64 id, Int64 parentId, double value, string date) : base(id)
+        public MedicalValue(Int64 id, Int64 parentId, float value, long date) : base(id)
         {
             _parentId = parentId;
             _value = value;
             _date = date;
         }
 
-        public double Value
+        public MedicalValue(Int64 id, Int64 parentId, float value) : base(id)
+        {
+            _parentId = parentId;
+            _value = value;
+            _date = DateTime.Now.Ticks;
+        }
+
+        public float Value
         {
             get => _value;
             set => _value = value;
         }
 
-        public string Date
+        public long Date
         {
             get => _date;
             set => _date = value;
@@ -40,6 +46,11 @@ namespace MedicalDatabase.Objects
         {
             get => _parentId;
             set => _parentId = value;
+        }
+
+        public DateTime GetDateTime()
+        {
+            return new DateTime(Date);
         }
     }
 }

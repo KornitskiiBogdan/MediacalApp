@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediacalApp.Attributes;
 using MediacalApp.Models;
+using MedicalDatabase;
 
 namespace MediacalApp.ViewModels
 {

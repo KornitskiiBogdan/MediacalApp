@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediacalApp.Models;
+using MedicalDatabase;
 
 namespace MediacalApp.ViewModels
 {

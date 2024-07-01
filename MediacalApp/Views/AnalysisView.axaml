@@ -11,25 +11,16 @@
                         Series="{Binding Chart.Series}"
                         Title="{Binding Chart.Title}"
                         XAxes="{Binding Chart.XAxes}"/>-->
-    <UserControl.Resources>
-		<ResourceDictionary>
-			<ControlTheme x:Key="GroupButton" TargetType="Button">
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            </ControlTheme>
-        </ResourceDictionary>
-    </UserControl.Resources>
+    <DockPanel>
 
-    <StackPanel >
-
-		<Grid IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
+		<Grid DockPanel.Dock="Top" IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
 			<Button Grid.Column="0" HorizontalAlignment="Left"/>
             <TextBlock FontSize="16" Grid.Column="1" Text="Aнализы" HorizontalAlignment="Center"/>
             <Button Grid.Column="2" HorizontalAlignment="Right"/>
         </Grid>
 
-        <Grid IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
+        <Grid DockPanel.Dock="Top" IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0, 20, 0, 0" HorizontalAlignment="Stretch" >
             <TextBox Name="SearchTextBox" 
                      FontSize ="12"
@@ -40,7 +31,7 @@
             <Image Height="32" Width="32" Source="avares://MediacalApp/Assets/SearchRegular.png" HorizontalAlignment="Right" Focusable="False"/>
         </Grid>
 
-		<Grid 
+		<Grid DockPanel.Dock="Top"
               IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0, 20, 0, 0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
             
@@ -48,7 +39,7 @@
                     Grid.Column="1"
 					
                     Command="{Binding Model.SortByCategory}"
-                    Content="По категории"/>
+                    Content="По категориям"/>
 
             <Button  x:DataType="viewModels:AnalysisViewModel"
                      Grid.Column="0"
@@ -75,66 +66,71 @@
             </Grid.Styles>
         </Grid>
 
-        <TransitioningContentControl
-            IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNotNull}}"
-            Content="{Binding CurrentMark}"/>
+        <TransitioningContentControl DockPanel.Dock="Top"
+                                     IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                     Content="{Binding CurrentMark}"/>
 
-		<ListBox x:DataType="viewModels:AnalysisViewModel" SelectedItem="{Binding CurrentMark}"
-                 IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}" Background="White"
-             ItemsSource ="{CompiledBinding Analysis}">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Grid ColumnDefinitions="5*, *">
-						<TextBlock Grid.Column="0" Text="{CompiledBinding Name}"/>
-						<TextBlock Grid.Column="0"
-								   FontSize="11"
-								   Foreground="Gray"
-								   VerticalAlignment="Bottom"
-								   Text="{CompiledBinding CurrentDatetime}"/>
-
-						<StackPanel Grid.Column="1" Orientation="Vertical" >
-							<Border Background="Transparent" BorderThickness="0">
-								<Border
-									Name="br"
-									Width="30"
-									Height="30"
-									BorderThickness="0"
-                           >
-									<Canvas>
-										<Line Name="icon1"
-												Stroke="Gray"
-												StrokeDashArray="3, 2"
-												StartPoint="0, 7"
-												EndPoint="30, 7"/>
-
-										<Line Name="icon2"
-											  Stroke="Gray"
-											  StrokeDashArray="3, 2"
-											  StartPoint="0, 23"
-											  EndPoint="30, 23"/>
-
-										<Line Name="icon3"
-											  Stroke="{CompiledBinding ColorText}"
-											  StartPoint="15, 0"
-											  EndPoint="15, 30"/>
-										<Ellipse Width="4" Height="4"
-												 Canvas.Left="13" Canvas.Top="{CompiledBinding TopPosition}" Fill="{CompiledBinding ColorText}" />
+			<ListBox DockPanel.Dock="Top" ClipToBounds="True" x:DataType="viewModels:AnalysisViewModel" SelectedItem="{Binding CurrentMark}"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}" Background="White"
+                     ItemsSource ="{CompiledBinding Analysis}">
 
 
-									</Canvas>
-								</Border>
-							</Border>
-							<TextBlock Margin ="0,5, 0,0"
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid ColumnDefinitions="5*, *">
+							<TextBlock Grid.Column="0" Text="{CompiledBinding Name}"/>
+							<TextBlock Grid.Column="0"
 									   FontSize="11"
-									   HorizontalAlignment="Center">
-								<Run Text="{CompiledBinding CurrentValue}"></Run>
-								<Run Text="{CompiledBinding Unit.Name}"/>
-							</TextBlock>
-						</StackPanel>
-					</Grid>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
-	</StackPanel>
+									   Foreground="Gray"
+									   VerticalAlignment="Bottom"
+									   Text="{CompiledBinding CurrentDatetime}"/>
+
+							<StackPanel Grid.Column="1" Orientation="Vertical" >
+								<Border Background="Transparent" BorderThickness="0">
+									<Border
+										Name="br"
+										Width="30"
+										Height="30"
+										BorderThickness="0"
+                                >
+										<Canvas>
+											<Line Name="icon1"
+												  Stroke="Gray"
+												  StrokeDashArray="3, 2"
+												  StartPoint="0, 7"
+												  EndPoint="30, 7"/>
+
+											<Line Name="icon2"
+												  Stroke="Gray"
+												  StrokeDashArray="3, 2"
+												  StartPoint="0, 23"
+												  EndPoint="30, 23"/>
+
+											<Line Name="icon3"
+												  Stroke="{CompiledBinding ColorText}"
+												  StartPoint="15, 0"
+												  EndPoint="15, 30"/>
+											<Ellipse Width="4" Height="4"
+													 Canvas.Left="13" Canvas.Top="{CompiledBinding TopPosition}" Fill="{CompiledBinding ColorText}" />
+
+
+										</Canvas>
+									</Border>
+								</Border>
+								<TextBlock Margin ="0,5, 0,0"
+										   FontSize="11"
+										   HorizontalAlignment="Center">
+									<Run Text="{CompiledBinding CurrentValue}"></Run>
+									<Run Text="{CompiledBinding Unit.Name}"/>
+								</TextBlock>
+							</StackPanel>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+
+
+	</DockPanel>
 	
 </UserControl>

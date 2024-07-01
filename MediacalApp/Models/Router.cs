@@ -3,6 +3,8 @@ using Authentication;
 using MediacalApp.Messages;
 using MediacalApp.Messaging;
 using MediacalApp.ViewModels;
+using MedicalDatabase;
+using MedicalDatabase.Operations;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MediacalApp.Models
@@ -24,12 +26,15 @@ namespace MediacalApp.Models
         {
             MessageBus.Register<OpenedApp>(openedApp =>
             {
+                openedApp.Services.AddSingleton<ReadFromDatabase>(new ReadFromDatabase());
+                openedApp.Services.AddSingleton<WriteToDatabase>(new WriteToDatabase());
                 openedApp.Services.AddSingleton<MedicalProject>(openedApp.Project);
                 openedApp.Services.AddSingleton<SettingsViewModel>(new SettingsViewModel(openedApp.Project));
                 openedApp.Services.AddSingleton<AnalysisViewModel>(new AnalysisViewModel(openedApp.Project));
                 openedApp.Services.AddSingleton<AddingViewModel>(new AddingViewModel(openedApp.Project));
                 openedApp.Services.AddSingleton<DocumentsViewModel>(new DocumentsViewModel(openedApp.Project));
                 openedApp.Services.AddSingleton<ProfileViewModel>(new ProfileViewModel(openedApp.Project));
+                
                 openedApp.Services.AddHttpClient<ILoginService, LoginService>(httpClient =>
                     httpClient.BaseAddress = new Uri("https://dummyjson.com/"));
             });

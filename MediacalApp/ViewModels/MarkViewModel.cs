@@ -7,59 +7,71 @@ using System.Threading.Tasks;
 using Avalonia.Media;
 using MediacalApp.Messages;
 using MediacalApp.Messaging;
-using MediacalApp.Models;
+using MedicalDatabase;
+using MedicalDatabase.Objects;
+using MedicalDatabase.Operations;
+using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 
 namespace MediacalApp.ViewModels
 {
     public class MarkViewModel : ViewModelBase
     {
-        private Unit _unit;
-        private string _name;
-        private DateTime _currentDatetime;
-        private string _currentValue;
+        private DateTime? _currentDatetime;
+        private string? _currentValue;
 
-        private readonly List<float> _values;
+        private readonly List<MedicalValue> _values;
         private SolidColorBrush? _colorText;
         private int _topPosition;
-        private readonly ReferenceModel _referenceModel;
+        private readonly MedicalReference _referenceModel;
         private readonly MedicalProject _project;
+        private readonly MedicalMark _mark;
+        private readonly ReadFromDatabase _readFromDatabase;
+        private readonly WriteToDatabase _writeToDatabase;
 
-        public MarkViewModel(ReferenceModel referenceModel, MedicalProject project,
-            string name, DateTime date, float value, string unit)
+        public MarkViewModel(MedicalMark markModel, MedicalProject project)
         {
-            _referenceModel = referenceModel;
+            _mark = markModel;
             _project = project;
-            _name = name;
-            _currentDatetime = date;
-            _currentValue = value.ToString(CultureInfo.CurrentCulture);
-            _unit = new Unit(unit);
-            _values = new List<float>{value};
+            _readFromDatabase = _project.Services.GetRequiredService<ReadFromDatabase>();
+            _writeToDatabase = _project.Services.GetRequiredService<WriteToDatabase>();
+            _values = new List<MedicalValue>(_readFromDatabase.ReadValues(_mark));
+            _referenceModel = GetCurrentReference();
+            _currentDatetime = _values.LastOrDefault()?.GetDateTime();
+            _currentValue = _values.LastOrDefault()?.Value.ToString(CultureInfo.CurrentCulture);
             CalculateReferences();
         }
 
         public string Name
         {
-            get => _name;
-            set => this.RaiseAndSetIfChanged(ref _name, value);
+            get => _mark.Name;
+            set
+            {
+                var backingField = _mark.Name;
+                this.RaiseAndSetIfChanged(ref backingField, value);
+            }
         }
 
-        public DateTime CurrentDatetime
+        public DateTime? CurrentDatetime
         {
             get => _currentDatetime;
-            set => this.RaiseAndSetIfChanged(ref _currentDatetime, value);
+            private set => this.RaiseAndSetIfChanged(ref _currentDatetime, value);
         }
 
-        public string CurrentValue
+        public string? CurrentValue
         {
             get => _currentValue;
-            set => this.RaiseAndSetIfChanged(ref _currentValue, value);
+            private set => this.RaiseAndSetIfChanged(ref _currentValue, value);
         }
 
         public Unit Unit
         {
-            get => _unit;
-            set => this.RaiseAndSetIfChanged(ref _unit, value);
+            get => _mark.Unit;
+            set
+            {
+                var backingField = _mark.Unit;
+                this.RaiseAndSetIfChanged(ref backingField, value);
+            }
         }
 
         public ObservableCollection<Unit> Units { get; set; } = new ObservableCollection<Unit>(); 
@@ -76,11 +88,21 @@ namespace MediacalApp.ViewModels
             set => this.RaiseAndSetIfChanged(ref _topPosition, value);
         }
 
+        private MedicalReference GetCurrentReference()
+        {
+            //TODO
+            //На основании профиля пользователя мы должны вытащить для него нужный референс
+
+            return _readFromDatabase.ReadReferences(_mark).LastOrDefault() ?? new MedicalReference(0, _mark.Id, "", "");
+        }
+
         public void AddNewValue(DateTime date, float value)
         {
             CurrentValue = value.ToString(CultureInfo.CurrentCulture);
             CurrentDatetime = date;
-            _values.Add(value);
+            var markValue = new MedicalValue(0, _mark.Id, value, date.Ticks);
+            _writeToDatabase.Write(new [] { markValue });
+            _values.Add(markValue);
         }
 
         public void CalculateReferences()
@@ -90,10 +112,15 @@ namespace MediacalApp.ViewModels
                 return;
             }
 
-            var value = _values.Last();
+            if (_values.Count == 0)
+            {
+                return;
+            }
+
+            var medicalValue = _values.Last();
 
             
-            if (value > _referenceModel.LowerValue.Value && value < _referenceModel.UpperValue.Value)
+            if (medicalValue.Value > _referenceModel.LowerValue.Value && medicalValue.Value < _referenceModel.UpperValue.Value)
             {
                 ColorText = new SolidColorBrush(Colors.Green);
             }
@@ -102,21 +129,21 @@ namespace MediacalApp.ViewModels
                 ColorText = new SolidColorBrush(Colors.Red);
             }
 
-            if (value >= _referenceModel.UpperValue.Value)
+            if (medicalValue.Value >= _referenceModel.UpperValue.Value)
             {
-                TopPosition = (int)((_referenceModel.UpperValue.Value / value) * 7) - 2; 
+                TopPosition = (int)((_referenceModel.UpperValue.Value / medicalValue.Value) * 7) - 2; 
                 return;
             }
 
-            if (value <= _referenceModel.LowerValue.Value)
+            if (medicalValue.Value <= _referenceModel.LowerValue.Value)
             {
-                TopPosition = (int)((value / _referenceModel.LowerValue.Value) * 7) + 25;
+                TopPosition = (int)((medicalValue.Value / _referenceModel.LowerValue.Value) * 7) + 25;
                 return;
             }
 
             var koefA = (_referenceModel.UpperValue.Value - _referenceModel.LowerValue.Value) / 16;
             var koefB = _referenceModel.LowerValue.Value;
-            TopPosition = (int)((value - koefB) / koefA) + 5;
+            TopPosition = (int)((medicalValue.Value - koefB) / koefA) + 5;
         }
 
         public async Task GoBackCommand()

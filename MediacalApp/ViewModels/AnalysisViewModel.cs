@@ -10,6 +10,11 @@ using DynamicData;
 using MediacalApp.Messaging;
 using MediacalApp.Tools;
 using MediacalApp.Messages;
+using MedicalDatabase;
+using MedicalDatabase.Objects;
+using MedicalDatabase.Operations;
+using Microsoft.Extensions.DependencyInjection;
+using LiveChartsCore.Geo;
 
 namespace MediacalApp.ViewModels
 {
@@ -39,20 +44,21 @@ namespace MediacalApp.ViewModels
             Analysis = newCollection;
             _project = project;
 
-             MarkViewModel mark = new MarkViewModel(new MarkModel(20, 10), _project, "Глюкоза", DateTime.FromBinary(2375698327), 15,
-                "мг/л");
-             _sourceListMark.Add(mark);
-            MarkViewModel mark1 = new MarkViewModel(new MarkModel(20, 10), _project, "Целлюлоза", DateTime.FromBinary(8725698272), 25,
-                "мг/л");
-            _sourceListMark.Add(mark1);
-            MarkViewModel mark2 = new MarkViewModel(new MarkModel(20, 10), _project, "Амминокислота", DateTime.FromBinary(5982350982), 20,
-                "мг/л");
-            _sourceListMark.Add(mark2);
-
             _project.MessageBus.Register<GoBackView>(backView =>
             {
                 CurrentMark = null;
             });
+
+            _project.MessageBus.Register<ServiceCreationCompleted>(_ => Init());
+
+        }
+
+        public void Init()
+        {
+            foreach (var mark in _project.Services.GetRequiredService<ReadFromDatabase>().ReadMarks())
+            {
+                _sourceListMark.Add(new MarkViewModel(mark, _project));
+            }
         }
 
         public AnalysisModel Model => _model;

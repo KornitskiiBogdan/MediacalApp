@@ -1,10 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using MediacalApp.Messages;
-using MediacalApp.Messaging;
+﻿using MediacalApp.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MediacalApp.Models;
+namespace MedicalDatabase;
 
 public class MedicalProject
 {
@@ -25,6 +22,8 @@ public class MedicalProject
         await medicalProject.MessageBus.SendAsync<OpenedApp>(new OpenedApp(medicalProject, serviceCollection));
 
         medicalProject.Services = serviceCollection.BuildServiceProvider();
+
+        await medicalProject.MessageBus.SendAsync<ServiceCreationCompleted>();
         return medicalProject;
     }
 }
