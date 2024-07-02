@@ -23,6 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediacalApp\MedicalApp.csproj" />
+    <ProjectReference Include="..\MedicalApp\MedicalApp.csproj" />
   </ItemGroup>
 </Project>
