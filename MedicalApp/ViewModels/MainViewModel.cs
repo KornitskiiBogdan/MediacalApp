@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using MedicalApp.Messages;
 using MedicalApp.Models;
 using MedicalDatabase;
@@ -27,12 +28,15 @@ public sealed class MainViewModel : ViewModelBase
             taskMedicalProject.RunSynchronously();
         }
         Project = taskMedicalProject.Result;
-        Project.MessageBus.Register<LoginSuccess>(loginSucces =>
+        Project.MessageBus.Register<LoginSuccess>(_ =>
         {
-            CurrentPage = Project.Services.GetRequiredService<AnalysisViewModel>();
+            SelectedListItem = Items.FirstOrDefault(x => x.ModelType == typeof(AnalysisViewModel));
         });
-        
+
         _currentPage = Project.Services.GetRequiredService<AnalysisViewModel>();
+
+        SelectedListItem = Items.FirstOrDefault(x => x.ModelType == typeof(AnalysisViewModel));
+
         //Пока так. Из-за циклических зависимостей, потому что одновременно добавляется и ILoginService и LoginViewModel.
         //Мб это норм, потому что окно логин нужно только при входе
         //Нужно подумать...
