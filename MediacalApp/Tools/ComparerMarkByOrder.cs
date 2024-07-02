@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using MediacalApp.ViewModels;
+using MedicalApp.ViewModels;
 
-namespace MediacalApp.Tools;
+namespace MedicalApp.Tools;
 
 public class ComparerMarkByOrder : IComparer<MarkViewModel>
 {

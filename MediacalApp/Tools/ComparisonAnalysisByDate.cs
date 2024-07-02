@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediacalApp.ViewModels;
+using MedicalApp.ViewModels;
 
-namespace MediacalApp.Tools
+namespace MedicalApp.Tools
 {
     public class ComparerMarkByDate : IComparer<MarkViewModel>
     {

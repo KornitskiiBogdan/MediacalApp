@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
 using Tools.Collection;
 
-namespace MediacalApp.Messaging
+namespace Tools.Messaging
 {
     public sealed class StrongReferenceMessageBus : IMessageBus
     {

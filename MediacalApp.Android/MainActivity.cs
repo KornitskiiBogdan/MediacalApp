@@ -1,11 +1,10 @@
 ﻿using Android.App;
 using Android.Content.PM;
-
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
 
-namespace MediacalApp.Android;
+namespace MedicalApp.Android;
 
 [Activity(
     Label = "MediacalApp.Android",

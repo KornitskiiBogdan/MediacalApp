@@ -1,12 +1,12 @@
 ﻿using System.Collections.ObjectModel;
-using MediacalApp.Messages;
-using MediacalApp.Messaging;
-using MediacalApp.Models;
+using MedicalApp.Messages;
+using MedicalApp.Models;
 using MedicalDatabase;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
+using Tools.Messaging;
 
-namespace MediacalApp.ViewModels;
+namespace MedicalApp.ViewModels;
 
 public sealed class MainViewModel : ViewModelBase
 {

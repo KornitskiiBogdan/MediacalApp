@@ -2,13 +2,12 @@
 using System.Collections.ObjectModel;
 using LiveChartsCore;
 using LiveChartsCore.Defaults;
-using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.VisualElements;
 using SkiaSharp;
 
-namespace MediacalApp.ViewModels.Charts
+namespace MedicalApp.ViewModels.Charts
 {
     public sealed class LineChartViewModel : ChartViewModel
     {

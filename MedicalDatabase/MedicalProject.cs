@@ -1,5 +1,5 @@
-﻿using MediacalApp.Messaging;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Tools.Messaging;
 
 namespace MedicalDatabase;
 

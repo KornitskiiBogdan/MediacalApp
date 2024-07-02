@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using MediacalApp.ViewModels;
+using MedicalApp.ViewModels;
 
-namespace MediacalApp
+namespace MedicalApp
 {
     public class ViewLocator : IDataTemplate
     {

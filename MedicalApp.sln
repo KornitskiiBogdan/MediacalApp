@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediacalApp", "MediacalApp\MediacalApp.csproj", "{3436E3D6-FA05-4EAB-BD50-4926103FC23E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalApp", "MediacalApp\MedicalApp.csproj", "{3436E3D6-FA05-4EAB-BD50-4926103FC23E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediacalApp.Android", "MediacalApp.Android\MediacalApp.Android.csproj", "{848EC1BA-5D6B-4FB3-ACD2-D4DCBCED117D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalApp.Android", "MediacalApp.Android\MedicalApp.Android.csproj", "{848EC1BA-5D6B-4FB3-ACD2-D4DCBCED117D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediacalApp.Desktop", "MediacalApp.Desktop\MediacalApp.Desktop.csproj", "{4BC682B7-68E2-4981-B7A9-3D7545F0C637}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalApp.Desktop", "MediacalApp.Desktop\MedicalApp.Desktop.csproj", "{4BC682B7-68E2-4981-B7A9-3D7545F0C637}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediacalApp.iOS", "MediacalApp.iOS\MediacalApp.iOS.csproj", "{B89A675A-1F5D-41C7-AE27-1B4FA31546E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediacalApp.Browser", "MediacalApp.Browser\MediacalApp.Browser.csproj", "{F64075AA-94BA-4122-9EE5-3A4BED9BEB44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalApp.Browser", "MediacalApp.Browser\MedicalApp.Browser.csproj", "{F64075AA-94BA-4122-9EE5-3A4BED9BEB44}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkiaGraphics", "SkiaGraphics\SkiaGraphics.csproj", "{CC955FC7-B145-4E21-A722-A7239688577D}"
 EndProject
@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication", "Authentic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelOperations", "Exceloperations\ExcelOperations.csproj", "{8C15CD1A-269F-4FB5-96AC-4DA96E97F170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicalDatabase", "MedicalDatabase\MedicalDatabase.csproj", "{E4F68EBD-919B-4371-B2A4-3950AF4702E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicalDatabase", "MedicalDatabase\MedicalDatabase.csproj", "{E4F68EBD-919B-4371-B2A4-3950AF4702E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

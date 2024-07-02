@@ -1,16 +1,16 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mediacalApp="clr-namespace:MediacalApp"
-             x:Class="MediacalApp.App" RequestedThemeVariant="Light"
+             xmlns:medicalApp="clr-namespace:MedicalApp"
+             x:Class="MedicalApp.App" RequestedThemeVariant="Light"
              >
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
-		<mediacalApp:ViewLocator/>
+		<medicalApp:ViewLocator/>
     </Application.DataTemplates>
 
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="avares://MediacalApp/Assets/Icons.axaml" />
+        <StyleInclude Source="avares://MedicalApp/Assets/Icons.axaml" />
     </Application.Styles>
 </Application>

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediacalApp.ViewModels;
+using MedicalApp.ViewModels;
 using ReactiveUI;
 
-namespace MediacalApp.Tools
+namespace MedicalApp.Tools
 {
     public static class AnalysisViewModelExtensions
     {

@@ -3,6 +3,7 @@ using Avalonia.iOS;
 using Avalonia.ReactiveUI;
 
 using Foundation;
+using MedicalApp;
 
 namespace MediacalApp.iOS;
 

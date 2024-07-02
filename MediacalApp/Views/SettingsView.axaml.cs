@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace MediacalApp.Views
+namespace MedicalApp.Views
 {
     public partial class SettingsView : UserControl
     {

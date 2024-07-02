@@ -1,13 +1,9 @@
-﻿using MediacalApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediacalApp.Tools;
+﻿using System.Collections.Generic;
+using MedicalApp.Tools;
+using MedicalApp.ViewModels;
 using ReactiveUI;
 
-namespace MediacalApp.Models
+namespace MedicalApp.Models
 {
     public class AnalysisModel : ReactiveObject
     {

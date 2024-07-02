@@ -1,3 +1,3 @@
-﻿namespace MediacalApp.Messages;
+﻿namespace MedicalApp.Messages;
 
 public record LoginSuccess();

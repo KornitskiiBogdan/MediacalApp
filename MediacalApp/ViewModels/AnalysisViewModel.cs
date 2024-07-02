@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using ReactiveUI;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reactive.Linq;
-using MediacalApp.Models;
-using MediacalApp.Attributes;
 using DynamicData;
-using MediacalApp.Messaging;
-using MediacalApp.Tools;
-using MediacalApp.Messages;
+using MedicalApp.Attributes;
+using MedicalApp.Messages;
+using MedicalApp.Models;
+using MedicalApp.Tools;
 using MedicalDatabase;
-using MedicalDatabase.Objects;
 using MedicalDatabase.Operations;
 using Microsoft.Extensions.DependencyInjection;
-using LiveChartsCore.Geo;
+using ReactiveUI;
+using Tools.Messaging;
 
-namespace MediacalApp.ViewModels
+namespace MedicalApp.ViewModels
 {
     [MedicalExtension]
     public class AnalysisViewModel : ViewModelBase

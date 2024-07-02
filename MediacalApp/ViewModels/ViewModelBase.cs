@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace MediacalApp.ViewModels;
+namespace MedicalApp.ViewModels;
 
 public class ViewModelBase : ReactiveObject
 {

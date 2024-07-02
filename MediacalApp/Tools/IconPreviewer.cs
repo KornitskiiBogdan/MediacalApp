@@ -2,7 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 
-namespace MediacalApp.Tools
+namespace MedicalApp.Tools
 {
     public sealed class IconPreviewer : UserControl
     {

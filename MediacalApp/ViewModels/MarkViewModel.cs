@@ -5,15 +5,15 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Media;
-using MediacalApp.Messages;
-using MediacalApp.Messaging;
+using MedicalApp.Messages;
 using MedicalDatabase;
 using MedicalDatabase.Objects;
 using MedicalDatabase.Operations;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
+using Tools.Messaging;
 
-namespace MediacalApp.ViewModels
+namespace MedicalApp.ViewModels
 {
     public class MarkViewModel : ViewModelBase
     {

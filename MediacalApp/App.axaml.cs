@@ -1,12 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using MediacalApp.Models;
-using MediacalApp.ViewModels;
-using MediacalApp.Views;
+using MedicalApp.ViewModels;
+using MedicalApp.Views;
 using MedicalDatabase;
 
-namespace MediacalApp;
+namespace MedicalApp;
 
 public partial class App : Application
 {

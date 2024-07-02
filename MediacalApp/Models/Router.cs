@@ -1,13 +1,12 @@
 ﻿using System;
 using Authentication;
-using MediacalApp.Messages;
-using MediacalApp.Messaging;
-using MediacalApp.ViewModels;
+using MedicalApp.ViewModels;
 using MedicalDatabase;
 using MedicalDatabase.Operations;
 using Microsoft.Extensions.DependencyInjection;
+using Tools.Messaging;
 
-namespace MediacalApp.Models
+namespace MedicalApp.Models
 {
     public class Router
     {

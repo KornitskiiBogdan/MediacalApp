@@ -2,14 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:MediacalApp.ViewModels"
-             xmlns:models="clr-namespace:MediacalApp.Models"
-             xmlns:converters="clr-namespace:MediacalApp.Converters"
+             xmlns:viewModels="clr-namespace:MedicalApp.ViewModels"
+             xmlns:converters="clr-namespace:MedicalApp.Converters"
+             xmlns:models="clr-namespace:MedicalApp.Models"
              mc:Ignorable="d"
              d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="MediacalApp.Views.MainView"
+             x:Class="MedicalApp.Views.MainView"
              Focusable="True" Padding="{OnFormFactor 0, Mobile=10 0 10 0}" 
-             x:DataType="vm:MainViewModel">
+             x:DataType="viewModels:MainViewModel">
     
     <Grid Background="White">
         <Grid.RowDefinitions>

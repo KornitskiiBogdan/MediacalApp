@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-
-namespace MediacalApp.ViewModels.Charts;
-using SkiaSharp;
 using LiveChartsCore;
-using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.VisualElements;
+
+namespace MedicalApp.ViewModels.Charts;
 
 public abstract class ChartViewModel : ViewModelBase
 {

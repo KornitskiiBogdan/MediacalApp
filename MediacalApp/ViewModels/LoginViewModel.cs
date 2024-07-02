@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Authentication;
-using MediacalApp.Messages;
-using MediacalApp.Messaging;
-using MediacalApp.Models;
+using MedicalApp.Messages;
 using MedicalDatabase;
 using ReactiveUI;
+using Tools.Messaging;
 
-namespace MediacalApp.ViewModels
+namespace MedicalApp.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
