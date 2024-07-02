@@ -9,7 +9,7 @@ namespace MedicalDatabase.Operations
 {
     public class DeleteFromDatabase : DatabaseOperationBase
     {
-        public DeleteFromDatabase() : base()
+        internal DeleteFromDatabase() : base()
         {
 
         }

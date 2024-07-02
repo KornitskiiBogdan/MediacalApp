@@ -26,16 +26,14 @@ namespace MedicalApp.ViewModels
         private readonly MedicalReference _referenceModel;
         private readonly MedicalProject _project;
         private readonly MedicalMark _mark;
-        private readonly ReadFromDatabase _readFromDatabase;
-        private readonly WriteToDatabase _writeToDatabase;
+        private readonly MedicalRepository _repository;
 
         public MarkViewModel(MedicalMark markModel, MedicalProject project)
         {
             _mark = markModel;
             _project = project;
-            _readFromDatabase = _project.Services.GetRequiredService<ReadFromDatabase>();
-            _writeToDatabase = _project.Services.GetRequiredService<WriteToDatabase>();
-            _values = new List<MedicalValue>(_readFromDatabase.ReadValues(_mark));
+            _repository = _project.Services.GetRequiredService<MedicalRepository>();
+            _values = new List<MedicalValue>(_repository.Reader.ReadValues(_mark));
             _referenceModel = GetCurrentReference();
             _currentDatetime = _values.LastOrDefault()?.GetDateTime();
             _currentValue = _values.LastOrDefault()?.Value.ToString(CultureInfo.CurrentCulture);
@@ -93,7 +91,7 @@ namespace MedicalApp.ViewModels
             //TODO
             //На основании профиля пользователя мы должны вытащить для него нужный референс
 
-            return _readFromDatabase.ReadReferences(_mark).LastOrDefault() ?? new MedicalReference(0, _mark.Id, "", "");
+            return _repository.Reader.ReadReferences(_mark).LastOrDefault() ?? new MedicalReference(0, _mark.Id, "", "");
         }
 
         public void AddNewValue(DateTime date, float value)
@@ -101,7 +99,7 @@ namespace MedicalApp.ViewModels
             CurrentValue = value.ToString(CultureInfo.CurrentCulture);
             CurrentDatetime = date;
             var markValue = new MedicalValue(0, _mark.Id, value, date.Ticks);
-            _writeToDatabase.Write(new [] { markValue });
+            _repository.Writer.Write(new [] { markValue });
             _values.Add(markValue);
         }
 

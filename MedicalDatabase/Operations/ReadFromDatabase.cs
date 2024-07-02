@@ -10,7 +10,7 @@ namespace MedicalDatabase.Operations
 {
     public class ReadFromDatabase : DatabaseOperationBase
     {
-        public ReadFromDatabase() : base()
+        internal ReadFromDatabase() : base()
         {
 
         }
@@ -97,9 +97,9 @@ namespace MedicalDatabase.Operations
                     {
                         var date = (long)reader["Date"];
                         var id = (Int64)reader["Id"];
-                        var value = (int)reader["Value"];
+                        var value = (double)reader["Value"];
                         var idParent = (Int64)reader["IdParent"];
-                        result.Add(new MedicalValue(id: id, parentId: idParent, date: date, value: value));
+                        result.Add(new MedicalValue(id: id, parentId: idParent, date: date, value: (float)value));
                     }
                 }
             }

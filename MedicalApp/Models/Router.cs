@@ -25,12 +25,12 @@ namespace MedicalApp.Models
         {
             MessageBus.Register<OpenedApp>(openedApp =>
             {
-                openedApp.Services.AddSingleton<ReadFromDatabase>(new ReadFromDatabase());
-                openedApp.Services.AddSingleton<WriteToDatabase>(new WriteToDatabase());
+                var repository = new MedicalRepository();
+                openedApp.Services.AddSingleton<MedicalRepository>(repository);
                 openedApp.Services.AddSingleton<MedicalProject>(openedApp.Project);
                 openedApp.Services.AddSingleton<SettingsViewModel>(new SettingsViewModel(openedApp.Project));
                 openedApp.Services.AddSingleton<AnalysisViewModel>(new AnalysisViewModel(openedApp.Project));
-                openedApp.Services.AddSingleton<AddingViewModel>(new AddingViewModel(openedApp.Project));
+                openedApp.Services.AddSingleton<AddingViewModel>(new AddingViewModel(openedApp.Project, repository.Reader.ReadMarks()));
                 openedApp.Services.AddSingleton<DocumentsViewModel>(new DocumentsViewModel(openedApp.Project));
                 openedApp.Services.AddSingleton<ProfileViewModel>(new ProfileViewModel(openedApp.Project));
                 

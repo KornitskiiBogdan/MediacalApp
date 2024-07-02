@@ -50,7 +50,7 @@ namespace MedicalApp.ViewModels
 
         public void Init()
         {
-            foreach (var mark in _project.Services.GetRequiredService<ReadFromDatabase>().ReadMarks())
+            foreach (var mark in _project.Services.GetRequiredService<MedicalRepository>().Reader.ReadMarks())
             {
                 _sourceListMark.Add(new MarkViewModel(mark, _project));
             }

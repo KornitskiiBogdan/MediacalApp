@@ -67,7 +67,7 @@ namespace MedicalDatabase.Objects
                     return;
                 }
 
-                if (UpperValue > LowerValue)
+                if (LowerValue > UpperValue)
                 {
                     (LowerValue, UpperValue) = (UpperValue, LowerValue);
                 }
