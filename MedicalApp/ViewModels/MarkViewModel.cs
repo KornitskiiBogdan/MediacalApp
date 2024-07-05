@@ -23,11 +23,10 @@ namespace MedicalApp.ViewModels
         private readonly List<MedicalValue> _values;
         private SolidColorBrush? _colorText;
         private int _topPosition;
-        private readonly MedicalReference _referenceModel;
+        private MedicalReference _referenceModel;
         private readonly MedicalProject _project;
         private readonly MedicalMark _mark;
         private readonly MedicalRepository _repository;
-        private string _currentReference;
 
         public MarkViewModel(MedicalMark markModel, MedicalProject project)
         {
@@ -38,7 +37,6 @@ namespace MedicalApp.ViewModels
             _referenceModel = GetCurrentReference();
             _currentDatetime = _values.LastOrDefault()?.GetDateTime();
             _currentValue = _values.LastOrDefault()?.Value.ToString(CultureInfo.CurrentCulture);
-            _currentReference = GetReference();
             CalculateReferences();
         }
 
@@ -88,10 +86,10 @@ namespace MedicalApp.ViewModels
             set => this.RaiseAndSetIfChanged(ref _topPosition, value);
         }
 
-        public string CurrentReference
+        public MedicalReference CurrentReference
         {
-            get => _currentReference;
-            set => this.RaiseAndSetIfChanged(ref _currentReference, value);
+            get => _referenceModel;
+            set => this.RaiseAndSetIfChanged(ref _referenceModel, value);
         }
 
         private MedicalReference GetCurrentReference()
@@ -109,11 +107,6 @@ namespace MedicalApp.ViewModels
             var markValue = new MedicalValue(0, _mark.Id, value, date.Ticks);
             _repository.Writer.Write(new [] { markValue });
             _values.Add(markValue);
-        }
-
-        public string GetReference()
-        {
-            return string.Empty;
         }
 
         public void CalculateReferences()

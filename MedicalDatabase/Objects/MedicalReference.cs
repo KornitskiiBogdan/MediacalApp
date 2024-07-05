@@ -22,7 +22,7 @@ namespace MedicalDatabase.Objects
         {
             _value = value;
             _parentId = parentId;
-            ParseReferenceToInt(value);
+            ParseReferenceToFloat(value);
         }
 
         public string? Value
@@ -41,7 +41,7 @@ namespace MedicalDatabase.Objects
 
         public float? UpperValue { get; set; }
 
-        private void ParseReferenceToInt(string value)
+        private void ParseReferenceToFloat(string value)
         {
             //TODO Вроде бы есть более простой вариант чем такой
             if (Regex.IsMatch(value, @"\s*<\s*\w*"))

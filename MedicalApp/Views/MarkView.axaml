@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:MedicalApp.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="800"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
              x:DataType="viewModels:MarkViewModel" 
              x:Class="MedicalApp.Views.MarkView">
-    <!--Effect="blur(5)"-->
-	<StackPanel Margin="5" Orientation="Vertical">
+
+    <StackPanel Margin="5" Orientation="Vertical">
 
 		<Grid IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" 
@@ -60,7 +60,7 @@
                                    Text="Добавить новые значения"
                                    VerticalAlignment="Center"/>
 
-                        <PathIcon Grid.Column="1" HorizontalAlignment="Right"
+                        <PathIcon Grid.Column="1" HorizontalAlignment="Right" RenderTransform="rotate(90deg)"
                                   Data="{DynamicResource NextPageRegular}"
                                   Foreground="Gray"/>
                     </Grid>
@@ -69,9 +69,10 @@
 			</Button.Content>
 
             <Button.Flyout>
-                <Flyout PlacementAnchor="Bottom">
-                    <TextBlock Text="adfasdad"></TextBlock>
-                    <!--<ItemsControl ItemsSource="{CompiledBinding Units}">
+                <Flyout PlacementAnchor="Bottom" 
+                        Closed="ButtonFlyout_OnClosed"
+                        Opened="ButtonFlyout_OnOpened">
+                    <ItemsControl ItemsSource="{CompiledBinding Units}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{CompiledBinding Name}"
@@ -85,26 +86,57 @@
                                 <VirtualizingStackPanel/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
-                    </ItemsControl>-->
+                    </ItemsControl>
                 </Flyout>
             </Button.Flyout>
             
         </Button>
 
+
+        <Button HorizontalAlignment="Stretch" Padding="0"
+                Margin="0 10 0 0 "
+                Background="Transparent">
+            <Button.Content>
+                <Border BorderBrush="Gray" BorderThickness="1"
+                        CornerRadius="5">
+                    <Grid Margin="10" ColumnDefinitions="*,*">
+                        <TextBlock Grid.Column="0"
+                                   Text="Добавить новые значения"
+                                   VerticalAlignment="Center"/>
+
+                        <PathIcon Grid.Column="1" HorizontalAlignment="Right" RenderTransform="rotate(90deg)"
+                                  Data="{DynamicResource NextPageRegular}"
+                                  Foreground="Gray"/>
+                    </Grid>
+                </Border>
+
+            </Button.Content>
+
+            <Button.Flyout>
+                <Flyout PlacementAnchor="Bottom" 
+                        Opened="ButtonFlyout_OnOpened"
+                        Closed="ButtonFlyout_OnClosed">
+                    <ItemsControl ItemsSource="{CompiledBinding Units}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{CompiledBinding Name}"
+                                           Margin="0,0,5,0"
+                                           TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Flyout>
+            </Button.Flyout>
+
+        </Button>
 		
 
-        <Border Margin="0 10 0 0 " BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
-            <DockPanel Margin="10">
-                <TextBlock DockPanel.Dock="Left" Text="Добавить новые значения" VerticalAlignment="Center"/>
-                <Button DockPanel.Dock="Right" 
-                        HorizontalAlignment="Right" 
-                        Background="Transparent">
-                    <Button.Content>
-                        <PathIcon Data="{DynamicResource NextPageRegular}" Foreground="Gray"/>
-                    </Button.Content>
-				</Button>
-            </DockPanel>
-        </Border>
 
         <Grid Margin="0 10 0 0" ColumnDefinitions="*, *">
             <TextBlock Text="Референсные значения" Grid.Column="0"
@@ -114,11 +146,108 @@
             <TextBlock Grid.Column="1" VerticalAlignment="Center" 
                        HorizontalAlignment="Right" Foreground="Gray"
                        FontWeight="DemiBold"
-                       FontSize="10" Text="{CompiledBinding CurrentReference}"/>
+                       FontSize="10" Text="{CompiledBinding CurrentReference.Name}"/>
         </Grid>
-        
 
-        <Border>
+
+        <Grid>
+            <Border Margin="0 10 0 0" BorderThickness="1">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0%, 100%" EndPoint="100%, 100%">
+                        <GradientStop Offset="0" Color="IndianRed" />
+                        <GradientStop Offset="0.15" Color="Yellow" />
+                        <GradientStop Offset="0.5" Color="LimeGreen"/>
+                        <GradientStop Offset="0.85" Color="Yellow" />
+                        <GradientStop Offset="1" Color="IndianRed"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+            </Border>
+
+            <Canvas>
+                <StackPanel Canvas.Left="300"
+                            Canvas.Bottom="-2">
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{CompiledBinding CurrentValue}" 
+                                   FontSize="10"
+                                   Margin="0 0 0 5"
+                                   Foreground="Gray"/>
+					</StackPanel>
+
+
+					<Ellipse x:Name="EllipseValueReference"
+                             Width="6" Height="6" 
+                             Fill="{CompiledBinding ColorText}" />
+
+                    
+
+
+				</StackPanel>
+            </Canvas>
+
+
+        </Grid>
+
+        <Grid ColumnDefinitions="*, *">
+            <TextBlock FontSize="10" HorizontalAlignment="Center" 
+                       Grid.Column ="0"
+                       Foreground="Gray" 
+                       Text="{CompiledBinding CurrentReference.LowerValue}"
+                       Margin="0 5 0 0"/>
+
+            <TextBlock FontSize="10" HorizontalAlignment="Center" 
+                       Grid.Column ="1"
+                       Foreground="Gray" 
+                       Text="{CompiledBinding CurrentReference.UpperValue}"
+                       Margin="0 5 0 0"/>
+
+        </Grid>
+
+
+        <Button HorizontalAlignment="Stretch" Padding="0"
+                Margin="0 10 0 0 "
+                Background="Transparent">
+            <Button.Content>
+                <Border BorderBrush="Gray" BorderThickness="1"
+                        CornerRadius="5">
+                    <Grid Margin="10" ColumnDefinitions="2*,*">
+                        <TextBlock Grid.Column="0"
+                                   Text="Изменить референсные значения"
+                                   VerticalAlignment="Center"/>
+
+                        <PathIcon Grid.Column="1" HorizontalAlignment="Right" RenderTransform="rotate(90deg)"
+                                  Data="{DynamicResource NextPageRegular}"
+                                  Foreground="Gray"/>
+                    </Grid>
+                </Border>
+
+            </Button.Content>
+
+            <Button.Flyout>
+                <Flyout PlacementAnchor="Bottom"
+                        Opened="ButtonFlyout_OnOpened"
+                        Closed="ButtonFlyout_OnClosed">
+                    <ItemsControl ItemsSource="{CompiledBinding Units}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{CompiledBinding Name}"
+                                           Margin="0,0,5,0"
+                                           TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Flyout>
+            </Button.Flyout>
+
+        </Button>
+
+		<Border>
             <!--график-->
         </Border>
 
