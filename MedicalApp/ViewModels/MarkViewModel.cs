@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using MedicalApp.Messages;
+using MedicalApp.Tools;
 using MedicalDatabase;
 using MedicalDatabase.Objects;
 using MedicalDatabase.Operations;

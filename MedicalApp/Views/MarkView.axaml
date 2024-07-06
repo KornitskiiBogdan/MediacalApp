@@ -3,9 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:MedicalApp.ViewModels"
+             xmlns:converters="clr-namespace:MedicalApp.Converters"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
              x:DataType="viewModels:MarkViewModel" 
              x:Class="MedicalApp.Views.MarkView">
+
+	<UserControl.Resources>
+		<converters:StringValueToBrushConverter x:Key="StringToBrush"/>
+    </UserControl.Resources>
 
     <StackPanel Margin="5" Orientation="Vertical">
 
@@ -170,9 +175,11 @@
 
 
         <Grid>
-            <Border Margin="0 10 0 0" BorderThickness="1">
+            <Border x:Name="GradientBorder"  Margin="0 10 0 0" BorderThickness="1">
                 <Border.BorderBrush>
-                    <LinearGradientBrush StartPoint="0%, 100%" EndPoint="100%, 100%">
+                    <LinearGradientBrush
+                                         StartPoint="0%, 100%" 
+                                         EndPoint="100%, 100%">
                         <GradientStop Offset="0" Color="IndianRed" />
                         <GradientStop Offset="0.15" Color="Yellow" />
                         <GradientStop Offset="0.5" Color="LimeGreen"/>
@@ -195,8 +202,14 @@
 
 
 					<Ellipse x:Name="EllipseValueReference"
-                             Width="6" Height="6" 
-                             Fill="{CompiledBinding ColorText}" />
+                             Width="6" Height="6" >
+						<Ellipse.Fill>
+                            <MultiBinding Converter="{StaticResource StringToBrush}">
+                                <CompiledBinding Path="CurrentValue"/>
+                                <Binding ElementName="GradientBorder"/>
+                            </MultiBinding>
+                        </Ellipse.Fill>
+                    </Ellipse>
 
                     
 
