@@ -38,6 +38,7 @@ namespace MedicalApp.ViewModels
             _currentDatetime = _values.LastOrDefault()?.GetDateTime();
             _currentValue = _values.LastOrDefault()?.Value.ToString(CultureInfo.CurrentCulture);
             CalculateReferences();
+            Units.Add(markModel.Unit);
         }
 
         public string Name
@@ -107,6 +108,7 @@ namespace MedicalApp.ViewModels
             var markValue = new MedicalValue(0, _mark.Id, value, date.Ticks);
             _repository.Writer.Write(new [] { markValue });
             _values.Add(markValue);
+            CalculateReferences();
         }
 
         public void CalculateReferences()
