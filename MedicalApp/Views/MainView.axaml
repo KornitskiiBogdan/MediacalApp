@@ -20,7 +20,8 @@
 		<TransitioningContentControl Grid.Row="0" Background="White" 
                           Content="{Binding CurrentPage}"/>
 
-        <Border Grid.Row="1" IsVisible="{Binding CurrentPage, Converter={x:Static converters:CurrentPageToBoolConverter.BoolConverter}}">
+        <Border Grid.Row="1" IsVisible="{Binding CurrentPage, 
+				Converter={x:Static converters:CurrentPageToBoolConverter.BoolConverter}}">
             <ListBox  Background="White"
                      ItemsSource="{Binding Items}"
                      SelectedItem="{Binding SelectedListItem}">

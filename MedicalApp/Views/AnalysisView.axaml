@@ -6,11 +6,6 @@
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="MedicalApp.Views.AnalysisView">
 
-    <!--<lvc:CartesianChart x:DataType="viewModels:AnalysisViewModel" 
-                        d:DesignWidth="600" d:DesignHeight="450"
-                        Series="{Binding Chart.Series}"
-                        Title="{Binding Chart.Title}"
-                        XAxes="{Binding Chart.XAxes}"/>-->
     <DockPanel Margin="5">
 
 		<Grid DockPanel.Dock="Top" IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"

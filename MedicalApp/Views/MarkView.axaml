@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:MedicalApp.ViewModels"
              xmlns:converters="clr-namespace:MedicalApp.Converters"
+             xmlns:avalonia="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
              x:DataType="viewModels:MarkViewModel" 
              x:Class="MedicalApp.Views.MarkView">
@@ -18,7 +19,8 @@
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" 
               HorizontalAlignment="Stretch">
             <Button Grid.Column="0" Command="{CompiledBinding GoBackCommand}" HorizontalAlignment="Left"/>
-			<TextBlock FontSize="16" Grid.Column="1" Text="Aнализы" HorizontalAlignment="Center"/>
+			<TextBlock FontSize="16" Grid.Column="1" 
+                       Text="Aнализы" HorizontalAlignment="Center"/>
 		</Grid>
 
         <Grid ColumnDefinitions="3*, *">
@@ -48,9 +50,10 @@
 
             </StackPanel>
 
-            <TextBlock Grid.Column="1" FontSize="12"
+            <TextBlock Grid.Column="1" HorizontalAlignment="Right" FontSize="12"
                        Foreground="Gray"
-                       Text="{CompiledBinding CurrentDatetime}"/>
+                       Text="{CompiledBinding CurrentDatetime, 
+					   Converter={x:Static converters:DateTimeToStringConverter.StringConverter}}"/>
         </Grid>
 
 
@@ -279,17 +282,25 @@
 
         </Button>
 
-		<Border>
-            <!--график-->
+		<Border Margin="0 10 0 0">
+
+            <StackPanel>
+                <TextBlock Text="График изменений"
+                           FontSize="16"
+                           FontWeight="Bold"/>
+
+                <avalonia:CartesianChart 
+                    
+                    HorizontalAlignment="Stretch" 
+                    Height="300"
+                    Sections="{CompiledBinding Graphic.Sections}"
+                    DrawMarginFrame="{CompiledBinding Graphic.MarginFrame}"
+                    XAxes="{CompiledBinding Graphic.XAxes}"
+                    Series="{CompiledBinding Graphic.Series}"/>
+			</StackPanel>
+
         </Border>
 
-        <TextBlock>
-
-        </TextBlock>
-
-        <Border>
-            <!--график-->
-        </Border>
 	</StackPanel>
 
 </UserControl>

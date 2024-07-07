@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Avalonia.Media;
+using LiveChartsWrapper;
 using MedicalApp.Messages;
 using MedicalApp.Tools;
 using MedicalDatabase;
@@ -21,7 +23,6 @@ namespace MedicalApp.ViewModels
         private DateTime? _currentDatetime;
         private string? _currentValue;
 
-        private readonly List<MedicalValue> _values;
         private SolidColorBrush? _colorText;
         private int _topPosition;
         private MedicalReference _referenceModel;
@@ -34,10 +35,11 @@ namespace MedicalApp.ViewModels
             _mark = markModel;
             _project = project;
             _repository = _project.Services.GetRequiredService<MedicalRepository>();
-            _values = new List<MedicalValue>(_repository.Reader.ReadValues(_mark));
+            Values = new ObservableCollection<MedicalValue>(_repository.Reader.ReadValues(_mark));
             _referenceModel = GetCurrentReference();
-            _currentDatetime = _values.LastOrDefault()?.GetDateTime();
-            _currentValue = _values.LastOrDefault()?.Value.ToString(CultureInfo.CurrentCulture);
+            _currentDatetime = Values.LastOrDefault()?.GetDateTime();
+            _currentValue = Values.LastOrDefault()?.Value.ToString(CultureInfo.CurrentCulture);
+            Graphic = new MedicalMarksGraphics(CurrentReference, Values);
             CalculateReferences();
             Units.Add(markModel.Unit);
         }
@@ -94,6 +96,10 @@ namespace MedicalApp.ViewModels
             set => this.RaiseAndSetIfChanged(ref _referenceModel, value);
         }
 
+        public MedicalMarksGraphics Graphic { get; set; }
+
+        public ObservableCollection<MedicalValue> Values { get; }
+
         private MedicalReference GetCurrentReference()
         {
             //TODO
@@ -108,7 +114,7 @@ namespace MedicalApp.ViewModels
             CurrentDatetime = date;
             var markValue = new MedicalValue(0, _mark.Id, value, date.Ticks);
             _repository.Writer.Write(new [] { markValue });
-            _values.Add(markValue);
+            Values.Add(markValue);
             CalculateReferences();
         }
 
@@ -119,12 +125,12 @@ namespace MedicalApp.ViewModels
                 return;
             }
 
-            if (_values.Count == 0)
+            if (Values.Count == 0)
             {
                 return;
             }
 
-            var medicalValue = _values.Last();
+            var medicalValue = Values.Last();
 
             
             if (medicalValue.Value > _referenceModel.LowerValue.Value && medicalValue.Value < _referenceModel.UpperValue.Value)
