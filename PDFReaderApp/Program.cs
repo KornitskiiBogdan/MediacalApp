@@ -6,8 +6,8 @@ namespace PDFReaderApp
     {
         static void Main(string[] args)
         {
-            Reader reader = new Reader();
-            reader.Read();
+            PdfReader pdfReader = new PdfReader();
+            pdfReader.Read();
         }
     }
 }

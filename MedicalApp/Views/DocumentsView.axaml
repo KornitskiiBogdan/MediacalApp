@@ -2,7 +2,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:MedicalApp.ViewModels"
+             xmlns:converters="clr-namespace:MedicalApp.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:DocumentsViewModel"
              x:Class="MedicalApp.Views.DocumentsView">
-  Welcome to Avalonia!
+    <Grid>
+
+        <TransitioningContentControl DockPanel.Dock="Top"
+                                     IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                     Content="{Binding CurrentDocument}"/>
+
+        <ListBox ItemsSource="{CompiledBinding PdfDocuments}" 
+                 SelectedItem="{CompiledBinding CurrentDocument}"
+                 IsVisible="{CompiledBinding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}" 
+                 Background="White"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{CompiledBinding Converter={x:Static converters:SkBitmapToImageConverter.ImageConverter}}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </UserControl>

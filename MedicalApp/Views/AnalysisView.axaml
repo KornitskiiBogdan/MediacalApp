@@ -62,12 +62,16 @@
         </Grid>
 
         <TransitioningContentControl DockPanel.Dock="Top"
-                                     IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                     IsVisible="{Binding CurrentMark, 
+									 Converter={x:Static ObjectConverters.IsNotNull}}"
                                      Content="{Binding CurrentMark}"/>
 
-			<ListBox DockPanel.Dock="Top" ClipToBounds="True" x:DataType="viewModels:AnalysisViewModel" SelectedItem="{Binding CurrentMark}"
+			<ListBox DockPanel.Dock="Top" ClipToBounds="True" 
+                     x:DataType="viewModels:AnalysisViewModel"
+                     SelectedItem="{Binding CurrentMark}"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}" Background="White"
+                     IsVisible="{Binding CurrentMark, 
+					 Converter={x:Static ObjectConverters.IsNull}}" Background="White"
                      ItemsSource ="{CompiledBinding Analysis}">
 
 

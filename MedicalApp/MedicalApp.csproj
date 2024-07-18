@@ -16,25 +16,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Skia" Version="11.0.2" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     <PackageReference Include="DynamicData" Version="8.4.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-    <PackageReference Include="Svg.Skia" Version="1.0.0.18" />
+    
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Authentication\Authentication.csproj" />
     <ProjectReference Include="..\MedicalDatabase\MedicalDatabase.csproj" />
     <ProjectReference Include="..\LiveChartsWrapper\LiveChartsWrapper.csproj" />
+    <ProjectReference Include="..\PDFReader\PDFReader.csproj" />
     <ProjectReference Include="..\SkiaGraphics\SkiaGraphics.csproj" />
     <ProjectReference Include="..\Tools\Tools.csproj" />
+    <ProjectReference Include="..\VisualTools\VisualTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>
