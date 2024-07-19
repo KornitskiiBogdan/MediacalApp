@@ -44,7 +44,7 @@ namespace MedicalApp.Converters
 
             layoutable.Measure(new Size(width: double.MaxValue, height: double.MaxValue));
             layoutable.InvalidateMeasure();
-            return bitmap.Resize(new SKSizeI((int)layoutable.DesiredSize.Width, (int)layoutable.DesiredSize.Height), SKFilterQuality.Medium).ToAvaloniaImage();
+            return bitmap.Resize(new SKSizeI((int)layoutable.DesiredSize.Width, (int)layoutable.DesiredSize.Height), SKFilterQuality.High).ToAvaloniaImage();
         }
     }
 }
