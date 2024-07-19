@@ -29,7 +29,6 @@
     <ProjectReference Include="..\MedicalDatabase\MedicalDatabase.csproj" />
     <ProjectReference Include="..\LiveChartsWrapper\LiveChartsWrapper.csproj" />
     <ProjectReference Include="..\PDFReader\PDFReader.csproj" />
-    <ProjectReference Include="..\SkiaGraphics\SkiaGraphics.csproj" />
     <ProjectReference Include="..\Tools\Tools.csproj" />
     <ProjectReference Include="..\VisualTools\VisualTools.csproj" />
   </ItemGroup>

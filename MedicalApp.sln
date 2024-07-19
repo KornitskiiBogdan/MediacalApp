@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkiaGraphics", "SkiaGraphics\SkiaGraphics.csproj", "{CC955FC7-B145-4E21-A722-A7239688577D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools", "Tools\Tools.csproj", "{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication", "Authentication\Authentication.csproj", "{1FC2F729-7647-457D-A019-BAFAF9DC2F62}"
@@ -29,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFReader", "PDFReader\PDFR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFReaderApp", "PDFReaderApp\PDFReaderApp.csproj", "{A4F6A661-881A-46F7-A966-D066203755C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualTools", "VisualTools\VisualTools.csproj", "{B5669184-FEA2-428F-8752-0D1544DAB999}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualTools", "VisualTools\VisualTools.csproj", "{B5669184-FEA2-428F-8752-0D1544DAB999}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CC955FC7-B145-4E21-A722-A7239688577D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC955FC7-B145-4E21-A722-A7239688577D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC955FC7-B145-4E21-A722-A7239688577D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC955FC7-B145-4E21-A722-A7239688577D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E4F18A2-3089-4F8F-8ED8-9239ABA8CDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
