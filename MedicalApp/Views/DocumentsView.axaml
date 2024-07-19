@@ -7,12 +7,31 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="viewModels:DocumentsViewModel"
              x:Class="MedicalApp.Views.DocumentsView">
+
+    <UserControl.Resources>
+        <converters:SkBitmapToImageConverter x:Key="BitmapToImage"/>
+    </UserControl.Resources>
+
     <Grid>
 
-        <TransitioningContentControl DockPanel.Dock="Top"
-                                     IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNotNull}}"
-                                     Content="{Binding CurrentDocument}"/>
+        <TransitioningContentControl x:Name="TransitioningContentControl"
+                                     Height="682"
+                                     Width="430"
+                                     IsVisible="{CompiledBinding CurrentDocument, 
+									 Converter={x:Static ObjectConverters.IsNotNull}}">
+            <TransitioningContentControl.Content>
+                <Image>
+                    <Image.Source>
+                        <MultiBinding Converter="{StaticResource BitmapToImage}">
+                            <CompiledBinding Path="CurrentDocument"/>
+                            <Binding ElementName="TransitioningContentControl"/>
+                        </MultiBinding>
+					</Image.Source>
+				</Image>
 
+			</TransitioningContentControl.Content>
+        </TransitioningContentControl>
+        
         <ListBox ItemsSource="{CompiledBinding PdfDocuments}" 
                  SelectedItem="{CompiledBinding CurrentDocument}"
                  IsVisible="{CompiledBinding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}" 
@@ -21,7 +40,21 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{CompiledBinding Converter={x:Static converters:SkBitmapToImageConverter.ImageConverter}}"/>
+                    <DockPanel>
+                        <Image
+                            x:Name="PdfImage"
+                               Height="64"
+                               Width="64"
+                               DockPanel.Dock="Right">
+                            <Image.Source>
+								<MultiBinding Converter="{StaticResource BitmapToImage}">
+                                    <CompiledBinding />
+									<Binding ElementName="PdfImage"/>
+                                </MultiBinding>
+                            </Image.Source>
+                        </Image>
+                    </DockPanel>
+                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

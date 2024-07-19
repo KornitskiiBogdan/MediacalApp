@@ -36,7 +36,10 @@
                             <Image Source="{Binding IconKey, 
 								   Converter={x:Static converters:TypeConverters.IconConverter}}"
                                       Width="64"  Height="64" />
-                            <TextBlock HorizontalAlignment="Center" FontSize="11" Margin="0 5 0 0" Text="{Binding Label}"/>
+                            <TextBlock HorizontalAlignment="Center" 
+                                       FontSize="11"
+                                       Margin="0 5 0 0" 
+                                       Text="{Binding Label}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

@@ -12,7 +12,7 @@ namespace VisualTools
         public AvaloniaImage(SKBitmap? source)
         {
             _source = source;
-            if (source?.Info.Size is SKSizeI size)
+            if (source?.Info.Size is { } size)
             {
                 Size = new(size.Width, size.Height);
             }
@@ -24,12 +24,9 @@ namespace VisualTools
 
         public void Draw(DrawingContext context, Rect sourceRect, Rect destRect)
         {
-            if (_drawImageOperation is null)
+            _drawImageOperation ??= new SkBitmapDrawOperation()
             {
-                _drawImageOperation = new SkBitmapDrawOperation()
-                {
-                    Bitmap = _source,
-                };
+                Bitmap = _source,
             };
             _drawImageOperation.Bounds = sourceRect;
             context.Custom(_drawImageOperation);

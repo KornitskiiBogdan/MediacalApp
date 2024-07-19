@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 using MedicalApp.Tools;
@@ -21,7 +16,7 @@ namespace MedicalApp.Converters
         public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
         {
             string? stringValue = null;
-            Border border = null;
+            Border? border = null;
             foreach (var value in values)
             {
                 if (value is string s)
@@ -39,8 +34,12 @@ namespace MedicalApp.Converters
                 return new SolidColorBrush();
             }
 
-            var markViewModel = border.DataContext as MarkViewModel;
-            if (border.BorderBrush is LinearGradientBrush linearGradientBrush && markViewModel != null)
+            if (border is not
+                { BorderBrush: LinearGradientBrush linearGradientBrush, DataContext: MarkViewModel markViewModel })
+            {
+                return new SolidColorBrush();
+            }
+                
             {
                 var lowerValue = markViewModel.CurrentReference.LowerValue;
                 var upperValue = markViewModel.CurrentReference.UpperValue;
@@ -50,7 +49,6 @@ namespace MedicalApp.Converters
                     var b = (upperValue * 0.25 - lowerValue * 0.75) / (upperValue - lowerValue) ?? 0;
                     return new SolidColorBrush(linearGradientBrush.GradientStops.GetColorByOffset(k * fValue + b));
                 }
-                
             }
 
             return new SolidColorBrush();

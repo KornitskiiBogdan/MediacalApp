@@ -5,8 +5,6 @@ namespace VisualTools
 {
     public static class SkiaExtensions
     {
-        
-
         public static SKBitmap? ToSKBitmap(this System.IO.Stream? stream)
         {
             if (stream == null)

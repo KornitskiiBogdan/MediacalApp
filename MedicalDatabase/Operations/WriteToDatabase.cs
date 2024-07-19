@@ -11,7 +11,7 @@ namespace MedicalDatabase.Operations
 {
     public class WriteToDatabase : DatabaseOperationBase
     {
-        internal WriteToDatabase() : base()
+        public WriteToDatabase() : base()
         {
 
         }

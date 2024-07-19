@@ -10,7 +10,7 @@ namespace MedicalDatabase.Operations
 {
     public class ReadFromDatabase : DatabaseOperationBase
     {
-        internal ReadFromDatabase() : base()
+        public ReadFromDatabase() : base()
         {
 
         }
