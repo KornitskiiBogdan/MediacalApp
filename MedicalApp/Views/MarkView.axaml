@@ -5,8 +5,9 @@
              xmlns:viewModels="clr-namespace:MedicalApp.ViewModels"
              xmlns:converters="clr-namespace:MedicalApp.Converters"
              xmlns:avalonia="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
+             xmlns:analysis="clr-namespace:MedicalApp.ViewModels.Analysis"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
-             x:DataType="viewModels:MarkViewModel" 
+             x:DataType="analysis:MarkViewModel" 
              x:Class="MedicalApp.Views.MarkView">
 
 	<UserControl.Resources>
@@ -52,7 +53,7 @@
 
             <TextBlock Grid.Column="1" HorizontalAlignment="Right" FontSize="12"
                        Foreground="Gray"
-                       Text="{CompiledBinding CurrentDatetime, 
+                       Text="{CompiledBinding CurrentDateTime, 
 					   Converter={x:Static converters:DateTimeToStringConverter.StringConverter}}"/>
         </Grid>
 

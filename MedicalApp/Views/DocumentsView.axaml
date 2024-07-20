@@ -2,17 +2,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:MedicalApp.ViewModels"
              xmlns:converters="clr-namespace:MedicalApp.Converters"
+             xmlns:documents="clr-namespace:MedicalApp.ViewModels.Documents"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:DataType="viewModels:DocumentsViewModel"
+             x:DataType="documents:DocumentsViewModel"
              x:Class="MedicalApp.Views.DocumentsView">
 
     <UserControl.Resources>
         <converters:SkBitmapToImageConverter x:Key="BitmapToImage"/>
     </UserControl.Resources>
 
-    <Grid>
+    <DockPanel Margin="5">
+
+        <Grid DockPanel.Dock="Top" 
+              IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
+              Margin="0,20,0,0" ColumnDefinitions="*, *, *" 
+              HorizontalAlignment="Stretch">
+            <TextBlock FontSize="16" Grid.Column="1" Text="Документы" 
+                       HorizontalAlignment="Center"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top"
+              IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
+              Margin="0, 20, 0, 0"
+              HorizontalAlignment="Stretch" >
+            <TextBox Name="SearchTextBox"
+                     FontSize ="12"
+                     BorderBrush="#FF00D7D4"
+                     Text="{Binding SearchText}"
+                     Watermark="Поиск">
+            </TextBox>
+            <Image Height="32" Width="32" Source="avares://MedicalApp/Assets/SearchRegular.png"
+                   HorizontalAlignment="Right"
+                   Focusable="False"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top"
+              IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
+              Margin="0, 20, 0, 0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
+
+            <Button
+                    Grid.Column="1"
+					
+                    Command="{Binding Model.SortByCategory}"
+                    Content="По категориям"/>
+
+            <Button 
+                     Grid.Column="0"
+                     Command="{Binding Model.SortByOrder}"
+                     Content="Общий список"/>
+
+            <Button 
+                     Grid.Column="2"
+                     Command="{Binding Model.SortByDate}"
+                     Content="По дате добавления"/>
+            <Grid.Styles>
+                <Style Selector="Button">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="#FF00D7D4"></Setter>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="LightGray"/>
+                        <Setter Property="BorderBrush" Value="#FF00D7D4"/>
+                    </Style>
+                </Style>
+            </Grid.Styles>
+        </Grid>
 
         <TransitioningContentControl x:Name="TransitioningContentControl"
                                      Height="682"
@@ -58,5 +116,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </Grid>
+    </DockPanel>
 </UserControl>

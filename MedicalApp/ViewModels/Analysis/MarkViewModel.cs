@@ -9,6 +9,7 @@ using Avalonia.Media;
 using LiveChartsWrapper;
 using MedicalApp.Messages;
 using MedicalApp.Tools;
+using MedicalApp.ViewModels.Interfaces;
 using MedicalDatabase;
 using MedicalDatabase.Objects;
 using MedicalDatabase.Operations;
@@ -16,11 +17,11 @@ using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Tools.Messaging;
 
-namespace MedicalApp.ViewModels
+namespace MedicalApp.ViewModels.Analysis
 {
-    public class MarkViewModel : ViewModelBase
+    public class MarkViewModel : ViewModelBase, ISortedObject
     {
-        private DateTime? _currentDatetime;
+        private DateTime? _currentDateTime;
         private string? _currentValue;
 
         private SolidColorBrush? _colorText;
@@ -37,7 +38,7 @@ namespace MedicalApp.ViewModels
             _repository = _project.Services.GetRequiredService<MedicalRepository>();
             Values = new ObservableCollection<MedicalValue>(_repository.Reader.ReadValues(_mark));
             _referenceModel = GetCurrentReference();
-            _currentDatetime = Values.LastOrDefault()?.GetDateTime();
+            _currentDateTime = Values.LastOrDefault()?.GetDateTime();
             _currentValue = Values.LastOrDefault()?.Value.ToString(CultureInfo.CurrentCulture);
             Graphic = new MedicalMarksGraphics(CurrentReference, Values);
             CalculateReferences();
@@ -54,10 +55,10 @@ namespace MedicalApp.ViewModels
             }
         }
 
-        public DateTime? CurrentDatetime
+        public DateTime? CurrentDateTime
         {
-            get => _currentDatetime;
-            private set => this.RaiseAndSetIfChanged(ref _currentDatetime, value);
+            get => _currentDateTime;
+            private set => this.RaiseAndSetIfChanged(ref _currentDateTime, value);
         }
 
         public string? CurrentValue
@@ -76,7 +77,7 @@ namespace MedicalApp.ViewModels
             }
         }
 
-        public ObservableCollection<Unit> Units { get; set; } = new ObservableCollection<Unit>(); 
+        public ObservableCollection<Unit> Units { get; set; } = new ObservableCollection<Unit>();
 
         public SolidColorBrush? ColorText
         {
@@ -111,16 +112,16 @@ namespace MedicalApp.ViewModels
         public void AddNewValue(DateTime date, float value)
         {
             CurrentValue = value.ToString(CultureInfo.CurrentCulture);
-            CurrentDatetime = date;
+            CurrentDateTime = date;
             var markValue = new MedicalValue(0, _mark.Id, value, date.Ticks);
-            _repository.Writer.Write(new [] { markValue });
+            _repository.Writer.Write(new[] { markValue });
             Values.Add(markValue);
             CalculateReferences();
         }
 
         public void CalculateReferences()
         {
-            if(_referenceModel.LowerValue == null || _referenceModel.UpperValue == null)
+            if (_referenceModel.LowerValue == null || _referenceModel.UpperValue == null)
             {
                 return;
             }
@@ -132,7 +133,7 @@ namespace MedicalApp.ViewModels
 
             var medicalValue = Values.Last();
 
-            
+
             if (medicalValue.Value > _referenceModel.LowerValue.Value && medicalValue.Value < _referenceModel.UpperValue.Value)
             {
                 ColorText = new SolidColorBrush(Colors.Green);
@@ -144,13 +145,13 @@ namespace MedicalApp.ViewModels
 
             if (medicalValue.Value >= _referenceModel.UpperValue.Value)
             {
-                TopPosition = (int)((_referenceModel.UpperValue.Value / medicalValue.Value) * 7) - 2; 
+                TopPosition = (int)(_referenceModel.UpperValue.Value / medicalValue.Value * 7) - 2;
                 return;
             }
 
             if (medicalValue.Value <= _referenceModel.LowerValue.Value)
             {
-                TopPosition = (int)((medicalValue.Value / _referenceModel.LowerValue.Value) * 7) + 25;
+                TopPosition = (int)(medicalValue.Value / _referenceModel.LowerValue.Value * 7) + 25;
                 return;
             }
 

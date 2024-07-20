@@ -5,34 +5,32 @@ using MedicalApp.Attributes;
 using MedicalApp.Messages;
 using MedicalApp.Models;
 using MedicalApp.Tools;
+using MedicalApp.ViewModels.Interfaces;
 using MedicalDatabase;
 using MedicalDatabase.Operations;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Tools.Messaging;
 
-namespace MedicalApp.ViewModels
+namespace MedicalApp.ViewModels.Analysis
 {
     [MedicalExtension]
-    public class AnalysisViewModel : ViewModelBase
+    public class AnalysisViewModel : ViewModelBase, IFilteredObject
     {
-        public ReadOnlyObservableCollection<MarkViewModel> Analysis { get; set; }
-
-        //private ChartViewModel _chart = new LineChartViewModel();
         private MarkViewModel? _currentMark;
         private readonly MedicalProject _project;
-        private readonly SourceList<MarkViewModel> _sourceListMark = new ();
-        private readonly AnalysisModel _model;
+        private readonly SourceList<MarkViewModel> _sourceListMark = new();
+        private readonly SortingModel _sortingModel;
         private string _searchText = "";
 
         public AnalysisViewModel(MedicalProject project)
         {
-            _model = new AnalysisModel();
+            _sortingModel = new SortingModel();
 
             _sourceListMark
                 .Connect()
                 .Filter(this.GetObservableFilter())
-                .Sort(Model.Comparer, comparerChanged: this.WhenAnyValue(x => x.Model.Comparer))
+                .Sort(SortingModel.Comparer, comparerChanged: this.WhenAnyValue(x => x.SortingModel.Comparer))
                 .Bind(out var newCollection)
                 .Subscribe();
 
@@ -41,7 +39,11 @@ namespace MedicalApp.ViewModels
 
             _project.MessageBus.Register<GoBackView>(backView =>
             {
-                CurrentMark = null;
+                if (backView.TypeView == typeof(MarkViewModel))
+                {
+                    CurrentMark = null;
+                }
+
             });
 
             _project.MessageBus.Register<ServiceCreationCompleted>(_ => Init());
@@ -56,7 +58,9 @@ namespace MedicalApp.ViewModels
             }
         }
 
-        public AnalysisModel Model => _model;
+        public ReadOnlyObservableCollection<MarkViewModel> Analysis { get; set; }
+
+        public SortingModel SortingModel => _sortingModel;
 
         public MarkViewModel? CurrentMark
         {

@@ -1,6 +1,8 @@
 ﻿using System;
 using Authentication;
 using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Analysis;
+using MedicalApp.ViewModels.Documents;
 using MedicalDatabase;
 using MedicalDatabase.Operations;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Interfaces;
 
 namespace MedicalApp.Tools
 {
-    public class ComparerMarkByDate : IComparer<MarkViewModel>
+    public class ComparerByDate : IComparer<IDateTimeObject>
     {
-        public int Compare(MarkViewModel? x, MarkViewModel? y)
+        public int Compare(IDateTimeObject? x, IDateTimeObject? y)
         {
             if (x != null)
             {
@@ -15,12 +15,12 @@ namespace MedicalApp.Tools
                 }
                 else
                 {
-                    if (x.CurrentDatetime == null)
+                    if (x.CurrentDateTime == null)
                     {
-                        return y.CurrentDatetime == null ? 0 : -1;
+                        return y.CurrentDateTime == null ? 0 : -1;
                     }
 
-                    return y.CurrentDatetime == null ? 1 : x.CurrentDatetime.Value.CompareTo(y.CurrentDatetime.Value);
+                    return y.CurrentDateTime == null ? 1 : x.CurrentDateTime.Value.CompareTo(y.CurrentDateTime.Value);
                 }
 
             }

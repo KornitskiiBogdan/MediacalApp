@@ -2,48 +2,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:MedicalApp.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             xmlns:analysis="clr-namespace:MedicalApp.ViewModels.Analysis"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450" x:DataType="analysis:AnalysisViewModel"
              x:Class="MedicalApp.Views.AnalysisView">
 
     <DockPanel Margin="5">
 
-		<Grid DockPanel.Dock="Top" IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
+		<Grid DockPanel.Dock="Top" 
+              IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
-			<Button Grid.Column="0" HorizontalAlignment="Left"/>
+			<Button Grid.Column="0" HorizontalAlignment="Left" IsVisible="{CompiledBinding CurrentMark, Converter={x:Static ObjectConverters.IsNotNull}}"/>
             <TextBlock FontSize="16" Grid.Column="1" Text="Aнализы" HorizontalAlignment="Center"/>
             <Button Grid.Column="2" HorizontalAlignment="Right"/>
         </Grid>
 
-        <Grid DockPanel.Dock="Top" IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
-              Margin="0, 20, 0, 0" HorizontalAlignment="Stretch" >
+        <Grid DockPanel.Dock="Top" 
+              IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
+              Margin="0, 20, 0, 0" 
+              HorizontalAlignment="Stretch" >
             <TextBox Name="SearchTextBox" 
                      FontSize ="12"
 					 BorderBrush="#FF00D7D4"
 					 Text="{Binding SearchText}"
                      Watermark="Поиск">
             </TextBox>
-            <Image Height="32" Width="32" Source="avares://MedicalApp/Assets/SearchRegular.png" HorizontalAlignment="Right" Focusable="False"/>
+            <Image Height="32" Width="32" Source="avares://MedicalApp/Assets/SearchRegular.png"
+                   HorizontalAlignment="Right" 
+                   Focusable="False"/>
         </Grid>
 
 		<Grid DockPanel.Dock="Top"
               IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0, 20, 0, 0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
             
-            <Button x:DataType="viewModels:AnalysisViewModel" 
+            <Button x:DataType="analysis:AnalysisViewModel" 
                     Grid.Column="1"
 					
-                    Command="{Binding Model.SortByCategory}"
+                    Command="{Binding SortingModel.SortByCategory}"
                     Content="По категориям"/>
 
-            <Button  x:DataType="viewModels:AnalysisViewModel"
+            <Button  x:DataType="analysis:AnalysisViewModel"
                      Grid.Column="0"
-                     Command="{Binding Model.SortByOrder}"
+                     Command="{Binding SortingModel.SortByOrder}"
                      Content="Общий список"/>
             
-            <Button  x:DataType="viewModels:AnalysisViewModel" 
+            <Button  x:DataType="analysis:AnalysisViewModel" 
                      Grid.Column="2" 
-                     Command="{Binding Model.SortByDate}"
+                     Command="{Binding SortingModel.SortByDate}"
                      Content="По дате добавления"/>
 			<Grid.Styles>
 				<Style Selector="Button">
@@ -67,7 +72,7 @@
                                      Content="{Binding CurrentMark}"/>
 
 			<ListBox DockPanel.Dock="Top" ClipToBounds="True" 
-                     x:DataType="viewModels:AnalysisViewModel"
+                     x:DataType="analysis:AnalysisViewModel"
                      SelectedItem="{Binding CurrentMark}"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      IsVisible="{Binding CurrentMark, 
@@ -83,7 +88,7 @@
 									   FontSize="11"
 									   Foreground="Gray"
 									   VerticalAlignment="Bottom"
-									   Text="{CompiledBinding CurrentDatetime}"/>
+									   Text="{CompiledBinding CurrentDateTime}"/>
 
 							<StackPanel Grid.Column="1" Orientation="Vertical" >
 								<Border Background="Transparent" BorderThickness="0">

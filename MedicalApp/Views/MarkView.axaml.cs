@@ -6,7 +6,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Analysis;
 
 namespace MedicalApp.Views
 {

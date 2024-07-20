@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using MedicalApp.Tools;
-using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Interfaces;
 using ReactiveUI;
 
 namespace MedicalApp.Models
 {
-    public class AnalysisModel : ReactiveObject
+    public class SortingModel : ReactiveObject
     {
-        private IComparer<MarkViewModel> _comparer = new ComparerMarkByOrder();
+        private IComparer<ISortedObject> _comparer = new ComparerObjectByName();
 
-        public IComparer<MarkViewModel> Comparer
+        public IComparer<ISortedObject> Comparer
         {
             get => _comparer;
             set => this.RaiseAndSetIfChanged(ref _comparer, value);
@@ -17,7 +17,7 @@ namespace MedicalApp.Models
 
         public void SortByDate()
         {
-            Comparer = new ComparerMarkByDate();
+            Comparer = new ComparerByDate();
         }
 
         public void SortByCategory()
@@ -27,7 +27,7 @@ namespace MedicalApp.Models
 
         public void SortByOrder()
         {
-            Comparer = new ComparerMarkByOrder();
+            Comparer = new ComparerObjectByName();
         }
     }
 }

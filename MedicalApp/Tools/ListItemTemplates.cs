@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using MedicalApp.Models;
 using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Analysis;
+using MedicalApp.ViewModels.Documents;
 
 namespace MedicalApp.Tools
 {

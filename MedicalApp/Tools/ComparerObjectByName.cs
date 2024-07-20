@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Interfaces;
 
 namespace MedicalApp.Tools;
 
-public class ComparerMarkByOrder : IComparer<MarkViewModel>
+public class ComparerObjectByName : IComparer<INamedObject>
 {
-    public int Compare(MarkViewModel? x, MarkViewModel? y)
+    public int Compare(INamedObject? x, INamedObject? y)
     {
         if (x != null)
         {

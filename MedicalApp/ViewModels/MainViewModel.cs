@@ -2,6 +2,7 @@
 using System.Linq;
 using MedicalApp.Messages;
 using MedicalApp.Models;
+using MedicalApp.ViewModels.Analysis;
 using MedicalDatabase;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;

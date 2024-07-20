@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Data.Converters;
 using Avalonia.Media;
 using MedicalApp.Tools;
-using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Analysis;
 
 namespace MedicalApp.Converters
 {
