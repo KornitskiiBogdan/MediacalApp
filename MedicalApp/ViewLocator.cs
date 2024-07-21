@@ -14,8 +14,8 @@ namespace MedicalApp
                 return null;
             }
 
-            var name = param.GetType().FullName!.Replace("ViewModel", "View");
-            var type = Type.GetType(name);
+            var name = param.GetType().Name.Replace("ViewModel", "View");
+            var type = Type.GetType($"{GetType().Namespace}.Views.{name}");
 
             if (type != null)
             {
