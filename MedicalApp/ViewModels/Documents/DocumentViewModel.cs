@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MedicalApp.Messages;
 using MedicalApp.ViewModels.Interfaces;
+using MedicalDatabase;
 using SkiaSharp;
+using Tools.Messaging;
 
 namespace MedicalApp.ViewModels.Documents
 {
@@ -13,12 +16,15 @@ namespace MedicalApp.ViewModels.Documents
         
         private string _name;
         private SKBitmap _bitmap;
-        private readonly DateTime? _currentDateTime;
+        private readonly DateTime _currentDateTime;
+        private readonly MedicalProject _medicalProject;
 
-        public DocumentViewModel(SKBitmap bitmap, string name)
+        public DocumentViewModel(MedicalProject project, SKBitmap bitmap, string name)
         {
-            _bitmap = bitmap;
             _name = name;
+            _bitmap = bitmap;
+            _medicalProject = project;
+            _currentDateTime = DateTime.Today;
         }
 
         public DateTime? CurrentDateTime => _currentDateTime;
@@ -33,6 +39,11 @@ namespace MedicalApp.ViewModels.Documents
         {
             get => _bitmap;
             set => _bitmap = value;
+        }
+
+        public async Task GoBackCommand()
+        {
+            await _medicalProject.MessageBus.SendAsync(new GoBackView(GetType()));
         }
     }
 }

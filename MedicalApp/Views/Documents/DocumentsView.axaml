@@ -6,7 +6,7 @@
              xmlns:documents="clr-namespace:MedicalApp.ViewModels.Documents"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="documents:DocumentsViewModel"
-             x:Class="MedicalApp.Views.DocumentsView">
+             x:Class="MedicalApp.Views.Documents.DocumentsView">
 
     <UserControl.Resources>
         <converters:SkBitmapToImageConverter x:Key="BitmapToImage"/>
@@ -44,17 +44,17 @@
             <Button
                     Grid.Column="1"
 					
-                    Command="{Binding Model.SortByCategory}"
+                    Command="{CompiledBinding SortingModel.SortByCategory}"
                     Content="По категориям"/>
 
             <Button 
                      Grid.Column="0"
-                     Command="{Binding Model.SortByOrder}"
+                     Command="{CompiledBinding SortingModel.SortByOrder}"
                      Content="Общий список"/>
 
             <Button 
                      Grid.Column="2"
-                     Command="{Binding Model.SortByDate}"
+                     Command="{CompiledBinding SortingModel.SortByDate}"
                      Content="По дате добавления"/>
             <Grid.Styles>
                 <Style Selector="Button">
@@ -72,25 +72,13 @@
             </Grid.Styles>
         </Grid>
 
-        <TransitioningContentControl x:Name="TransitioningContentControl"
-                                     Height="682"
-                                     Width="430"
+        <TransitioningContentControl DockPanel.Dock="Top"
                                      IsVisible="{CompiledBinding CurrentDocument, 
-									 Converter={x:Static ObjectConverters.IsNotNull}}">
-            <TransitioningContentControl.Content>
-                <Image>
-                    <Image.Source>
-                        <MultiBinding Converter="{StaticResource BitmapToImage}">
-                            <CompiledBinding Path="CurrentDocument"/>
-                            <Binding ElementName="TransitioningContentControl"/>
-                        </MultiBinding>
-					</Image.Source>
-				</Image>
-
-			</TransitioningContentControl.Content>
+									 Converter={x:Static ObjectConverters.IsNotNull}}"
+                                     Content="{CompiledBinding CurrentDocument}">
         </TransitioningContentControl>
         
-        <ListBox ItemsSource="{CompiledBinding PdfDocuments}" 
+        <ListBox DockPanel.Dock="Top" ItemsSource="{CompiledBinding PdfDocuments}" 
                  SelectedItem="{CompiledBinding CurrentDocument}"
                  IsVisible="{CompiledBinding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}" 
                  Background="White"
@@ -98,19 +86,31 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel>
-                        <Image
-                            x:Name="PdfImage"
+                    <DockPanel Margin="0 5 0 0">
+						
+						<Image DockPanel.Dock="Right"
+                               x:Name="PdfImage"
                                Height="64"
                                Width="64"
-                               DockPanel.Dock="Right">
+                        >
                             <Image.Source>
 								<MultiBinding Converter="{StaticResource BitmapToImage}">
-                                    <CompiledBinding />
+                                    <CompiledBinding Path="Bitmap" />
 									<Binding ElementName="PdfImage"/>
                                 </MultiBinding>
                             </Image.Source>
                         </Image>
+
+                        <Grid DockPanel.Dock="Left">
+                            <TextBlock  Text="{CompiledBinding Name}"/>
+                            <TextBlock
+                                FontSize="11"
+                                Foreground="Gray"
+                                VerticalAlignment="Bottom"
+                                Text="{CompiledBinding CurrentDateTime, 
+									   Converter={x:Static converters:DateTimeToStringConverter.StringConverter}}"/>
+
+                        </Grid>
                     </DockPanel>
                     
                 </DataTemplate>

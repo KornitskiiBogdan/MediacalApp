@@ -8,18 +8,20 @@
              xmlns:analysis="clr-namespace:MedicalApp.ViewModels.Analysis"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
              x:DataType="analysis:MarkViewModel" 
-             x:Class="MedicalApp.Views.MarkView">
+             x:Class="MedicalApp.Views.Analysis.MarkView">
 
 	<UserControl.Resources>
 		<converters:StringValueToBrushConverter x:Key="StringToBrush"/>
     </UserControl.Resources>
 
-    <StackPanel Margin="5" Orientation="Vertical">
+    <StackPanel Orientation="Vertical">
 
-		<Grid IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
+		<Grid
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" 
               HorizontalAlignment="Stretch">
-            <Button Grid.Column="0" Command="{CompiledBinding GoBackCommand}" HorizontalAlignment="Left"/>
+            <Button Grid.Column="0" 
+                    Command="{CompiledBinding GoBackCommand}" 
+                    HorizontalAlignment="Left"/>
 			<TextBlock FontSize="16" Grid.Column="1" 
                        Text="Aнализы" HorizontalAlignment="Center"/>
 		</Grid>

@@ -44,4 +44,10 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\LoginView.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Documents\DocumentView.axaml.cs">
+      <DependentUpon>DocumentView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

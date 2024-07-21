@@ -50,7 +50,7 @@ namespace PDFReader
             }
         }
 
-        public SKBitmap GeBitmapFromPdf()
+        public SKBitmap GetBitmapFromPdf()
         {
             using (PdfDocument document = PdfDocument.Open(Path.Combine(folder, file)))
             {
@@ -60,7 +60,7 @@ namespace PDFReader
             }
         }
 
-        public SKBitmap GeBitmapFromPdf(string filePath)
+        public SKBitmap GetBitmapFromPdf(string filePath)
         {
             using (PdfDocument document = PdfDocument.Open(filePath))
             {

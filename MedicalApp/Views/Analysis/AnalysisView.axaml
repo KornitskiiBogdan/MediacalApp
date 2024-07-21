@@ -3,15 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:analysis="clr-namespace:MedicalApp.ViewModels.Analysis"
+             xmlns:converters="clr-namespace:MedicalApp.Converters"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450" x:DataType="analysis:AnalysisViewModel"
-             x:Class="MedicalApp.Views.AnalysisView">
+             x:Class="MedicalApp.Views.Analysis.AnalysisView">
 
     <DockPanel Margin="5">
 
 		<Grid DockPanel.Dock="Top" 
               IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
-			<Button Grid.Column="0" HorizontalAlignment="Left" IsVisible="{CompiledBinding CurrentMark, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+			<Button Grid.Column="0" HorizontalAlignment="Left"/>
             <TextBlock FontSize="16" Grid.Column="1" Text="Aнализы" HorizontalAlignment="Center"/>
             <Button Grid.Column="2" HorizontalAlignment="Right"/>
         </Grid>
@@ -88,7 +89,8 @@
 									   FontSize="11"
 									   Foreground="Gray"
 									   VerticalAlignment="Bottom"
-									   Text="{CompiledBinding CurrentDateTime}"/>
+									   Text="{CompiledBinding CurrentDateTime, 
+									   Converter={x:Static converters:DateTimeToStringConverter.StringConverter}}"/>
 
 							<StackPanel Grid.Column="1" Orientation="Vertical" >
 								<Border Background="Transparent" BorderThickness="0">

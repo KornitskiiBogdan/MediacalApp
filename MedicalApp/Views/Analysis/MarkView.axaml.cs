@@ -1,14 +1,10 @@
 using System;
-using System.Diagnostics;
-using System.Linq;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using MedicalApp.ViewModels.Analysis;
 
-namespace MedicalApp.Views
+namespace MedicalApp.Views.Analysis
 {
     public partial class MarkView : UserControl
     {
@@ -32,7 +28,7 @@ namespace MedicalApp.Views
             //TODO обработку ошибок при вводе
             if (DataContext is MarkViewModel viewModel)
             {
-                if (float.TryParse(ValueTextBox.Text, out float fValue))
+                if (float.TryParse((string?)ValueTextBox.Text, out float fValue))
                 {
                     viewModel.AddNewValue(DateTime.Parse(InputDateTextBox.Text ?? string.Empty), fValue);
 

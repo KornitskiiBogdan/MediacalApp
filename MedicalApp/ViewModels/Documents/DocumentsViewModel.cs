@@ -8,17 +8,20 @@ using PDFReader;
 using ReactiveUI;
 using SkiaSharp;
 using System;
+using MedicalApp.Messages;
+using Tools.Messaging;
 
 namespace MedicalApp.ViewModels.Documents
 {
     [MedicalExtension]
     public class DocumentsViewModel : ViewModelBase, IFilteredObject
     {
-        private readonly MedicalProject _medicalProject;
         private readonly PdfReader _pdfReader;
-        private SKBitmap? _currentDocument;
+        private DocumentViewModel? _currentDocument;
         private readonly SortingModel _sortingModel;
+        private readonly MedicalProject _medicalProject;
         private readonly SourceList<DocumentViewModel> _pdfDocuments = new();
+        private string _searchText = "";
 
         public DocumentsViewModel(MedicalProject project)
         {
@@ -36,11 +39,20 @@ namespace MedicalApp.ViewModels.Documents
 
             PdfDocuments = newCollection;
 
-            //_pdfDocuments = new ObservableCollection<SKBitmap> { _pdfReader.GeBitmapFromPdf() };
+            project.MessageBus.Register<GoBackView>(backView =>
+            {
+                if (backView.TypeView == typeof(DocumentViewModel))
+                {
+                    CurrentDocument = null;
+                }
+
+            });
+
+            _pdfDocuments.Add(new DocumentViewModel(project, _pdfReader.GetBitmapFromPdf(), "анализ"));
         }
 
 
-        public SKBitmap? CurrentDocument
+        public DocumentViewModel? CurrentDocument
         {
             get => _currentDocument;
             set => this.RaiseAndSetIfChanged(ref _currentDocument, value);
@@ -48,7 +60,11 @@ namespace MedicalApp.ViewModels.Documents
 
         public ReadOnlyObservableCollection<DocumentViewModel> PdfDocuments { get; set; }
 
-        public string SearchText { get; set; }
+        public string SearchText
+        {
+            get => _searchText;
+            set => this.RaiseAndSetIfChanged(ref _searchText, value);
+        }
 
         public SortingModel SortingModel => _sortingModel;
     }
