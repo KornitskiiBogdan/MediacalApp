@@ -18,13 +18,14 @@
 		</Grid.RowDefinitions>
 
 		<TransitioningContentControl Grid.Row="0" Background="White" 
-                          Content="{Binding CurrentPage}"/>
+                          Content="{CompiledBinding CurrentPage}"/>
 
-        <Border Grid.Row="1" IsVisible="{Binding CurrentPage, 
+        <Border Grid.Row="1" IsVisible="{CompiledBinding CurrentPage, 
 				Converter={x:Static converters:CurrentPageToBoolConverter.BoolConverter}}">
             <ListBox  Background="White"
-                     ItemsSource="{Binding Items}"
-                     SelectedItem="{Binding SelectedListItem}">
+                     ItemsSource="{CompiledBinding Items}"
+                      SelectionChanged="SelectingItemsControl_OnSelectionChanged"
+                     SelectedItem="{CompiledBinding SelectedListItem}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Rows="1" HorizontalAlignment="Stretch" />

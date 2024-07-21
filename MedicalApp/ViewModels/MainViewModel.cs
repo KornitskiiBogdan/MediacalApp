@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using MedicalApp.Messages;
 using MedicalApp.Models;
@@ -38,9 +40,6 @@ public sealed class MainViewModel : ViewModelBase
 
         SelectedListItem = Items.FirstOrDefault(x => x.ModelType == typeof(AnalysisViewModel));
 
-        //Пока так. Из-за циклических зависимостей, потому что одновременно добавляется и ILoginService и LoginViewModel.
-        //Мб это норм, потому что окно логин нужно только при входе
-        //Нужно подумать...
         //_currentPage = new LoginViewModel(Project, Project.Services.GetRequiredService<ILoginService>());
 
     }
@@ -61,15 +60,23 @@ public sealed class MainViewModel : ViewModelBase
                 return;
             }
 
-            var vm = Project.Services.GetRequiredService(value.ModelType);
-            if (vm is not ViewModelBase vmb)
-            {
-                return;
-            }
-
-            CurrentPage = vmb;
-
             this.RaiseAndSetIfChanged(ref _selectedListItem, value);
+
+            try
+            {
+                var vm = Project.Services.GetRequiredService(value.ModelType);
+                if (vm is not ViewModelBase vmb)
+                {
+                    return;
+                }
+
+                CurrentPage = vmb;
+            }
+            catch(InvalidOperationException e)
+            {
+                Debug.WriteLine(e);
+            }
+            
         }
     }
 
