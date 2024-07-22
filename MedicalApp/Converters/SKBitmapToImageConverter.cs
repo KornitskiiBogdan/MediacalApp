@@ -24,6 +24,7 @@ namespace MedicalApp.Converters
         {
             SKBitmap? bitmap = null;
             Layoutable? layoutable = null;
+            Rect? bounds = null;
 
             foreach (var value in values)
             {
@@ -35,16 +36,22 @@ namespace MedicalApp.Converters
                 {
                     layoutable = l;
                 }
+                else if (value is Rect r)
+                {
+                    bounds = r;
+                }
             }
 
             if (bitmap == null || layoutable == null)
             {
                 return null;
             }
-
-            layoutable.Measure(new Size(width: double.MaxValue, height: double.MaxValue));
-            layoutable.InvalidateMeasure();
-            return bitmap.Resize(new SKSizeI((int)layoutable.DesiredSize.Width, (int)layoutable.DesiredSize.Height), SKFilterQuality.High).ToAvaloniaImage();
+            
+            return new Image() { Source = bitmap.Resize(new SKSizeI((int)(bounds?.Width ?? 0), (int)(bounds?.Height ?? 0)), 
+                SKFilterQuality.High).ToAvaloniaImage(),
+                Width = bounds?.Width ?? 0,
+                Height = bounds?.Height ?? 0,
+            };
         }
     }
 }

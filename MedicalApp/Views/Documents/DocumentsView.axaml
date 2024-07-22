@@ -12,9 +12,9 @@
         <converters:SkBitmapToImageConverter x:Key="BitmapToImage"/>
     </UserControl.Resources>
 
-    <DockPanel Margin="5">
+    <Grid RowDefinitions="Auto, Auto, Auto, *, Auto" Margin="5">
 
-        <Grid DockPanel.Dock="Top" 
+        <Grid Grid.Row="0" 
               IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" 
               HorizontalAlignment="Stretch">
@@ -22,7 +22,7 @@
                        HorizontalAlignment="Center"/>
         </Grid>
 
-        <Grid DockPanel.Dock="Top"
+        <Grid Grid.Row="1" 
               IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0, 20, 0, 0"
               HorizontalAlignment="Stretch" >
@@ -37,7 +37,7 @@
                    Focusable="False"/>
         </Grid>
 
-        <Grid DockPanel.Dock="Top"
+        <Grid Grid.Row="2"
               IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0, 20, 0, 0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
 
@@ -72,13 +72,13 @@
             </Grid.Styles>
         </Grid>
 
-        <TransitioningContentControl DockPanel.Dock="Top"
+        <TransitioningContentControl Grid.Row="3"  VerticalAlignment="Stretch"
                                      IsVisible="{CompiledBinding CurrentDocument, 
 									 Converter={x:Static ObjectConverters.IsNotNull}}"
                                      Content="{CompiledBinding CurrentDocument}">
         </TransitioningContentControl>
         
-        <ListBox DockPanel.Dock="Top" ItemsSource="{CompiledBinding PdfDocuments}" 
+        <ListBox Grid.Row="4" ItemsSource="{CompiledBinding PdfDocuments}" 
                  SelectedItem="{CompiledBinding CurrentDocument}"
                  IsVisible="{CompiledBinding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}" 
                  Background="White"
@@ -88,18 +88,17 @@
                 <DataTemplate>
                     <DockPanel Margin="0 5 0 0">
 						
-						<Image DockPanel.Dock="Right"
-                               x:Name="PdfImage"
-                               Height="64"
-                               Width="64"
-                        >
-                            <Image.Source>
-								<MultiBinding Converter="{StaticResource BitmapToImage}">
+                        <Border Height="64" DockPanel.Dock="Right"
+                                x:Name="PdfImage"
+                                Width="64">
+                            <Border.Child>
+                                <MultiBinding Converter="{StaticResource BitmapToImage}">
                                     <CompiledBinding Path="Bitmap" />
-									<Binding ElementName="PdfImage"/>
+                                    <Binding ElementName="PdfImage"/>
+                                    <Binding ElementName="PdfImage" Path="Bounds" />
                                 </MultiBinding>
-                            </Image.Source>
-                        </Image>
+                            </Border.Child>
+                        </Border>
 
                         <Grid DockPanel.Dock="Left">
                             <TextBlock  Text="{CompiledBinding Name}"/>
@@ -116,5 +115,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </DockPanel>
+    </Grid>
 </UserControl>

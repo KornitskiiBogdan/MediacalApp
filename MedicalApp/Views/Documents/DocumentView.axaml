@@ -12,9 +12,9 @@
         <converters:SkBitmapToImageConverter x:Key="BitmapToImage"/>
     </UserControl.Resources>
 
-	<StackPanel Orientation="Vertical">
+	<Grid RowDefinitions="Auto, *" HorizontalAlignment="Stretch">
 
-		<Grid 
+		<Grid Grid.Row="0"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *"
               HorizontalAlignment="Stretch">
 			<Button Grid.Column="0"
@@ -24,17 +24,25 @@
 					   Text="Документы" HorizontalAlignment="Center"/>
 		</Grid>
 
-		<Border x:Name="BorderImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-			<Image Width="420" Height="600">
+		<ContentControl x:Name="BorderImage"  Grid.Row="1"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                >
+			<ContentControl.Content>
+				<MultiBinding Converter="{StaticResource BitmapToImage}">
+					<CompiledBinding Path="Bitmap" />
+					<Binding ElementName="BorderImage"/>
+					<Binding ElementName="BorderImage" Path="Bounds" />
+				</MultiBinding>
+			</ContentControl.Content>
+        </ContentControl>
+        <!--<Image>
 				<Image.Source>
 					<MultiBinding Converter="{StaticResource BitmapToImage}">
 						<CompiledBinding Path="Bitmap" />
 						<Binding ElementName="BorderImage"/>
 					</MultiBinding>
 				</Image.Source>
-			</Image>
-		</Border>
-
-	</StackPanel>
+			</Image>-->
+	</Grid>
 
 </UserControl>

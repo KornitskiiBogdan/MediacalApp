@@ -7,7 +7,7 @@ namespace PDFReader
 {
     public class PdfReader
     {
-        const string folder = @"C:\Users\Bogdan\Downloads\";
+        const string folder = @"C:\Users\bkornitsky\Downloads\";
         const string file = "mark4.pdf";
 
         public void Read()
