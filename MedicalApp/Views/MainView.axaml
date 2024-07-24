@@ -13,7 +13,8 @@
     
     <Grid Background="White" RowDefinitions="Auto, Auto">
 
-		<TransitioningContentControl Grid.Row="0" Background="White" VerticalAlignment="Stretch"
+		<TransitioningContentControl Grid.Row="0" Background="White" 
+                                     VerticalAlignment="Stretch"
                           Content="{CompiledBinding CurrentPage}"/>
 
         <Border Grid.Row="1" IsVisible="{CompiledBinding CurrentPage, 
