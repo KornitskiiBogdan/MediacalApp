@@ -67,10 +67,10 @@
             </Grid.Styles>
         </Grid>
 
-        <TransitioningContentControl DockPanel.Dock="Top"
+        <!--<TransitioningContentControl DockPanel.Dock="Top"
                                      IsVisible="{Binding CurrentMark, 
 									 Converter={x:Static ObjectConverters.IsNotNull}}"
-                                     Content="{Binding CurrentMark}"/>
+                                     Content="{Binding CurrentMark}"/>-->
 
 			<ListBox DockPanel.Dock="Top" ClipToBounds="True" 
                      x:DataType="analysis:AnalysisViewModel"
