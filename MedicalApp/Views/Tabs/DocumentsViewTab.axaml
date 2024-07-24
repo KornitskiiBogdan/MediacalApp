@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:MedicalApp.Converters"
              xmlns:documents="clr-namespace:MedicalApp.ViewModels.Documents"
+             xmlns:tabs="clr-namespace:MedicalApp.ViewModels.Tabs"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:DataType="documents:DocumentsViewModel"
-             x:Class="MedicalApp.Views.Documents.DocumentsViewTab">
+             x:DataType="tabs:DocumentsViewModelTab"
+             x:Class="MedicalApp.Views.Tabs.DocumentsViewTab">
 
     <UserControl.Resources>
         <converters:SkBitmapToImageConverter x:Key="BitmapToImage"/>
@@ -15,21 +16,19 @@
     <Grid RowDefinitions="Auto, Auto, Auto, Auto" Margin="5">
 
         <Grid Grid.Row="0" 
-              IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" 
               HorizontalAlignment="Stretch">
-            <TextBlock FontSize="16" Grid.Column="1" Text="Документы" 
+            <TextBlock FontSize="16" Grid.Column="1" Text="{CompiledBinding Header}" 
                        HorizontalAlignment="Center"/>
         </Grid>
 
         <Grid Grid.Row="1" 
-              IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0, 20, 0, 0"
               HorizontalAlignment="Stretch" >
             <TextBox Name="SearchTextBox"
                      FontSize ="12"
                      BorderBrush="#FF00D7D4"
-                     Text="{Binding SearchText}"
+                     Text="{CompiledBinding ViewModel.SearchText}"
                      Watermark="Поиск">
             </TextBox>
             <Image Height="32" Width="32" Source="avares://MedicalApp/Assets/SearchRegular.png"
@@ -38,23 +37,22 @@
         </Grid>
 
         <Grid Grid.Row="2"
-              IsVisible="{Binding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}"
-              Margin="0, 20, 0, 0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
+              Margin="0, 20, 0, 0" 
+              ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
 
             <Button
                     Grid.Column="1"
-					
-                    Command="{CompiledBinding SortingModel.SortByCategory}"
+                    Command="{CompiledBinding ViewModel.SortingModel.SortByCategory}"
                     Content="По категориям"/>
 
             <Button 
                      Grid.Column="0"
-                     Command="{CompiledBinding SortingModel.SortByOrder}"
+                     Command="{CompiledBinding ViewModel.SortingModel.SortByOrder}"
                      Content="Общий список"/>
 
             <Button 
                      Grid.Column="2"
-                     Command="{CompiledBinding SortingModel.SortByDate}"
+                     Command="{CompiledBinding ViewModel.SortingModel.SortByDate}"
                      Content="По дате добавления"/>
             <Grid.Styles>
                 <Style Selector="Button">
@@ -72,15 +70,9 @@
             </Grid.Styles>
         </Grid>
 
-        <!--<TransitioningContentControl Grid.Row="3"  VerticalAlignment="Stretch"
-                                     IsVisible="{CompiledBinding CurrentDocument, 
-									 Converter={x:Static ObjectConverters.IsNotNull}}"
-                                     Content="{CompiledBinding CurrentDocument}">
-        </TransitioningContentControl>-->
         
-        <ListBox Grid.Row="3" ItemsSource="{CompiledBinding PdfDocuments}" 
+        <ListBox Grid.Row="3" ItemsSource="{CompiledBinding ViewModel.PdfDocuments}" 
                  SelectedItem="{CompiledBinding CurrentDocument}"
-                 IsVisible="{CompiledBinding CurrentDocument, Converter={x:Static ObjectConverters.IsNull}}" 
                  Background="White"
                  ScrollViewer.VerticalScrollBarVisibility="Auto">
 

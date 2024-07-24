@@ -6,9 +6,10 @@
              xmlns:converters="clr-namespace:MedicalApp.Converters"
              xmlns:avalonia="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
              xmlns:analysis="clr-namespace:MedicalApp.ViewModels.Analysis"
+             xmlns:tabs="clr-namespace:MedicalApp.ViewModels.Tabs"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
-             x:DataType="analysis:MarkViewModel" 
-             x:Class="MedicalApp.Views.Analysis.MarkViewTab">
+             x:DataType="tabs:MarkViewModelTab" 
+             x:Class="MedicalApp.Views.Tabs.MarkViewTab">
 
 	<UserControl.Resources>
 		<converters:StringValueToBrushConverter x:Key="StringToBrush"/>
@@ -23,19 +24,19 @@
                     Command="{CompiledBinding GoBackCommand}" 
                     HorizontalAlignment="Left"/>
 			<TextBlock FontSize="16" Grid.Column="1" 
-                       Text="Aнализы" HorizontalAlignment="Center"/>
+                       Text="{CompiledBinding Header}" HorizontalAlignment="Center"/>
 		</Grid>
 
         <Grid ColumnDefinitions="3*, *">
 			<StackPanel Grid.Column="0" Orientation="Horizontal">
                 <TextBlock FontSize="15"
-                           Text="{CompiledBinding CurrentValue}"
-                           Foreground="{CompiledBinding ColorText}" />
-                <TextBlock Text="{CompiledBinding Unit.Name}"
+                           Text="{CompiledBinding ViewModel.CurrentValue}"
+                           Foreground="{CompiledBinding ViewModel.ColorText}" />
+                <TextBlock Text="{CompiledBinding ViewModel.Unit.Name}"
                            Margin="5, 0, 0, 0"
                            FontWeight="Bold"/>
 
-                <ItemsControl ItemsSource="{CompiledBinding Units}">
+                <ItemsControl ItemsSource="{CompiledBinding ViewModel.Units}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{CompiledBinding Name}"
@@ -55,7 +56,7 @@
 
             <TextBlock Grid.Column="1" HorizontalAlignment="Right" FontSize="12"
                        Foreground="Gray"
-                       Text="{CompiledBinding CurrentDateTime, 
+                       Text="{CompiledBinding ViewModel.CurrentDateTime, 
 					   Converter={x:Static converters:DateTimeToStringConverter.StringConverter}}"/>
         </Grid>
 
@@ -83,7 +84,7 @@
                 <Flyout PlacementAnchor="Bottom" 
                         Closed="ButtonFlyout_OnClosed"
                         Opened="ButtonFlyout_OnOpened">
-                    <ItemsControl ItemsSource="{CompiledBinding Units}">
+                    <ItemsControl ItemsSource="{CompiledBinding ViewModel.Units}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{CompiledBinding Name}"
@@ -134,7 +135,7 @@
                             <TextBox x:Name="ValueTextBox" Watermark="Значение" Margin="0 5 0 0"/>
                             
                             <ComboBox PlaceholderText="Единицы измерения"
-                                      ItemsSource="{CompiledBinding Units}"
+                                      ItemsSource="{CompiledBinding ViewModel.Units}"
                                       Margin="0 5 0 0">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -176,7 +177,7 @@
             <TextBlock Grid.Column="1" VerticalAlignment="Center" 
                        HorizontalAlignment="Right" Foreground="Gray"
                        FontWeight="DemiBold"
-                       FontSize="10" Text="{CompiledBinding CurrentReference.Name}"/>
+                       FontSize="10" Text="{CompiledBinding ViewModel.CurrentReference.Name}"/>
         </Grid>
 
 
@@ -200,7 +201,7 @@
                             Canvas.Bottom="-2">
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{CompiledBinding CurrentValue}" 
+                        <TextBlock Text="{CompiledBinding ViewModel.CurrentValue}" 
                                    FontSize="10"
                                    Margin="0 0 0 5"
                                    Foreground="Gray"/>
@@ -211,7 +212,7 @@
                              Width="6" Height="6" >
 						<Ellipse.Fill>
                             <MultiBinding Converter="{StaticResource StringToBrush}">
-                                <CompiledBinding Path="CurrentValue"/>
+                                <CompiledBinding Path="ViewModel.CurrentValue"/>
                                 <Binding ElementName="GradientBorder"/>
                             </MultiBinding>
                         </Ellipse.Fill>
@@ -230,13 +231,13 @@
             <TextBlock FontSize="10" HorizontalAlignment="Center" 
                        Grid.Column ="0"
                        Foreground="Gray" 
-                       Text="{CompiledBinding CurrentReference.LowerValue}"
+                       Text="{CompiledBinding ViewModel.CurrentReference.LowerValue}"
                        Margin="0 5 0 0"/>
 
             <TextBlock FontSize="10" HorizontalAlignment="Center" 
                        Grid.Column ="1"
                        Foreground="Gray" 
-                       Text="{CompiledBinding CurrentReference.UpperValue}"
+                       Text="{CompiledBinding ViewModel.CurrentReference.UpperValue}"
                        Margin="0 5 0 0"/>
 
         </Grid>
@@ -265,7 +266,7 @@
                 <Flyout PlacementAnchor="Bottom"
                         Opened="ButtonFlyout_OnOpened"
                         Closed="ButtonFlyout_OnClosed">
-                    <ItemsControl ItemsSource="{CompiledBinding Units}">
+                    <ItemsControl ItemsSource="{CompiledBinding ViewModel.Units}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{CompiledBinding Name}"
@@ -296,10 +297,10 @@
                     
                     HorizontalAlignment="Stretch" 
                     Height="300"
-                    Sections="{CompiledBinding Graphic.Sections}"
-                    DrawMarginFrame="{CompiledBinding Graphic.MarginFrame}"
-                    XAxes="{CompiledBinding Graphic.XAxes}"
-                    Series="{CompiledBinding Graphic.Series}"/>
+                    Sections="{CompiledBinding ViewModel.Graphic.Sections}"
+                    DrawMarginFrame="{CompiledBinding ViewModel.Graphic.MarginFrame}"
+                    XAxes="{CompiledBinding ViewModel.Graphic.XAxes}"
+                    Series="{CompiledBinding ViewModel.Graphic.Series}"/>
 			</StackPanel>
 
         </Border>

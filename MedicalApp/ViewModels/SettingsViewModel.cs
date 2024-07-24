@@ -12,5 +12,7 @@ namespace MedicalApp.ViewModels
         {
             _medicalProject = project;
         }
+
+        public override MedicalProject Project => _medicalProject;
     }
 }

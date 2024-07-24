@@ -3,13 +3,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MedicalApp.ViewModels.Documents;
+using ReactiveUI;
 
 namespace MedicalApp.ViewModels.Tabs
 {
     public class DocumentsViewModelTab : ViewModelTabBase
     {
-        public override string Header { get; set; }
+        private string _header;
+        private DocumentsViewModel _viewModel;
+        private DocumentViewModel? _currentDocument;
 
-        public override ViewModelBase ViewModel { get; set; }
+        public DocumentsViewModelTab(DocumentsViewModel viewModel)
+        {
+            _header = "Документы";
+            _viewModel = viewModel;
+        }
+
+        public override string Header
+        {
+            get => _header;
+            set => this.RaiseAndSetIfChanged(ref _header, value);
+        }
+
+        public DocumentsViewModel ViewModel
+        {
+            get => _viewModel;
+            set => this.RaiseAndSetIfChanged(ref _viewModel, value);
+        }
+
+        public DocumentViewModel? CurrentDocument
+        {
+            get => _currentDocument;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _currentDocument, value);
+                if (value != null)
+                {
+                    ChangeCurrentTabInvoke(new DocumentViewModelTab(value));
+                }
+            }
+        }
+
+        public override void Dispose()
+        {
+            
+        }
     }
 }

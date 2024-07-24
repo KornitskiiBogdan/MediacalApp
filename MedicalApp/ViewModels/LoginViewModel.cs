@@ -27,6 +27,8 @@ namespace MedicalApp.ViewModels
             _ = GetUsers();
         }
 
+        public override MedicalProject Project => _project;
+
         public string ErrorMessage
         {
             get => _errorMessage;

@@ -17,7 +17,6 @@ namespace MedicalApp.ViewModels.Documents
     public class DocumentsViewModel : ViewModelBase, IFilteredObject
     {
         private readonly PdfReader _pdfReader;
-        private DocumentViewModel? _currentDocument;
         private readonly SortingModel _sortingModel;
         private readonly MedicalProject _medicalProject;
         private readonly SourceList<DocumentViewModel> _pdfDocuments = new();
@@ -39,23 +38,7 @@ namespace MedicalApp.ViewModels.Documents
 
             PdfDocuments = newCollection;
 
-            project.MessageBus.Register<GoBackView>(backView =>
-            {
-                if (backView.TypeView == typeof(DocumentViewModel))
-                {
-                    CurrentDocument = null;
-                }
-
-            });
-
             _pdfDocuments.Add(new DocumentViewModel(project, _pdfReader.GetBitmapFromPdf(), "анализ"));
-        }
-
-
-        public DocumentViewModel? CurrentDocument
-        {
-            get => _currentDocument;
-            set => this.RaiseAndSetIfChanged(ref _currentDocument, value);
         }
 
         public ReadOnlyObservableCollection<DocumentViewModel> PdfDocuments { get; set; }
@@ -67,5 +50,7 @@ namespace MedicalApp.ViewModels.Documents
         }
 
         public SortingModel SortingModel => _sortingModel;
+
+        public override MedicalProject Project => _medicalProject;
     }
 }

@@ -46,16 +46,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Analysis\AnalysisViewTab.axaml.cs">
+    <Compile Update="Views\Tabs\AnalysisViewTab.axaml.cs">
       <DependentUpon>AnalysisViewTab.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Analysis\MarkViewTab.axaml.cs">
+    <Compile Update="Views\Tabs\MarkViewTab.axaml.cs">
       <DependentUpon>MarkViewTab.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Documents\DocumentsViewTab.axaml.cs">
+    <Compile Update="Views\Tabs\DocumentsViewTab.axaml.cs">
       <DependentUpon>DocumentsViewTab.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Documents\DocumentViewTab.axaml.cs">
+    <Compile Update="Views\Tabs\DocumentViewTab.axaml.cs">
       <DependentUpon>DocumentViewTab.axaml</DependentUpon>
     </Compile>
   </ItemGroup>

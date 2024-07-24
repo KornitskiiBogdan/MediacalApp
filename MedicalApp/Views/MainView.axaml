@@ -11,13 +11,9 @@
              Focusable="True" Padding="{OnFormFactor 0, Mobile=10 0 10 0}" 
              x:DataType="viewModels:MainViewModel">
     
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="6.3*"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+    <Grid Background="White" RowDefinitions="Auto, Auto">
 
-		<TransitioningContentControl Grid.Row="0" Background="White" 
+		<TransitioningContentControl Grid.Row="0" Background="White" VerticalAlignment="Stretch"
                           Content="{CompiledBinding CurrentPage}"/>
 
         <Border Grid.Row="1" IsVisible="{CompiledBinding CurrentPage, 

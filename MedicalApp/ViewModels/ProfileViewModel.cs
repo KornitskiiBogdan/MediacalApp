@@ -34,5 +34,7 @@ namespace MedicalApp.ViewModels
             get => _weight;
             set => this.RaiseAndSetIfChanged(ref _weight, value);
         }
+
+        public override MedicalProject Project => _medicalProject;
     }
 }

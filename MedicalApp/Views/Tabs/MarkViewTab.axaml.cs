@@ -4,7 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using MedicalApp.ViewModels.Analysis;
 
-namespace MedicalApp.Views.Analysis
+namespace MedicalApp.Views.Tabs
 {
     public partial class MarkViewTab : UserControl
     {

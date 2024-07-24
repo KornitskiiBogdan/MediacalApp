@@ -27,6 +27,8 @@ namespace MedicalApp.ViewModels.Documents
             _currentDateTime = DateTime.Today;
         }
 
+        public override MedicalProject Project => _medicalProject;
+
         public DateTime? CurrentDateTime => _currentDateTime;
 
         public string Name

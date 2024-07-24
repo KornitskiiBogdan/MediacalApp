@@ -17,7 +17,7 @@ namespace MedicalApp.ViewModels.Analysis
     [MedicalExtension]
     public class AnalysisViewModel : ViewModelBase, IFilteredObject
     {
-        private MarkViewModel? _currentMark;
+        
         private readonly MedicalProject _project;
         private readonly SourceList<MarkViewModel> _sourceListMark = new();
         private readonly SortingModel _sortingModel;
@@ -37,15 +37,6 @@ namespace MedicalApp.ViewModels.Analysis
             Analysis = newCollection;
             _project = project;
 
-            _project.MessageBus.Register<GoBackView>(backView =>
-            {
-                if (backView.TypeView == typeof(MarkViewModel))
-                {
-                    CurrentMark = null;
-                }
-
-            });
-
             _project.MessageBus.Register<ServiceCreationCompleted>(_ => Init());
 
         }
@@ -62,16 +53,12 @@ namespace MedicalApp.ViewModels.Analysis
 
         public SortingModel SortingModel => _sortingModel;
 
-        public MarkViewModel? CurrentMark
-        {
-            get => _currentMark;
-            set => this.RaiseAndSetIfChanged(ref _currentMark, value);
-        }
-
         public string SearchText
         {
             get => _searchText;
             set => this.RaiseAndSetIfChanged(ref _searchText, value);
         }
+
+        public override MedicalProject Project => _project;
     }
 }

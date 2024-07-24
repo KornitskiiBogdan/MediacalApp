@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:documents="clr-namespace:MedicalApp.ViewModels.Documents"
              xmlns:converters="clr-namespace:MedicalApp.Converters"
+             xmlns:tabs="clr-namespace:MedicalApp.ViewModels.Tabs"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
-             x:DataType="documents:DocumentViewModel"
-             x:Class="MedicalApp.Views.Documents.DocumentViewTab">
+             x:DataType="tabs:DocumentViewModelTab"
+             x:Class="MedicalApp.Views.Tabs.DocumentViewTab">
 
     <UserControl.Resources>
         <converters:SkBitmapToImageConverter x:Key="BitmapToImage"/>
@@ -21,7 +22,7 @@
 					Command="{CompiledBinding GoBackCommand}"
 					HorizontalAlignment="Left"/>
 			<TextBlock FontSize="16" Grid.Column="1"
-					   Text="Документы" HorizontalAlignment="Center"/>
+					   Text="{CompiledBinding Header}" HorizontalAlignment="Center"/>
 		</Grid>
 
 		<ContentControl x:Name="BorderImage"  Grid.Row="1"
@@ -29,20 +30,12 @@
                 >
 			<ContentControl.Content>
 				<MultiBinding Converter="{StaticResource BitmapToImage}">
-					<CompiledBinding Path="Bitmap" />
+					<CompiledBinding Path="ViewModel.Bitmap" />
 					<Binding ElementName="BorderImage"/>
 					<Binding ElementName="BorderImage" Path="Bounds" />
 				</MultiBinding>
 			</ContentControl.Content>
         </ContentControl>
-        <!--<Image>
-				<Image.Source>
-					<MultiBinding Converter="{StaticResource BitmapToImage}">
-						<CompiledBinding Path="Bitmap" />
-						<Binding ElementName="BorderImage"/>
-					</MultiBinding>
-				</Image.Source>
-			</Image>-->
 	</Grid>
 
 </UserControl>

@@ -4,27 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:analysis="clr-namespace:MedicalApp.ViewModels.Analysis"
              xmlns:converters="clr-namespace:MedicalApp.Converters"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450" x:DataType="analysis:AnalysisViewModel"
-             x:Class="MedicalApp.Views.Analysis.AnalysisViewTab">
+             xmlns:tabs="clr-namespace:MedicalApp.ViewModels.Tabs"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450" 
+             x:DataType="tabs:AnalysisViewModelTab"
+             x:Class="MedicalApp.Views.Tabs.AnalysisViewTab">
 
     <DockPanel Margin="5">
 
 		<Grid DockPanel.Dock="Top" 
-              IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0,20,0,0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
 			<Button Grid.Column="0" HorizontalAlignment="Left"/>
-            <TextBlock FontSize="16" Grid.Column="1" Text="Aнализы" HorizontalAlignment="Center"/>
+            <TextBlock FontSize="16" Grid.Column="1" Text="{CompiledBinding Header}" HorizontalAlignment="Center"/>
             <Button Grid.Column="2" HorizontalAlignment="Right"/>
         </Grid>
 
-        <Grid DockPanel.Dock="Top" 
-              IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
+        <Grid DockPanel.Dock="Top"
               Margin="0, 20, 0, 0" 
               HorizontalAlignment="Stretch" >
             <TextBox Name="SearchTextBox" 
                      FontSize ="12"
 					 BorderBrush="#FF00D7D4"
-					 Text="{Binding SearchText}"
+					 Text="{CompiledBinding ViewModel.SearchText}"
                      Watermark="Поиск">
             </TextBox>
             <Image Height="32" Width="32" Source="avares://MedicalApp/Assets/SearchRegular.png"
@@ -33,23 +33,21 @@
         </Grid>
 
 		<Grid DockPanel.Dock="Top"
-              IsVisible="{Binding CurrentMark, Converter={x:Static ObjectConverters.IsNull}}"
               Margin="0, 20, 0, 0" ColumnDefinitions="*, *, *" HorizontalAlignment="Stretch">
             
-            <Button x:DataType="analysis:AnalysisViewModel" 
+            <Button
                     Grid.Column="1"
-					
-                    Command="{Binding SortingModel.SortByCategory}"
+					Command="{CompiledBinding ViewModel.SortingModel.SortByCategory}"
                     Content="По категориям"/>
 
-            <Button  x:DataType="analysis:AnalysisViewModel"
-                     Grid.Column="0"
-                     Command="{Binding SortingModel.SortByOrder}"
-                     Content="Общий список"/>
+            <Button
+                Grid.Column="0"
+                Command="{CompiledBinding ViewModel.SortingModel.SortByOrder}"
+                Content="Общий список"/>
             
-            <Button  x:DataType="analysis:AnalysisViewModel" 
+            <Button
                      Grid.Column="2" 
-                     Command="{Binding SortingModel.SortByDate}"
+                     Command="{CompiledBinding ViewModel.SortingModel.SortByDate}"
                      Content="По дате добавления"/>
 			<Grid.Styles>
 				<Style Selector="Button">
@@ -67,18 +65,11 @@
             </Grid.Styles>
         </Grid>
 
-        <!--<TransitioningContentControl DockPanel.Dock="Top"
-                                     IsVisible="{Binding CurrentMark, 
-									 Converter={x:Static ObjectConverters.IsNotNull}}"
-                                     Content="{Binding CurrentMark}"/>-->
-
 			<ListBox DockPanel.Dock="Top" ClipToBounds="True" 
-                     x:DataType="analysis:AnalysisViewModel"
-                     SelectedItem="{Binding CurrentMark}"
+                     SelectedItem="{CompiledBinding CurrentMark}"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     IsVisible="{Binding CurrentMark, 
-					 Converter={x:Static ObjectConverters.IsNull}}" Background="White"
-                     ItemsSource ="{CompiledBinding Analysis}">
+                     Background="White"
+                     ItemsSource ="{CompiledBinding ViewModel.Analysis}">
 
 
 				<ListBox.ItemTemplate>

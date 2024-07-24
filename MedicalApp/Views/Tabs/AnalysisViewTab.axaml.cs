@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace MedicalApp.Views.Analysis
+namespace MedicalApp.Views.Tabs
 {
     public partial class AnalysisViewTab : UserControl
     {

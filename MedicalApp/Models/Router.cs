@@ -3,6 +3,7 @@ using Authentication;
 using MedicalApp.ViewModels;
 using MedicalApp.ViewModels.Analysis;
 using MedicalApp.ViewModels.Documents;
+using MedicalApp.ViewModels.Tabs;
 using MedicalDatabase;
 using MedicalDatabase.Operations;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,14 +31,19 @@ namespace MedicalApp.Models
                 var repository = new MedicalRepository();
                 openedApp.Services.AddSingleton<MedicalRepository>(repository);
                 openedApp.Services.AddSingleton<MedicalProject>(openedApp.Project);
-                openedApp.Services.AddSingleton<SettingsViewModel>(new SettingsViewModel(openedApp.Project));
-                openedApp.Services.AddSingleton<AnalysisViewModel>(new AnalysisViewModel(openedApp.Project));
-                openedApp.Services.AddSingleton<DocumentsViewModel>(new DocumentsViewModel(openedApp.Project));
-                openedApp.Services.AddSingleton<ProfileViewModel>(new ProfileViewModel(openedApp.Project));
-                
+                AddMainTabs(openedApp.Services, openedApp.Project);
                 openedApp.Services.AddHttpClient<ILoginService, LoginService>(httpClient =>
                     httpClient.BaseAddress = new Uri("https://dummyjson.com/"));
             });
+        }
+
+        private void AddMainTabs(IServiceCollection serviceCollection, MedicalProject project)
+        {
+            serviceCollection.AddSingleton<SettingsViewModel>(new SettingsViewModel(project));
+            serviceCollection.AddSingleton<AnalysisViewModelTab>(new AnalysisViewModelTab(new AnalysisViewModel(project)));
+            serviceCollection.AddSingleton<DocumentsViewModelTab>(new DocumentsViewModelTab(new DocumentsViewModel(project)));
+            serviceCollection.AddSingleton<DocumentsViewModel>(new DocumentsViewModel(project));
+            serviceCollection.AddSingleton<ProfileViewModel>(new ProfileViewModel(project));
         }
     }
 }

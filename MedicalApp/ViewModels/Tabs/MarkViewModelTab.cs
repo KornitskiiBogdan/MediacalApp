@@ -1,15 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MedicalApp.ViewModels.Analysis;
+using Microsoft.Extensions.DependencyInjection;
+using ReactiveUI;
 
 namespace MedicalApp.ViewModels.Tabs
 {
     public class MarkViewModelTab : ViewModelTabBase
     {
-        public override string Header { get; set; }
+        private string _header;
+        private MarkViewModel _viewModel;
 
-        public override ViewModelBase ViewModel { get; set; }
+        public MarkViewModelTab(MarkViewModel viewModel)
+        {
+            _header = "Aнализы";
+            _viewModel = viewModel;
+        }
+
+        public override string Header
+        {
+            get => _header;
+            set => this.RaiseAndSetIfChanged(ref _header, value);
+        }
+
+        public MarkViewModel ViewModel
+        {
+            get => _viewModel;
+            set => this.RaiseAndSetIfChanged(ref _viewModel, value);
+        }
+
+        public void GoBackCommand()
+        {
+            ChangeCurrentTabInvoke(_viewModel.Project.Services.GetRequiredService<AnalysisViewModelTab>());
+        }
+
+        public override void Dispose()
+        {
+            
+        }
     }
 }

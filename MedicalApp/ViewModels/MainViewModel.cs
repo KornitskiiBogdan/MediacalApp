@@ -5,6 +5,7 @@ using System.Linq;
 using MedicalApp.Messages;
 using MedicalApp.Models;
 using MedicalApp.ViewModels.Analysis;
+using MedicalApp.ViewModels.Tabs;
 using MedicalDatabase;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
@@ -15,10 +16,10 @@ namespace MedicalApp.ViewModels;
 public sealed class MainViewModel : ViewModelBase
 {
     private readonly Router _router;
-    private ViewModelBase _currentPage;
+    private ViewModelTabBase _currentPage;
     private ListItemTemplate? _selectedListItem;
     
-    public MedicalProject Project { get; }
+    public override MedicalProject Project { get; }
 
     public MainViewModel()
     {
@@ -33,21 +34,30 @@ public sealed class MainViewModel : ViewModelBase
         Project = taskMedicalProject.Result;
         Project.MessageBus.Register<LoginSuccess>(_ =>
         {
-            SelectedListItem = Items.FirstOrDefault(x => x.ModelType == typeof(AnalysisViewModel));
+            SelectedListItem = Items.FirstOrDefault(x => x.ModelType == typeof(AnalysisViewModelTab));
         });
 
-        _currentPage = Project.Services.GetRequiredService<AnalysisViewModel>();
-
-        SelectedListItem = Items.FirstOrDefault(x => x.ModelType == typeof(AnalysisViewModel));
+        _currentPage = Project.Services.GetRequiredService<AnalysisViewModelTab>();
+        _currentPage.ChangeCurrentTabEvent += CurrentPageOnChangeCurrentTabEvent;
+        SelectedListItem = Items.FirstOrDefault(x => x.ModelType == typeof(AnalysisViewModelTab));
 
         //_currentPage = new LoginViewModel(Project, Project.Services.GetRequiredService<ILoginService>());
-
     }
 
-    public ViewModelBase CurrentPage
+    private void CurrentPageOnChangeCurrentTabEvent(ViewModelTabBase obj)
+    {
+        CurrentPage = obj;
+    }
+
+    public ViewModelTabBase CurrentPage
     {
         get => _currentPage;
-        set => this.RaiseAndSetIfChanged(ref _currentPage, value);
+        set
+        {
+            _currentPage.ChangeCurrentTabEvent -= CurrentPageOnChangeCurrentTabEvent;
+            this.RaiseAndSetIfChanged(ref _currentPage, value);
+            value.ChangeCurrentTabEvent += CurrentPageOnChangeCurrentTabEvent;
+        }
     }
 
     public ListItemTemplate? SelectedListItem
@@ -65,12 +75,12 @@ public sealed class MainViewModel : ViewModelBase
             try
             {
                 var vm = Project.Services.GetRequiredService(value.ModelType);
-                if (vm is not ViewModelBase vmb)
+                if (vm is not ViewModelTabBase vmtb)
                 {
                     return;
                 }
 
-                CurrentPage = vmb;
+                CurrentPage = vmtb;
             }
             catch(InvalidOperationException e)
             {

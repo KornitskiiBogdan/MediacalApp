@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using System.Diagnostics;
+using SkiaSharp;
 using UglyToad.PdfPig.Content;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.Rendering.Skia;
@@ -52,11 +53,19 @@ namespace PDFReader
 
         public SKBitmap GetBitmapFromPdf()
         {
-            using (PdfDocument document = PdfDocument.Open(Path.Combine(folder, file)))
+            try
             {
-                document.AddSkiaPageFactory();
+                using (PdfDocument document = PdfDocument.Open(Path.Combine(folder, file)))
+                {
+                    document.AddSkiaPageFactory();
 
-                return document.GetPageAsSKBitmap(1);
+                    return document.GetPageAsSKBitmap(1);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return new SKBitmap();
             }
         }
 

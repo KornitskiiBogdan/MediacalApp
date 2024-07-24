@@ -45,6 +45,8 @@ namespace MedicalApp.ViewModels.Analysis
             Units.Add(markModel.Unit);
         }
 
+        public override MedicalProject Project => _project;
+
         public string Name
         {
             get => _mark.Name;
@@ -158,11 +160,6 @@ namespace MedicalApp.ViewModels.Analysis
             var koefA = (_referenceModel.UpperValue.Value - _referenceModel.LowerValue.Value) / 16;
             var koefB = _referenceModel.LowerValue.Value;
             TopPosition = (int)((medicalValue.Value - koefB) / koefA) + 5;
-        }
-
-        public async Task GoBackCommand()
-        {
-            await _project.MessageBus.SendAsync(new GoBackView(GetType()));
         }
     }
 }
