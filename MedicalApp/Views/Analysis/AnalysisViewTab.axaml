@@ -5,7 +5,7 @@
              xmlns:analysis="clr-namespace:MedicalApp.ViewModels.Analysis"
              xmlns:converters="clr-namespace:MedicalApp.Converters"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450" x:DataType="analysis:AnalysisViewModel"
-             x:Class="MedicalApp.Views.Analysis.AnalysisView">
+             x:Class="MedicalApp.Views.Analysis.AnalysisViewTab">
 
     <DockPanel Margin="5">
 

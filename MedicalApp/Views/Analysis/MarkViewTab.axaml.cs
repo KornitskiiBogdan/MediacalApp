@@ -6,9 +6,9 @@ using MedicalApp.ViewModels.Analysis;
 
 namespace MedicalApp.Views.Analysis
 {
-    public partial class MarkView : UserControl
+    public partial class MarkViewTab : UserControl
     {
-        public MarkView()
+        public MarkViewTab()
         {
             InitializeComponent();
         }

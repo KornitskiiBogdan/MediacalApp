@@ -46,8 +46,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Documents\DocumentView.axaml.cs">
-      <DependentUpon>DocumentView.axaml</DependentUpon>
+    <Compile Update="Views\Analysis\AnalysisViewTab.axaml.cs">
+      <DependentUpon>AnalysisViewTab.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Analysis\MarkViewTab.axaml.cs">
+      <DependentUpon>MarkViewTab.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Documents\DocumentsViewTab.axaml.cs">
+      <DependentUpon>DocumentsViewTab.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Documents\DocumentViewTab.axaml.cs">
+      <DependentUpon>DocumentViewTab.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

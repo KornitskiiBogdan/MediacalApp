@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace MedicalApp.Views.Analysis
 {
-    public partial class AnalysisView : UserControl
+    public partial class AnalysisViewTab : UserControl
     {
-        public AnalysisView()
+        public AnalysisViewTab()
         {
             InitializeComponent();
         }

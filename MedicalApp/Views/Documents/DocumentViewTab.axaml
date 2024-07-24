@@ -6,7 +6,7 @@
              xmlns:converters="clr-namespace:MedicalApp.Converters"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
              x:DataType="documents:DocumentViewModel"
-             x:Class="MedicalApp.Views.Documents.DocumentView">
+             x:Class="MedicalApp.Views.Documents.DocumentViewTab">
 
     <UserControl.Resources>
         <converters:SkBitmapToImageConverter x:Key="BitmapToImage"/>

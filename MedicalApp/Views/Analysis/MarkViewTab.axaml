@@ -8,7 +8,7 @@
              xmlns:analysis="clr-namespace:MedicalApp.ViewModels.Analysis"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="700"
              x:DataType="analysis:MarkViewModel" 
-             x:Class="MedicalApp.Views.Analysis.MarkView">
+             x:Class="MedicalApp.Views.Analysis.MarkViewTab">
 
 	<UserControl.Resources>
 		<converters:StringValueToBrushConverter x:Key="StringToBrush"/>

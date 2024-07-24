@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace MedicalApp.Views.Documents
 {
-    public partial class DocumentView : UserControl
+    public partial class DocumentsViewTab : UserControl
     {
-        public DocumentView()
+        public DocumentsViewTab()
         {
             InitializeComponent();
         }
