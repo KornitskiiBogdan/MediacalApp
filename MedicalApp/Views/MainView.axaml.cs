@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using MedicalApp.Models;
 using MedicalApp.ViewModels;
+using MedicalDatabase;
+using MedicalDatabase.Objects;
+using MedicalDatabase.Operations;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MedicalApp.Views;
 
@@ -16,6 +23,11 @@ public partial class MainView : UserControl
 
     private async void SelectingItemsControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
+        if (DataContext is not MainViewModel viewModel)
+        {
+            return;
+        }
+
         foreach (var item in e.AddedItems)
         {
             if (item is not ListItemTemplate itemTemplate ||
@@ -38,17 +50,25 @@ public partial class MainView : UserControl
                 FileTypeFilter = new [] {FilePickerFileTypes.Pdf}, 
                 AllowMultiple = false
             });
-
-            if (files.Count >= 1)
+            
+            foreach (var file in files)
             {
-                // Open reading stream from the first file.
-                await using var stream = await files[0].OpenReadAsync();
-                using var streamReader = new StreamReader(stream);
-                // Reads all the content of file as a text.
-                var fileContent = await streamReader.ReadToEndAsync();
-            }
+                await Task.Run(() =>
+                {
+                    var bitmap = PDFReader.PdfReader.GetBitmapFromPdf(file.Path.AbsolutePath);
 
-            return;
+                    var writeToDatabase = viewModel.Project.Services.GetRequiredService<MedicalRepository>();
+
+                    //TODO Какая-то хуйня с сохранением байтов
+                    writeToDatabase.Writer.Write(new MedicalDocument[]
+                    {
+                        new()
+                        {
+                            Date = DateTime.Now.Ticks, Id = 0, Name = file.Name, Image = bitmap.Bytes
+                        }
+                    });
+                });
+            }
         }
     }
 }

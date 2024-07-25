@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using MedicalApp.Messages;
 using MedicalApp.ViewModels.Interfaces;
 using MedicalDatabase;
 using MedicalDatabase.Objects;
 using ReactiveUI;
 using SkiaSharp;
-using Tools.Messaging;
 
 namespace MedicalApp.ViewModels.Documents
 {
@@ -24,7 +20,7 @@ namespace MedicalApp.ViewModels.Documents
         {
             _document = document;
             _medicalProject = project;
-            _bitmap = new SKBitmap();
+            _bitmap = VisualTools.SkiaExtensions.ArrayToBitmap(document.Image);
         }
 
         public override MedicalProject Project => _medicalProject;

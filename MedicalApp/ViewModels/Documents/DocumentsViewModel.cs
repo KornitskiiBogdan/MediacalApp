@@ -9,14 +9,16 @@ using ReactiveUI;
 using SkiaSharp;
 using System;
 using MedicalApp.Messages;
+using MedicalDatabase.Operations;
+using Microsoft.Extensions.DependencyInjection;
 using Tools.Messaging;
+using MedicalApp.ViewModels.Analysis;
 
 namespace MedicalApp.ViewModels.Documents
 {
     [MedicalExtension]
     public class DocumentsViewModel : ViewModelBase, IFilteredObject
     {
-        private readonly PdfReader _pdfReader;
         private readonly SortingModel _sortingModel;
         private readonly MedicalProject _medicalProject;
         private readonly SourceList<DocumentViewModel> _pdfDocuments = new();
@@ -27,7 +29,6 @@ namespace MedicalApp.ViewModels.Documents
             _medicalProject = project;
 
             _sortingModel = new SortingModel();
-            _pdfReader = new PdfReader();
 
             _pdfDocuments
                 .Connect()
@@ -38,7 +39,18 @@ namespace MedicalApp.ViewModels.Documents
 
             PdfDocuments = newCollection;
 
-            _pdfDocuments.Add(new DocumentViewModel(project, _pdfReader.GetBitmapFromPdf(), "анализ"));
+            _medicalProject.MessageBus.Register<ServiceCreationCompleted>(_ => Init());
+
+            
+        }
+
+        public void Init()
+        {
+            var databaseDocuments = _medicalProject.Services.GetRequiredService<MedicalRepository>().Reader.ReadDocuments();
+            foreach (var databaseDocument in databaseDocuments)
+            {
+                _pdfDocuments.Add(new DocumentViewModel(_medicalProject, databaseDocument));
+            }
         }
 
         public ReadOnlyObservableCollection<DocumentViewModel> PdfDocuments { get; set; }

@@ -9,12 +9,11 @@ namespace PDFReader
     public class PdfReader
     {
         //const string folder = @"C:\Users\bkornitsky\Downloads\";
-        private const string folder = @"C:\Users\Bogdan\Downloads\";
-        const string file = "mark4.pdf";
+        //private const string folder = @"C:\Users\Bogdan\Downloads\";
+        //const string file = "mark4.pdf";
 
-        public void Read()
+        public void Read(string filePath)
         {
-            string filePath = Path.Combine(folder, file);
             using PdfDocument document = PdfDocument.Open(filePath);
             foreach (Page page in document.GetPages())
             {
@@ -52,20 +51,20 @@ namespace PDFReader
             }
         }
 
-        public SKBitmap GetBitmapFromPdf()
+        //public SKBitmap GetBitmapFromPdf()
+        //{
+        //    using PdfDocument document = PdfDocument.Open(Path.Combine(folder, file));
+        //    document.AddSkiaPageFactory();
+
+        //    return document.GetPageAsSKBitmap(1);
+        //}
+
+        public static SKBitmap GetBitmapFromPdf(string filePath)
         {
-            using PdfDocument document = PdfDocument.Open(Path.Combine(folder, file));
+            using PdfDocument document = PdfDocument.Open(filePath);
             document.AddSkiaPageFactory();
 
             return document.GetPageAsSKBitmap(1);
-        }
-
-        public SKBitmap GetBitmapFromPdf(string filePath)
-        {
-            using (PdfDocument document = PdfDocument.Open(filePath))
-            {
-                return document.GetPageAsSKBitmap(0);
-            }
         }
 
     }
