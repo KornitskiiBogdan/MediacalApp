@@ -5,6 +5,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace MedicalDatabase.Operations
 {
@@ -19,7 +20,6 @@ namespace MedicalDatabase.Operations
             SqlConnection = new SQLiteConnection($"Data Source={path}");
             SqlConnection.Open();
         }
-
 
         public void Dispose()
         {

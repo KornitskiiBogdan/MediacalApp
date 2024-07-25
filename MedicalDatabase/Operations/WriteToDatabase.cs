@@ -40,6 +40,7 @@ namespace MedicalDatabase.Operations
             return Write(CreateInsertCommand(values), values.Length);
         }
 
+
         private string CreateInsertCommand(MedicalMark[] marks)
         {
             string command = $"INSERT INTO MedicalMarks (Name, Unit, NameSubGroup, NameGroup) VALUES";
