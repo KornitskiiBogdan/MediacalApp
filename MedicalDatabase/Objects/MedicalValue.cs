@@ -23,11 +23,8 @@ namespace MedicalDatabase.Objects
             _date = date;
         }
 
-        public MedicalValue(Int64 id, Int64 parentId, float value) : base(id)
+        public MedicalValue(Int64 id, Int64 parentId, float value) : this(id, parentId, value, DateTime.Now.Ticks)
         {
-            _parentId = parentId;
-            _value = value;
-            _date = DateTime.Now.Ticks;
         }
 
         public float Value

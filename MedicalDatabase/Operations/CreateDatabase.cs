@@ -36,6 +36,14 @@ namespace MedicalDatabase.Operations
                                         $"Value REAL NOT NULL, " +
                                         $"IdParent INTEGER NOT NULL)";
             commandValues.ExecuteNonQuery();
+
+            SQLiteCommand commandDocuments = new SQLiteCommand();
+            commandDocuments.Connection = SqlConnection;
+            commandDocuments.CommandText = $"CREATE TABLE MedicalDocuments(Id INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, " +
+                                           $"Name TEXT NOT NULL, " +
+                                           $"Date INTEGER NOT NULL, " +
+                                           $"Image BLOB NOT NULL)";
+            commandDocuments.ExecuteNonQuery();
         }
     }
 }

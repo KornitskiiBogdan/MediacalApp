@@ -41,6 +41,31 @@ namespace MedicalDatabase.Operations
             return result.ToArray();
         }
 
+        public MedicalDocument[] ReadDocuments()
+        {
+            string sqlExpression = $"SELECT * FROM MedicalDocuments";
+
+            SQLiteCommand command = new SQLiteCommand(sqlExpression, SqlConnection);
+
+            var result = new List<MedicalDocument>();
+            using (SQLiteDataReader reader = command.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var name = (string)reader["Name"];
+                        var id = (Int64)reader["Id"];
+                        var image = (byte[])reader["Image"];
+                        var date = (long)reader["Date"];
+                        result.Add(new MedicalDocument(id: id, name: name, image: image, date: date));
+                    }
+                }
+            }
+
+            return result.ToArray();
+        }
+
         public MedicalReference[] ReadAllReferences()
         {
             return ReadReferences($"SELECT * FROM MedicalReferences");

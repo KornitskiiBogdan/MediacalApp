@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SQLite;
 using MedicalDatabase.Objects;
 
 namespace MedicalDatabase.Operations
@@ -40,6 +34,29 @@ namespace MedicalDatabase.Operations
             return Write(CreateInsertCommand(values), values.Length);
         }
 
+        public bool Write(MedicalDocument[] documents)
+        {
+            return Write(CreateInsertCommand(documents), documents.Length);
+        }
+
+        private string CreateInsertCommand(MedicalDocument[] documents)
+        {
+            string command = $"INSERT INTO MedicalDocuments (Name, Date, Image) VALUES";
+            for (int i = 0; i < documents.Length; i++)
+            {
+                var mark = documents[i];
+                if (i == documents.Length - 1)
+                {
+                    command += $" ('{mark.Name}', '{mark.Date}', '{mark.Image}')";
+                }
+                else
+                {
+                    command += $" ('{mark.Name}', '{mark.Date}', '{mark.Image}'),";
+                }
+            }
+
+            return command;
+        }
 
         private string CreateInsertCommand(MedicalMark[] marks)
         {
