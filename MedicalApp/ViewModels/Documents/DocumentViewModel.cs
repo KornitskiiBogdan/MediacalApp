@@ -42,10 +42,5 @@ namespace MedicalApp.ViewModels.Documents
             get => _bitmap;
             set => _bitmap = value;
         }
-
-        public async Task GoBackCommand()
-        {
-            await _medicalProject.MessageBus.SendAsync(new GoBackView(GetType()));
-        }
     }
 }

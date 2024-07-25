@@ -8,7 +8,8 @@ namespace PDFReader
 {
     public class PdfReader
     {
-        const string folder = @"C:\Users\bkornitsky\Downloads\";
+        //const string folder = @"C:\Users\bkornitsky\Downloads\";
+        private const string folder = @"C:\Users\Bogdan\Downloads\";
         const string file = "mark4.pdf";
 
         public void Read()
@@ -53,20 +54,10 @@ namespace PDFReader
 
         public SKBitmap GetBitmapFromPdf()
         {
-            try
-            {
-                using (PdfDocument document = PdfDocument.Open(Path.Combine(folder, file)))
-                {
-                    document.AddSkiaPageFactory();
+            using PdfDocument document = PdfDocument.Open(Path.Combine(folder, file));
+            document.AddSkiaPageFactory();
 
-                    return document.GetPageAsSKBitmap(1);
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-                return new SKBitmap();
-            }
+            return document.GetPageAsSKBitmap(1);
         }
 
         public SKBitmap GetBitmapFromPdf(string filePath)

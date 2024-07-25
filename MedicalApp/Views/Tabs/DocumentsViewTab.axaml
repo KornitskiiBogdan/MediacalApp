@@ -79,7 +79,6 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="0 5 0 0">
-						
                         <Border Height="64" DockPanel.Dock="Right"
                                 x:Name="PdfImage"
                                 Width="64">
