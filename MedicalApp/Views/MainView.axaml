@@ -11,18 +11,13 @@
              Focusable="True" Padding="{OnFormFactor 0, Mobile=10 0 10 0}" 
              x:DataType="viewModels:MainViewModel">
     
-    <Grid Background="White" RowDefinitions="Auto, Auto">
+    <Grid Background="White" RowDefinitions="Auto, *">
 
-		<TransitioningContentControl Grid.Row="0" Background="White" 
-                                     VerticalAlignment="Stretch"
-                          Content="{CompiledBinding CurrentPage}"/>
-
-        <Border Grid.Row="1" IsVisible="{CompiledBinding CurrentPage, 
-				Converter={x:Static converters:CurrentPageToBoolConverter.BoolConverter}}">
+        <Border Grid.Row="1" >
             <ListBox  Background="White"
-                     ItemsSource="{CompiledBinding Items}"
+                      ItemsSource="{CompiledBinding Items}"
                       SelectionChanged="SelectingItemsControl_OnSelectionChanged"
-                     SelectedItem="{CompiledBinding SelectedListItem}">
+                      SelectedItem="{CompiledBinding SelectedListItem}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Rows="1" HorizontalAlignment="Stretch" />
@@ -33,17 +28,19 @@
                         <StackPanel Orientation="Vertical">
                             <Image Source="{Binding IconKey, 
 								   Converter={x:Static converters:TypeConverters.IconConverter}}"
-                                      Width="64"  Height="64" />
-                            <TextBlock HorizontalAlignment="Center" 
+                                   Width="64"  Height="64" />
+                            <TextBlock HorizontalAlignment="Center"
                                        FontSize="11"
-                                       Margin="0 5 0 0" 
+                                       Margin="0 5 0 0"
                                        Text="{Binding Label}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
-        
+
+		<TransitioningContentControl Grid.Row="0" Background="White"
+                          Content="{CompiledBinding CurrentPage}"/>
     </Grid>
 	
 </UserControl>

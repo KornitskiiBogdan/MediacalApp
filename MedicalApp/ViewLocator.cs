@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Tabs;
 
 namespace MedicalApp
 {
@@ -33,7 +34,7 @@ namespace MedicalApp
 
         public bool Match(object? data)
         {
-            return data is ViewModelBase;
+            return data is ViewModelBase or ViewModelTabBase;
         }
     }
 }
