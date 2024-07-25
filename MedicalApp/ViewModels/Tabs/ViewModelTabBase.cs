@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MedicalApp.Messages;
 using ReactiveUI;
 using Tools.Messaging;
 using IMessageBus = Tools.Messaging.IMessageBus;
@@ -11,15 +12,19 @@ namespace MedicalApp.ViewModels.Tabs
 {
     public abstract class ViewModelTabBase : ReactiveObject, IDisposable
     {
-        public event Action<ViewModelTabBase>? ChangeCurrentTabEvent;
+        protected readonly IMessageBus _messageBus;
+        protected ViewModelTabBase(IMessageBus messageBus)
+        {
+            _messageBus = messageBus;
+        }
 
         public abstract string Header { get; set; }
 
         public abstract void Dispose();
 
-        protected void ChangeCurrentTabInvoke(ViewModelTabBase tab)
+        protected void ChangeCurrentTab(ViewModelTabBase tab)
         {
-            ChangeCurrentTabEvent?.Invoke(tab);
+            _messageBus.SendAsync<ChangeTab>(new ChangeTab(tab));
         }
     }
 }

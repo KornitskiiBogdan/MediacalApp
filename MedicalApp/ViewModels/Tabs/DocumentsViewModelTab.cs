@@ -14,7 +14,7 @@ namespace MedicalApp.ViewModels.Tabs
         private DocumentsViewModel _viewModel;
         private DocumentViewModel? _currentDocument;
 
-        public DocumentsViewModelTab(DocumentsViewModel viewModel)
+        public DocumentsViewModelTab(DocumentsViewModel viewModel) : base(viewModel.Project.MessageBus)
         {
             _header = "Документы";
             _viewModel = viewModel;
@@ -40,7 +40,7 @@ namespace MedicalApp.ViewModels.Tabs
                 this.RaiseAndSetIfChanged(ref _currentDocument, value);
                 if (value != null)
                 {
-                    ChangeCurrentTabInvoke(new DocumentViewModelTab(value));
+                    ChangeCurrentTab(new DocumentViewModelTab(value));
                 }
             }
         }

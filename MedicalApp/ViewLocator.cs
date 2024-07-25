@@ -29,7 +29,7 @@ namespace MedicalApp
                 return control;
             }
 
-            throw new NotImplementedException();
+            return null;
         }
 
         public bool Match(object? data)

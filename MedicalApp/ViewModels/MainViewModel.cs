@@ -38,26 +38,16 @@ public sealed class MainViewModel : ViewModelBase
         });
 
         _currentPage = Project.Services.GetRequiredService<AnalysisViewModelTab>();
-        _currentPage.ChangeCurrentTabEvent += CurrentPageOnChangeCurrentTabEvent;
+        Project.MessageBus.Register<ChangeTab>(tab => CurrentPage = tab.ChangingTab);
         SelectedListItem = Items.FirstOrDefault(x => x.ModelType == typeof(AnalysisViewModelTab));
 
         //_currentPage = new LoginViewModel(Project, Project.Services.GetRequiredService<ILoginService>());
     }
 
-    private void CurrentPageOnChangeCurrentTabEvent(ViewModelTabBase obj)
-    {
-        CurrentPage = obj;
-    }
-
     public ViewModelTabBase CurrentPage
     {
         get => _currentPage;
-        set
-        {
-            _currentPage.ChangeCurrentTabEvent -= CurrentPageOnChangeCurrentTabEvent;
-            this.RaiseAndSetIfChanged(ref _currentPage, value);
-            value.ChangeCurrentTabEvent += CurrentPageOnChangeCurrentTabEvent;
-        }
+        set => this.RaiseAndSetIfChanged(ref _currentPage, value);
     }
 
     public ListItemTemplate? SelectedListItem

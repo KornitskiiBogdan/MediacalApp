@@ -9,7 +9,7 @@ namespace MedicalApp.ViewModels.Tabs
         private string _header;
         private MarkViewModel _viewModel;
 
-        public MarkViewModelTab(MarkViewModel viewModel)
+        public MarkViewModelTab(MarkViewModel viewModel) : base(viewModel.Project.MessageBus)
         {
             _header = "Aнализы";
             _viewModel = viewModel;
@@ -29,7 +29,7 @@ namespace MedicalApp.ViewModels.Tabs
 
         public void GoBackCommand()
         {
-            ChangeCurrentTabInvoke(_viewModel.Project.Services.GetRequiredService<AnalysisViewModelTab>());
+            ChangeCurrentTab(_viewModel.Project.Services.GetRequiredService<AnalysisViewModelTab>());
         }
 
         public override void Dispose()

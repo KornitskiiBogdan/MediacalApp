@@ -46,12 +46,11 @@ namespace MedicalApp.Converters
             {
                 return null;
             }
-            
-            return new Image() { Source = bitmap.Resize(new SKSizeI((int)(bounds?.Width ?? 0), (int)(bounds?.Height ?? 0)), 
-                SKFilterQuality.High).ToAvaloniaImage(),
-                Width = bounds?.Width ?? 0,
-                Height = bounds?.Height ?? 0,
-            };
+
+            var size = new SKSizeI((int)(bounds?.Width ?? 0), (int)(bounds?.Height ?? 0));
+            var avaloniaImage = bitmap.Resize(size, SKFilterQuality.Medium);
+
+            return new Image() { Source = avaloniaImage.ToAvaloniaImage(), Width = bounds?.Width ?? 0, Height = bounds?.Height ?? 0};
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MedicalApp.ViewModels.Tabs
         private MarkViewModel? _currentMark;
         private AnalysisViewModel _viewModel;
 
-        public AnalysisViewModelTab(AnalysisViewModel viewModel)
+        public AnalysisViewModelTab(AnalysisViewModel viewModel) : base(viewModel.Project.MessageBus)
         {
             _header = "Анализы";
             _viewModel = viewModel;
@@ -40,7 +40,7 @@ namespace MedicalApp.ViewModels.Tabs
                 this.RaiseAndSetIfChanged(ref _currentMark, value);
                 if (value != null)
                 {
-                    ChangeCurrentTabInvoke(new MarkViewModelTab(value));
+                    ChangeCurrentTab(new MarkViewModelTab(value));
                 }
             }
         }

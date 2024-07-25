@@ -15,7 +15,7 @@ namespace MedicalApp.ViewModels.Tabs
         private string _header;
         private DocumentViewModel _viewModel;
 
-        public DocumentViewModelTab(DocumentViewModel viewModel)
+        public DocumentViewModelTab(DocumentViewModel viewModel) : base(viewModel.Project.MessageBus)
         {
             _header = "Документы";
             _viewModel = viewModel;
@@ -35,7 +35,7 @@ namespace MedicalApp.ViewModels.Tabs
 
         public void GoBackCommand()
         {
-            ChangeCurrentTabInvoke(_viewModel.Project.Services.GetRequiredService<DocumentsViewModelTab>());
+            ChangeCurrentTab(_viewModel.Project.Services.GetRequiredService<DocumentsViewModelTab>());
         }
 
         public override void Dispose()
