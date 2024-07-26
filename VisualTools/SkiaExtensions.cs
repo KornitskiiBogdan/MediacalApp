@@ -9,7 +9,9 @@ namespace VisualTools
     {
         public static SKBitmap ToSKBitmap(this System.IO.Stream stream)
         {
-            return SKBitmap.Decode(stream);
+            //TODO Это не работает
+            using SKCodec codec = SKCodec.Create(stream);
+            return SKBitmap.Decode(codec);
         }
 
         public static IImage? ToAvaloniaImage(this SKBitmap? bitmap)
@@ -23,6 +25,7 @@ namespace VisualTools
 
         public static SKBitmap ArrayToBitmap(byte[] pixelArray)
         {
+            //TODO Это не работает
             using (MemoryStream memStream = new MemoryStream())
             {
                 int count = 0;
@@ -31,6 +34,7 @@ namespace VisualTools
                     memStream.WriteByte(pixelArray[count++]);
                 }
 
+                memStream.Flush();
                 return memStream.ToSKBitmap();
             }
         }

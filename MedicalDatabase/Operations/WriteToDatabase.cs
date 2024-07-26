@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using System.Data;
+using System.Data.SQLite;
 using MedicalDatabase.Objects;
 
 namespace MedicalDatabase.Operations
@@ -15,7 +16,16 @@ namespace MedicalDatabase.Operations
             SQLiteCommand command = new SQLiteCommand();
             command.Connection = SqlConnection;
             command.CommandText = insertCommand;
+            return command.ExecuteNonQuery() == countElements;
+        }
 
+        private bool Write(string insertCommand, int countElements, SQLiteParameter[] parameters)
+        {
+            SQLiteCommand command = new SQLiteCommand();
+            command.Connection = SqlConnection;
+            command.CommandText = insertCommand;
+            //TODO Проверить на нескольких файлах
+            command.Parameters.AddRange(parameters);
             return command.ExecuteNonQuery() == countElements;
         }
 
@@ -36,23 +46,27 @@ namespace MedicalDatabase.Operations
 
         public bool Write(MedicalDocument[] documents)
         {
-            return Write(CreateInsertCommand(documents), documents.Length);
+            return Write(CreateInsertCommand(documents, out var parameters), documents.Length, parameters);
         }
 
-        private string CreateInsertCommand(MedicalDocument[] documents)
+        private string CreateInsertCommand(MedicalDocument[] documents, out SQLiteParameter[] parameters)
         {
             string command = $"INSERT INTO MedicalDocuments (Name, Date, Image) VALUES";
+            parameters = new SQLiteParameter[documents.Length];
             for (int i = 0; i < documents.Length; i++)
             {
                 var mark = documents[i];
                 if (i == documents.Length - 1)
                 {
-                    command += $" ('{mark.Name}', '{mark.Date}', '{mark.Image}')";
+                    command += $" ('{mark.Name}', '{mark.Date}', @Image{i})";
                 }
                 else
                 {
-                    command += $" ('{mark.Name}', '{mark.Date}', '{mark.Image}'),";
+                    command += $" ('{mark.Name}', '{mark.Date}', @Image{i}),";
                 }
+                var param = new SQLiteParameter(DbType.Binary, mark.Image);
+                param.ParameterName = $"@Image{i}";
+                parameters[i] = param;
             }
 
             return command;
