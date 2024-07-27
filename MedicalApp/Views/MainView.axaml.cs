@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
+using MedicalApp.Messages;
 using MedicalApp.Models;
 using MedicalApp.ViewModels;
+using MedicalApp.ViewModels.Documents;
 using MedicalDatabase;
 using MedicalDatabase.Objects;
 using MedicalDatabase.Operations;
@@ -48,23 +51,18 @@ public partial class MainView : UserControl
             {
                 Title = "Выберите документ с анализами",
                 FileTypeFilter = new [] {FilePickerFileTypes.Pdf}, 
-                AllowMultiple = false
+                AllowMultiple = true
             });
             
             foreach (var file in files)
             {
                 await Task.Run(() =>
                 {
-                    var bitmap = PDFReader.PdfReader.GetBitmapFromPdf(file.Path.AbsolutePath);
-
-                    var writeToDatabase = viewModel.Project.Services.GetRequiredService<MedicalRepository>();
-
-                    writeToDatabase.Writer.Write(new MedicalDocument[]
-                    {
-                        new(id: 0, name: file.Name, width: bitmap.Width, height: bitmap.Height, image: bitmap.Bytes)
-                    });
+                    DocumentViewModel.Create(viewModel.Project, file.Path.AbsolutePath);
                 });
             }
         }
     }
+
+    
 }

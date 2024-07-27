@@ -13,6 +13,7 @@ using MedicalDatabase.Operations;
 using Microsoft.Extensions.DependencyInjection;
 using Tools.Messaging;
 using MedicalApp.ViewModels.Analysis;
+using MedicalApp.Views;
 
 namespace MedicalApp.ViewModels.Documents
 {
@@ -41,7 +42,11 @@ namespace MedicalApp.ViewModels.Documents
 
             _medicalProject.MessageBus.Register<ServiceCreationCompleted>(_ => Init());
 
-            
+            _medicalProject.MessageBus.Register<AddedDocument>(document =>
+            {
+                _pdfDocuments.Add(new DocumentViewModel(_medicalProject, document.Document));
+            });
+
         }
 
         public void Init()

@@ -6,13 +6,10 @@ using UglyToad.PdfPig.Rendering.Skia;
 
 namespace PDFReader
 {
+    public record PdfData(SKBitmap Bitmap);
     public class PdfReader
     {
-        //const string folder = @"C:\Users\bkornitsky\Downloads\";
-        //private const string folder = @"C:\Users\Bogdan\Downloads\";
-        //const string file = "mark4.pdf";
-
-        public void Read(string filePath)
+        public static PdfData Read(string filePath)
         {
             using PdfDocument document = PdfDocument.Open(filePath);
             foreach (Page page in document.GetPages())
@@ -49,15 +46,11 @@ namespace PDFReader
                     Console.Write(letter.Value);
                 }
             }
+
+            document.AddSkiaPageFactory();
+
+            return new PdfData(document.GetPageAsSKBitmap(1));
         }
-
-        //public SKBitmap GetBitmapFromPdf()
-        //{
-        //    using PdfDocument document = PdfDocument.Open(Path.Combine(folder, file));
-        //    document.AddSkiaPageFactory();
-
-        //    return document.GetPageAsSKBitmap(1);
-        //}
 
         public static SKBitmap GetBitmapFromPdf(string filePath)
         {

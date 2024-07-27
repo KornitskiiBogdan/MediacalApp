@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using MedicalApp.Messages;
+using System.Threading;
 using MedicalApp.ViewModels.Interfaces;
 using MedicalDatabase;
 using MedicalDatabase.Objects;
+using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using SkiaSharp;
 
@@ -22,6 +25,22 @@ namespace MedicalApp.ViewModels.Documents
             _medicalProject = project;
             _bitmap = VisualTools.SkiaExtensions.ArrayToBitmap((int)document.Width, (int)document.Height, document.Image);
         }
+
+        public static void Create(MedicalProject medicalProject, string pathToDocument)
+        {
+            var resultReadPdf = PDFReader.PdfReader.Read(pathToDocument);
+            var bitmap = resultReadPdf.Bitmap;
+
+            var writeToDatabase = medicalProject.Services.GetRequiredService<MedicalRepository>();
+
+            var medicalDocument = new MedicalDocument(id: 0, name: "file.Name", width: bitmap.Width,
+                height: bitmap.Height, image: bitmap.Bytes);
+
+            writeToDatabase.Writer.Write(new[] { medicalDocument });
+
+            medicalProject.MessageBus.SendAsync(new AddedDocument(medicalDocument), CancellationToken.None);
+        }
+
 
         public override MedicalProject Project => _medicalProject;
 
