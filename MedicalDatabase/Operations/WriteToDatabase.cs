@@ -51,18 +51,18 @@ namespace MedicalDatabase.Operations
 
         private string CreateInsertCommand(MedicalDocument[] documents, out SQLiteParameter[] parameters)
         {
-            string command = $"INSERT INTO MedicalDocuments (Name, Date, Image) VALUES";
+            string command = $"INSERT INTO MedicalDocuments (Name, Date, Image, Width, Height) VALUES";
             parameters = new SQLiteParameter[documents.Length];
             for (int i = 0; i < documents.Length; i++)
             {
                 var mark = documents[i];
                 if (i == documents.Length - 1)
                 {
-                    command += $" ('{mark.Name}', '{mark.Date}', @Image{i})";
+                    command += $" ('{mark.Name}', '{mark.Date}', @Image{i}, '{mark.Width}', '{mark.Height}')";
                 }
                 else
                 {
-                    command += $" ('{mark.Name}', '{mark.Date}', @Image{i}),";
+                    command += $" ('{mark.Name}', '{mark.Date}', @Image{i}, '{mark.Width}', '{mark.Height}'),";
                 }
                 var param = new SQLiteParameter(DbType.Binary, mark.Image);
                 param.ParameterName = $"@Image{i}";

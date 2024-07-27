@@ -42,6 +42,8 @@ namespace MedicalDatabase.Operations
             commandDocuments.CommandText = $"CREATE TABLE MedicalDocuments(Id INTEGER NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT, " +
                                            $"Name TEXT NOT NULL, " +
                                            $"Date INTEGER NOT NULL, " +
+                                           $"Width INTEGER NOT NULL, " +
+                                           $"Height INTEGER NOT NULL, " +
                                            $"Image BLOB NOT NULL)";
             commandDocuments.ExecuteNonQuery();
         }

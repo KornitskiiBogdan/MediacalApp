@@ -10,21 +10,23 @@ namespace MedicalDatabase.Objects
     {
         private long _date;
         private byte[] _image;
-        private int _width;
-        private int _height;
+        private Int64 _width;
+        private Int64 _height;
 
         public MedicalDocument() : base()
         {
             _image = Array.Empty<byte>();
         }
 
-        public MedicalDocument(Int64 id, string name, long date, byte[] image) : base(id, name)
+        public MedicalDocument(Int64 id, string name, long date, Int64 width, Int64 height, byte[] image) : base(id, name)
         {
             _image = image;
+            _width = width;
+            _height = height;
             _date = date;
         }
 
-        public MedicalDocument(Int64 id, string name, byte[] image) : this(id, name, DateTime.Now.Ticks, image)
+        public MedicalDocument(Int64 id, string name, Int64 width, Int64 height, byte[] image) : this(id, name, DateTime.Now.Ticks, width, height, image)
         {
         }
 
@@ -34,6 +36,17 @@ namespace MedicalDatabase.Objects
             set => _date = value;
         }
 
+        public Int64 Width
+        {
+            get => _width;
+            set => _width = value;
+        }
+
+        public Int64 Height
+        {
+            get => _height;
+            set => _height = value;
+        }
 
         public byte[] Image
         {

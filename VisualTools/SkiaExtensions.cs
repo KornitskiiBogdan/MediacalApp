@@ -7,13 +7,6 @@ namespace VisualTools
 {
     public static class SkiaExtensions
     {
-        public static SKBitmap ToSKBitmap(this System.IO.Stream stream)
-        {
-            //TODO Это не работает
-            using SKCodec codec = SKCodec.Create(stream);
-            return SKBitmap.Decode(codec);
-        }
-
         public static IImage? ToAvaloniaImage(this SKBitmap? bitmap)
         {
             if (bitmap is not null)
@@ -23,20 +16,17 @@ namespace VisualTools
             return default;
         }
 
-        public static SKBitmap ArrayToBitmap(byte[] pixelArray)
+        public static SKBitmap ArrayToBitmap(int widht, int height, byte[] pixelArray)
         {
-            //TODO Это не работает
-            using (MemoryStream memStream = new MemoryStream())
-            {
-                int count = 0;
-                while (count < pixelArray.Length)
-                {
-                    memStream.WriteByte(pixelArray[count++]);
-                }
+            var bitmap = new SKBitmap();
 
-                memStream.Flush();
-                return memStream.ToSKBitmap();
-            }
+            var gcHandle = GCHandle.Alloc(pixelArray, GCHandleType.Pinned);
+
+            var info = new SKImageInfo(widht, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+
+            bitmap.InstallPixels(info, gcHandle.AddrOfPinnedObject(), info.RowBytes, delegate { gcHandle.Free(); }, null);
+
+            return bitmap;
         }
 
     }

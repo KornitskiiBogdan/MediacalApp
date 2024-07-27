@@ -20,7 +20,7 @@ namespace MedicalApp.ViewModels.Documents
         {
             _document = document;
             _medicalProject = project;
-            _bitmap = VisualTools.SkiaExtensions.ArrayToBitmap(document.Image);
+            _bitmap = VisualTools.SkiaExtensions.ArrayToBitmap((int)document.Width, (int)document.Height, document.Image);
         }
 
         public override MedicalProject Project => _medicalProject;

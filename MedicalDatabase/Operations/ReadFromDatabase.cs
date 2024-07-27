@@ -58,7 +58,9 @@ namespace MedicalDatabase.Operations
                         var id = (Int64)reader["Id"];
                         var image = (byte[])reader["Image"];
                         var date = (long)reader["Date"];
-                        result.Add(new MedicalDocument(id: id, name: name, image: image, date: date));
+                        var width = (Int64)reader["Width"];
+                        var height = (Int64)reader["Height"];
+                        result.Add(new MedicalDocument(id: id, name: name, image: image, date: date, height: height, width: width ));
                     }
                 }
             }

@@ -59,13 +59,9 @@ public partial class MainView : UserControl
 
                     var writeToDatabase = viewModel.Project.Services.GetRequiredService<MedicalRepository>();
 
-                    //TODO Какая-то хуйня с сохранением байтов
                     writeToDatabase.Writer.Write(new MedicalDocument[]
                     {
-                        new()
-                        {
-                            Date = DateTime.Now.Ticks, Id = 0, Name = file.Name, Image = bitmap.Bytes
-                        }
+                        new(id: 0, name: file.Name, width: bitmap.Width, height: bitmap.Height, image: bitmap.Bytes)
                     });
                 });
             }
