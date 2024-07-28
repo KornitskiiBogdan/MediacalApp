@@ -8,6 +8,7 @@ using MedicalApp.ViewModels.Interfaces;
 using MedicalDatabase;
 using MedicalDatabase.Objects;
 using Microsoft.Extensions.DependencyInjection;
+using PDFReader;
 using ReactiveUI;
 using SkiaSharp;
 
@@ -28,10 +29,13 @@ namespace MedicalApp.ViewModels.Documents
 
         public static void Create(MedicalProject medicalProject, string pathToDocument)
         {
-            var resultReadPdf = PDFReader.PdfReader.Read(pathToDocument);
-            var bitmap = resultReadPdf.Bitmap;
-
             var writeToDatabase = medicalProject.Services.GetRequiredService<MedicalRepository>();
+
+            var pdfReader = new PdfReader(writeToDatabase);
+
+            var resultReadPdf = pdfReader.Read(pathToDocument);
+
+            var bitmap = resultReadPdf.Bitmap;
 
             var medicalDocument = new MedicalDocument(id: 0, name: "file.Name", width: bitmap.Width,
                 height: bitmap.Height, image: bitmap.Bytes);
