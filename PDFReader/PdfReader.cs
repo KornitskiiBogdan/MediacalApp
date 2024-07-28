@@ -1,16 +1,9 @@
-﻿using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
-using System.Diagnostics;
-using MedicalDatabase;
+﻿using MedicalDatabase;
 using MedicalDatabase.Objects;
 using UglyToad.PdfPig.Content;
 using UglyToad.PdfPig;
-using UglyToad.PdfPig.DocumentLayoutAnalysis.TextExtractor;
 using UglyToad.PdfPig.DocumentLayoutAnalysis.WordExtractor;
 using UglyToad.PdfPig.Rendering.Skia;
-using UglyToad.PdfPig.Util;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Avalonia.Controls;
 
 namespace PDFReader
 {
