@@ -13,7 +13,7 @@ namespace PDFReader
         //private readonly Dictionary<string, MedicalMark> _stringToMark;
         private readonly List<string> _markTitle = new List<string>()
         {
-            "тест", "исследование"
+            "тест", "исследование", "параметр"
         };
 
         private readonly List<string> _valueMarkTitle = new List<string>()
@@ -22,7 +22,7 @@ namespace PDFReader
         };
 
         private readonly List<string> _unitMarkTitle = new List<string>(){
-            "единица измерения", "единицы", "ед. изм."
+            "единица измерения", "единицы", "ед. изм.", "ед. изм"
         };
 
         public PdfReader(MedicalRepository repository)
