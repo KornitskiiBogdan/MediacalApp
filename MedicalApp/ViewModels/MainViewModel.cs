@@ -26,7 +26,7 @@ public sealed class MainViewModel : ViewModelBase
         _router = new Router(this);
         Items = new ObservableCollection<ListItemTemplate>(Tools.ListItemTemplates.GetTemplates());
 
-        var taskMedicalProject = MedicalProject.Create();
+        var taskMedicalProject = MedicalProject.CreateAsync();
         if (!taskMedicalProject.IsCompleted)
         {
             taskMedicalProject.RunSynchronously();

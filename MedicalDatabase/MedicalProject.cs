@@ -14,7 +14,7 @@ public class MedicalProject
         MessageBus = StrongReferenceMessageBus.Instance;
     }
 
-    public static async Task<MedicalProject> Create()
+    public static async Task<MedicalProject> CreateAsync()
     {
         var medicalProject = new MedicalProject();
         var serviceCollection = new ServiceCollection();
