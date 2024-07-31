@@ -6,6 +6,7 @@ using Avalonia.Data.Converters;
 using Avalonia.Media;
 using MedicalApp.Tools;
 using MedicalApp.ViewModels.Analysis;
+using MedicalApp.ViewModels.Tabs;
 
 namespace MedicalApp.Converters
 {
@@ -35,14 +36,14 @@ namespace MedicalApp.Converters
             }
 
             if (border is not
-                { BorderBrush: LinearGradientBrush linearGradientBrush, DataContext: MarkViewModel markViewModel })
+                { BorderBrush: LinearGradientBrush linearGradientBrush, DataContext: MarkViewModelTab markViewModelTab })
             {
                 return new SolidColorBrush();
             }
                 
             {
-                var lowerValue = markViewModel.CurrentReference.LowerValue;
-                var upperValue = markViewModel.CurrentReference.UpperValue;
+                var lowerValue = markViewModelTab.ViewModel.CurrentReference.LowerValue;
+                var upperValue = markViewModelTab.ViewModel.CurrentReference.UpperValue;
                 if(lowerValue != null && upperValue != null && float.TryParse(stringValue, out float fValue)) 
                 {
                     var k = (0.5) / (upperValue - lowerValue) ?? 1;
